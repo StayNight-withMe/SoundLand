@@ -1,0 +1,3 @@
+[console_scripts]
+fakeua=fake_user_agent:run_on_term
+
