@@ -29,6 +29,8 @@ namespace WpfApp1
         private DispatcherTimer progressTimer;
         private bool isDraggingProgressBar = false;
         public ObservableCollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
+
+        public ObservableCollection<Track> ALLTracks { get; set; } = new ObservableCollection<Track>();
         public string ImageIcon { get; }
         public string AbsolutePath { get; }
 
@@ -695,9 +697,79 @@ namespace WpfApp1
 
         private void addALL_Click(object sender, RoutedEventArgs e)
         {
-            if (TracksListView.SelectedItem is Track selectedTrack)
-            {
+            var button = (Button)sender;
+            var track = (Track)button.DataContext;
+            TracksListView.SelectedItem = track;
 
+            Debug.WriteLine("Кнопка 'Все треки' нажата");
+
+            try
+            {
+                if (TracksListView.SelectedItem is Track selectedTrack)
+                {
+                    string filename = Path.GetFileNameWithoutExtension(selectedTrack.FilePath);
+
+                    // Правильные исходные пути
+                    string sourceImagePath = Path.Combine("temp_img", $"{filename}.jpg");
+                    string sourceAudioPath = Path.Combine("temp_song", $"{filename}.mp3");
+
+                    // Целевые директории
+                    string targetSongDir = @"ALL\song";
+                    string targetImgDir = @"ALL\img";
+
+                    // Создаем директории, если их нет
+                    Directory.CreateDirectory(targetSongDir);
+                    Directory.CreateDirectory(targetImgDir);
+
+                    // Правильные целевые пути
+                    string targetImagePath = Path.Combine(targetImgDir, $"{filename}.jpg");
+                    string targetSongPath = Path.Combine(targetSongDir, $"{filename}.mp3");
+
+                    Debug.WriteLine($"Копируем изображение из: {sourceImagePath}");
+                    Debug.WriteLine($"Копируем изображение в: {targetImagePath}");
+                    Debug.WriteLine($"Копируем аудио из: {sourceAudioPath}");
+                    Debug.WriteLine($"Копируем аудио в: {targetSongPath}");
+
+                    // Копируем изображение
+                    if (SI.File.Exists(sourceImagePath))
+                    {
+                        if (!SI.File.Exists(targetImagePath))
+                        {
+                            SI.File.Copy(sourceImagePath, targetImagePath);
+                            Debug.WriteLine("Изображение скопировано!");
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Изображение уже существует!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Исходное изображение не найдено: {sourceImagePath}");
+                    }
+
+                    // Копируем аудио
+                    if (SI.File.Exists(sourceAudioPath))
+                    {
+                        if (!SI.File.Exists(targetSongPath))
+                        {
+                            SI.File.Copy(sourceAudioPath, targetSongPath);
+                            Debug.WriteLine("Аудио скопировано!");
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Аудио уже существует!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Исходное аудио не найдено: {sourceAudioPath}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Ошибка: {ex.Message}");
             }
         }
 

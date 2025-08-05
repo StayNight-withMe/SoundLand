@@ -155,3 +155,4 @@ Z:\hui1\WpfApp1\WpfApp1\bin\Debug\net8.0-windows\uz-Latn-UZ\ModernWpf.resources.
 Z:\hui1\WpfApp1\WpfApp1\bin\Debug\net8.0-windows\vi-VN\ModernWpf.Controls.resources.dll
 Z:\hui1\WpfApp1\WpfApp1\bin\Debug\net8.0-windows\vi-VN\ModernWpf.resources.dll
 Z:\hui1\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\App.baml
+Z:\hui1\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\WpfApp1.sourcelink.json
