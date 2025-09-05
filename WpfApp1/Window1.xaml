@@ -502,7 +502,7 @@
 
                                 </Button>
 
-                                <Button x:Name="BackToPlaylist" Content="Назад" Grid.Column="1" Background="Transparent" BorderThickness="0" Click="BackToPlaylist_Click"/>
+                                <Button x:Name="BackToPlaylist" Content="Назад" Grid.Column="1" FontSize="50" Visibility="Collapsed" Background="Transparent" BorderThickness="0" Click="BackToPlaylist_Click"/>
 
 
                                 <Popup Name="myPopup" IsOpen="False " Placement="Center" Grid.ColumnSpan="2" Margin="0,0,0,686" Grid.RowSpan="2">
@@ -554,8 +554,9 @@
                                                     <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
                                                         <Button x:Name="add" Content="+" HorizontalAlignment="Right" VerticalAlignment="Stretch" 
                         Background="Black" Height="25" Width="25" Margin="0 0 0 0" Click="add_Click" Padding="0" Foreground="White" />
-                                                        <Button x:Name="add_ALL" Content="в все треки" Width="100" Height="25" Foreground="White"
-                        HorizontalAlignment="Right" Margin="10 0 0 0" Background="Black" Click="addALL_Click" Padding="0"/>
+                                                        <Button x:Name="Dell" Content="удалить" Width="100" Height="25" 
+                                HorizontalAlignment="Right" Foreground="White" Margin="10 0 0 0" Background="Black" Click="Dell_Click" 
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
                                                         <Button x:Name="AddPlay" Content="в плейлист" Width="100" Height="25" 
 Margin="10 0 30 0" Background="Black" Foreground="White" 
 Click="AddPlay_Click_1" Padding="0">
