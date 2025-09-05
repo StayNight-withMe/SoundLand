@@ -12,10 +12,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.Linq;
 //нугеты
 using TagLib;
+using static System.Net.Mime.MediaTypeNames;
+
 // Псевдонимы
 using SI = System.IO;
 
@@ -28,9 +31,13 @@ namespace WpfApp1
         private bool isMediaLoaded = false;
         private DispatcherTimer progressTimer;
         private bool isDraggingProgressBar = false;
-        public ObservableCollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
 
+        //две колекции через один класс
+        public ObservableCollection<Track> Tracks { get; set; } = new ObservableCollection<Track>();
         public ObservableCollection<Track> ALLTracks { get; set; } = new ObservableCollection<Track>();
+        public ObservableCollection<PlayList> PlayLists { get; set; } = new ObservableCollection<PlayList>();
+        public ObservableCollection<Track> PlayListsTrack { get; set; } = new ObservableCollection<Track>();
+
         public string ImageIcon { get; }
         public string AbsolutePath { get; }
 
@@ -51,7 +58,8 @@ namespace WpfApp1
 
             // Установка изображения по умолчанию при запуске
             SetDefaultImage();
-
+            AllTrackView();
+            PlayListVIew();
             progressTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(200)
@@ -59,6 +67,15 @@ namespace WpfApp1
             progressTimer.Tick += ProgressTimer_Tick;
 
             _ = LoadBackgroundAsync();
+        }
+
+
+        private void AddPlay_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
         }
 
         private async Task LoadBackgroundAsync()
@@ -93,7 +110,7 @@ namespace WpfApp1
                 isDraggingProgressBar = false;
                 if (wasPlayingBeforeDrag)
                 {
-                    MediaPlayer.Play(); // Возобновляем, если трек играл
+                    MediaPlayer.Play(); // хуево тут все работает, но мне лень переделывать
                     isPlaying = true;
                 }
                 progressTimer.Start();
@@ -106,11 +123,11 @@ namespace WpfApp1
             if (MediaPlayer.Source != null && MediaPlayer.NaturalDuration.HasTimeSpan)
             {
                 isDraggingProgressBar = true;
-                wasPlayingBeforeDrag = isPlaying; // Запоминаем, играл ли трек
+                wasPlayingBeforeDrag = isPlaying; 
                 if (isPlaying)
                 {
-                    MediaPlayer.Pause(); // Приостанавливаем воспроизведение
-                    isPlaying = false;   // Обновляем флаг
+                    MediaPlayer.Pause(); 
+                    isPlaying = false;   
                 }
                 progressTimer.Stop();
 
@@ -185,13 +202,23 @@ namespace WpfApp1
 
         public class Track
         {
-            public string Name { get; set; }
+            //все светитя начало после перехода с .net framework на .net т.к. у них нет значения, ну и похуй, нахуя мне им нули присваивать
+            public string Name { get; set; } 
             public string Artist { get; set; }
             public string FilePath { get; set; }
-            public byte[] ImageData { get; set; } // Изображение в памяти
+            public byte[] ImageData { get; set; } // Изображение в памяти ибо по иному хуево + нужны абсолютные пути, без них тоже поебота
             public string Duration { get; set; }
         }
 
+
+        public class PlayList
+        {
+            public string Name { get; set; }
+           
+
+            public string Directory { get; set; }
+        }
+           
         async Task ClearDirectory(string path)
         {
             if (!SI.Directory.Exists(path)) return;
@@ -213,20 +240,20 @@ namespace WpfApp1
                 });
 
             }
+
+
+        //спиздил и пох функция простая, она нужна что бы сранвить, файл уже полностью загрузился или нет
         public bool CompareDuration(string filePath, string expectedDuration)
         {
             double ToleranceSeconds = 1.0;
             try
             {
 
-                // Получаем длительность из файла
                 var file = TagLib.File.Create(filePath);
                 TimeSpan actualDuration = file.Properties.Duration;
-
-                // Парсим ожидаемую длительность строго в формате "mm:ss"
+                
                 TimeSpan expected = TimeSpan.ParseExact(expectedDuration, @"mm\:ss", null);
-
-                // Сравниваем с допуском
+                
                 double difference = Math.Abs((actualDuration - expected).TotalSeconds);
                 return difference <= ToleranceSeconds;
             }
@@ -324,17 +351,25 @@ namespace WpfApp1
 
                 string searchsolo = $"{selectedTrack.Name} {selectedTrack.Artist}";
                 
-                await PythonScript(1, searchText, selectedTrack.FilePath, selectedTrack.Name);
-                ChangeImage(selectedTrack.ImageData);
+
+                string filename = SI.Path.GetFileName(selectedTrack.FilePath);
+                filename = SI.Path.GetFileNameWithoutExtension(filename);
+
+                if (!SI.File.Exists(SI.Path.Combine("temp_song", $"{filename}.mp3"))) 
+                {
+                    await PythonScript(1, searchText, selectedTrack.FilePath, selectedTrack.Name);
+                    ChangeImage(selectedTrack.ImageData);
+                }
 
 
 
-                string path = (Path.GetFullPath(Path.Combine("temp_song", selectedTrack.FilePath)));
+
+                string path = (SI.Path.GetFullPath(SI.Path.Combine("temp_song", selectedTrack.FilePath)));
 
                 if (!Directory.Exists(path))
                 {
 
-                    path = Path.ChangeExtension(path, "mp3");
+                    path = SI.Path.ChangeExtension(path, "mp3");
                    
 
                     if (CompareDuration(path, selectedTrack.Duration))
@@ -343,7 +378,7 @@ namespace WpfApp1
                     }
                     else
                     {
-                        MessageBox.Show("трек не загрузится, соси хуй");
+                        MessageBox.Show("да падажди заебал!");
                     }
                 }
                     
@@ -353,7 +388,7 @@ namespace WpfApp1
                 
             }
 
-            //снимает выеделение после клика, хзкак работает мне похуй(не ебу нахуя тут диспетчер)
+            //снимает выеделение после клика
             await Dispatcher.InvokeAsync((Action)(() =>
             {
                 TracksListView.UnselectAll();
@@ -395,6 +430,9 @@ namespace WpfApp1
         {
             Debug.WriteLine($"Начало выполнения PythonScript: arg={arg}, searchText1={searchText1}, name={name}, name1={name1}");
 
+
+
+            
             _previousCts?.Cancel();
             _previousCts = new CancellationTokenSource();
 
@@ -409,18 +447,18 @@ namespace WpfApp1
                 Debug.WriteLine("Ожидание свободного слота");
                 await _concurrencyLimiter.WaitAsync(cancellationToken);
 
-                string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Untitled-3.py");
+                string scriptPath = SI.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Untitled-3.py");
                 string searchText = searchText1;
 
                 if (string.IsNullOrWhiteSpace(searchText))
                 {
-                    Debug.WriteLine("Пустой или пробельный searchText");
+                    Debug.WriteLine("Пустой searchText");
                     MessageBox.Show("Пусто еп твою мать");
                     return;
                 }
 
                 string argument = string.Empty;
-                string nameWithoutExtension = Path.GetFileNameWithoutExtension(name);
+                string nameWithoutExtension = SI.Path.GetFileNameWithoutExtension(name);
 
                 if (arg == 1)
                 {
@@ -493,6 +531,7 @@ namespace WpfApp1
             }
         }
 
+
         private List<Process> _pythonProcesses = new List<Process>();
         private void KillAllPythonProcesses()
         {
@@ -521,7 +560,8 @@ namespace WpfApp1
             foreach (var process in Process.GetProcessesByName("python"))
             {
                 try { process.Kill(); }
-                catch { /* Игнорируем ошибки */ }
+                catch { //похуй на ошибки
+                        }
             }
         }
 
@@ -534,7 +574,7 @@ namespace WpfApp1
                 {
                     foreach (var track in Tracks)
                     {
-                        track.ImageData = null; // Очищаем ImageData
+                        track.ImageData = null; // очистка ImageData
                     }
                     Debug.WriteLine("ImageData очищен для всех треков");
                 });
@@ -615,6 +655,101 @@ namespace WpfApp1
 
         }
 
+        public async void AllTrackView()
+        {
+            
+
+            try
+            {
+                Debug.WriteLine("функция запущена");
+                //уебище запоVни что путь не начинается с слеша придурок
+                string allImgPath = @"ALL\img";
+                string allSongPath = @"ALL\song";
+
+                
+                Debug.WriteLine($" Полный путь : {allImgPath}");
+
+                songView songView = new songView();
+                string[] imgFiles = Directory.GetFiles(SI.Path.GetFullPath(allImgPath), "*.jpg");
+
+                ALLTracks.Clear();
+
+                foreach (string imgFile in imgFiles)
+                {
+
+                    Debug.WriteLine(imgFile);
+
+                    string fullImgPath = SI.Path.GetFullPath(imgFile);
+                    byte[] imageData = SI.File.ReadAllBytes(fullImgPath);
+
+
+                    string full = await Task.Run(() => songView.GetNamePart(fullImgPath, 4));
+
+                    string name = await Task.Run(() => songView.GetNamePart(fullImgPath, 1));
+                    string artist = await Task.Run(() => songView.GetNamePart(fullImgPath, 2));
+                    string duration = await Task.Run(() => songView.GetNamePart(fullImgPath, 3));
+
+                    ALLTracks.Add(new Track
+                    {
+                        Name = name,
+                        Artist = artist,
+                        FilePath = full,
+                        ImageData = imageData,
+                        Duration = duration
+                    });
+
+                }
+            }
+
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+
+
+
+        }
+
+        public void PlayListVIew()
+        {
+            try
+            {
+                PlayLists.Clear();
+                //спизженно частично с stackoverflow
+                string[] folders = System.IO.Directory.GetDirectories(SI.Path.GetFullPath(SI.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"playlist")), "*", System.IO.SearchOption.AllDirectories);
+
+
+                foreach (string f in System.IO.Directory.GetDirectories(SI.Path.GetFullPath(SI.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"playlist")), "*", System.IO.SearchOption.AllDirectories))
+                {
+                    Debug.WriteLine($"ПЛЕЙЛИСТ {f}");
+
+                    var dirName = new DirectoryInfo(f).Name;
+
+                    PlayLists.Add(new PlayList
+                    {
+                        Name = dirName,
+                        Directory = f,
+                        
+
+                    });
+
+
+                }
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
+     
 
         class songView
         {
@@ -626,8 +761,8 @@ namespace WpfApp1
             {
                 try
                 {
-                    string fileName = Path.GetFileName(filePath);
-                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+                    string fileName = SI.Path.GetFileName(filePath);
+                    string fileNameWithoutExtension = SI.Path.GetFileNameWithoutExtension(fileName);
                     string[] parts = fileNameWithoutExtension.Split('_');
 
 
@@ -695,42 +830,260 @@ namespace WpfApp1
          
         }
 
-        private void addALL_Click(object sender, RoutedEventArgs e)
+        private async void PlayListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+
+                BackToPlaylist.Visibility = Visibility.Visible;
+                PlayListView.Visibility = Visibility.Collapsed;
+                TracksListView1.Visibility = Visibility.Visible;
+                NewPlayList.Visibility = Visibility.Collapsed;
+
+                Debug.WriteLine("Показался листвью");
+
+                if (PlayListView.SelectedItem is PlayList selectedPlayList)
+                {
+                    Debug.WriteLine("Выделение плейлиста");
+
+
+                    string path = selectedPlayList.Directory;
+
+
+
+
+
+                    PlaySong.Source = null;
+                    MediaPlayer.Stop();
+                    SetDefaultImage();
+
+                    await UnloadImagesFromMemoryAsync();
+
+
+
+                    songView songView = new songView();
+
+                    // Получение списка изображений
+                    string[] imgFiles = Directory.GetFiles(selectedPlayList.Directory, "*.jpg");
+                    PlayListsTrack.Clear();
+
+                    foreach (string imgFile in imgFiles)
+                    {
+                        string fullImgPath = SI.Path.GetFullPath(imgFile);
+                        byte[] imageData = SI.File.ReadAllBytes(fullImgPath);
+
+                        string full = await Task.Run(() => songView.GetNamePart(fullImgPath, 4));
+
+                        string name = await Task.Run(() => songView.GetNamePart(fullImgPath, 1));
+                        string artist = await Task.Run(() => songView.GetNamePart(fullImgPath, 2));
+                        string duration = await Task.Run(() => songView.GetNamePart(fullImgPath, 3));
+
+                        if (name.Length > 30)
+                        {
+                            name = name.Substring(0, 30) + "...";
+                        }
+
+
+                        if (artist.Length > 30)
+                        {
+                            artist = artist.Substring(0, 30) + "...";
+                        }
+
+
+                        PlayListsTrack.Add(new Track
+                        {
+                            Name = name,
+                            Artist = artist,
+                            FilePath = full,
+                            ImageData = imageData,
+                            Duration = duration
+                        });
+
+                    }
+
+
+
+                }
+
+
+            }
+            finally
+            {
+                await Dispatcher.InvokeAsync((Action)(() =>
+                {
+                    PlayListView.UnselectAll();
+                }), DispatcherPriority.Background);
+            }
+
+
+
+
+
+        }
+
+        private async void DelPlayList_Click(object sender, RoutedEventArgs e)
+        {
+
+            PlayListView.SelectionChanged -= PlayListView_SelectionChanged;
+
+            try
+            {
+
+                
+
+                var button = (Button)sender;
+                var Playlist = (PlayList)button.DataContext;
+                PlayListView.SelectedItem = Playlist;
+
+
+                Debug.WriteLine("функция удаления трека запущена");
+
+
+                if (PlayListView.SelectedItem is PlayList selectedPlayList)
+
+                {
+                    await ClearDirectory(selectedPlayList.Directory);
+                    Debug.WriteLine("выделение выполнено");
+                    Debug.WriteLine(selectedPlayList.Directory);
+                    Directory.Delete(selectedPlayList.Directory);
+                }
+
+               
+
+
+
+            }
+
+            catch(Exception ex) 
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                PlayListVIew();
+                PlayListView.SelectionChanged += PlayListView_SelectionChanged;
+            }
+
+
+        }
+
+
+        
+
+
+
+        private void Dell_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            try
+            {
+                
+                var button = (Button)sender;
+                var track = (Track)button.DataContext;
+                TracksListView2.SelectedItem = track;
+
+
+                Debug.WriteLine("функция удаления трека запущена");
+
+
+                if (TracksListView2.SelectedItem is Track selectedTrack)
+                {
+
+                    Debug.WriteLine("выделение выполнено");
+
+
+                    string filename = SI.Path.GetFileNameWithoutExtension(SI.Path.GetFullPath(selectedTrack.FilePath));
+                    
+                    string imgPath = SI.Path.Combine(@"ALL\img" ,$"{filename}.jpg");
+                    string SongPath = SI.Path.GetFullPath(SI.Path.Combine(@"ALL\song", $"{filename}.mp3"));
+                    Debug.WriteLine($"изображение {imgPath}, песня {SongPath}");
+                    Console.WriteLine($"изображение {imgPath}, песня {SongPath}");
+
+
+                    SI.File.Delete(imgPath);
+                    SI.File.Delete(SongPath);
+
+
+
+                }
+                    
+            }
+
+
+
+
+
+           
+            catch(Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+            finally
+            {
+               
+                AllTrackView();
+            }
+            
+        }
+
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            myPopup.IsOpen = false;
+        }
+
+
+
+
+        //частично нейронка
+        //вообще лучше потом сделать одну функцию для удаления/копирования по парметру и пути в функцию
+        private async void addALL_Click(object sender, RoutedEventArgs e)
+        {
+            TracksListView.SelectionChanged -= TracksListView_SelectionChanged;
+
             var button = (Button)sender;
             var track = (Track)button.DataContext;
             TracksListView.SelectedItem = track;
 
             Debug.WriteLine("Кнопка 'Все треки' нажата");
 
-            try
+            try 
             {
                 if (TracksListView.SelectedItem is Track selectedTrack)
                 {
-                    string filename = Path.GetFileNameWithoutExtension(selectedTrack.FilePath);
+                   
+                    string searchText = SearchBox.Text.Trim();
 
-                    // Правильные исходные пути
-                    string sourceImagePath = Path.Combine("temp_img", $"{filename}.jpg");
-                    string sourceAudioPath = Path.Combine("temp_song", $"{filename}.mp3");
+                    string searchsolo = $"{selectedTrack.Name} {selectedTrack.Artist}";
 
-                    // Целевые директории
+                    await PythonScript(1, searchText, selectedTrack.FilePath, selectedTrack.Name);
+                    ChangeImage(selectedTrack.ImageData);
+
+
+                    string filename = SI.Path.GetFileNameWithoutExtension(selectedTrack.FilePath);
+
+                 
+                    string sourceImagePath = SI.Path.Combine("temp_img", $"{filename}.jpg");
+                    string sourceAudioPath = SI.Path.Combine("temp_song", $"{filename}.mp3");
+
+                   
                     string targetSongDir = @"ALL\song";
                     string targetImgDir = @"ALL\img";
 
-                    // Создаем директории, если их нет
+                    
                     Directory.CreateDirectory(targetSongDir);
                     Directory.CreateDirectory(targetImgDir);
 
-                    // Правильные целевые пути
-                    string targetImagePath = Path.Combine(targetImgDir, $"{filename}.jpg");
-                    string targetSongPath = Path.Combine(targetSongDir, $"{filename}.mp3");
+                    string targetImagePath = SI.Path.Combine(targetImgDir, $"{filename}.jpg");
+                    string targetSongPath = SI.Path.Combine(targetSongDir, $"{filename}.mp3");
 
-                    Debug.WriteLine($"Копируем изображение из: {sourceImagePath}");
-                    Debug.WriteLine($"Копируем изображение в: {targetImagePath}");
-                    Debug.WriteLine($"Копируем аудио из: {sourceAudioPath}");
-                    Debug.WriteLine($"Копируем аудио в: {targetSongPath}");
+                    Debug.WriteLine($"изображение из: {sourceImagePath}");
+                    Debug.WriteLine($"изображение в: {targetImagePath}");
+                    Debug.WriteLine($"аудио из: {sourceAudioPath}");
+                    Debug.WriteLine($"аудио в: {targetSongPath}");
 
-                    // Копируем изображение
+                   
                     if (SI.File.Exists(sourceImagePath))
                     {
                         if (!SI.File.Exists(targetImagePath))
@@ -748,17 +1101,27 @@ namespace WpfApp1
                         Debug.WriteLine($"Исходное изображение не найдено: {sourceImagePath}");
                     }
 
-                    // Копируем аудио
+
+                    string path = (SI.Path.GetFullPath(SI.Path.Combine("temp_song", selectedTrack.FilePath)));
+
+
                     if (SI.File.Exists(sourceAudioPath))
                     {
-                        if (!SI.File.Exists(targetSongPath))
+                        if (CompareDuration(sourceAudioPath, selectedTrack.Duration))
                         {
-                            SI.File.Copy(sourceAudioPath, targetSongPath);
-                            Debug.WriteLine("Аудио скопировано!");
+                            if (!SI.File.Exists(targetSongPath))
+                            {
+                                SI.File.Copy(sourceAudioPath, targetSongPath);
+                                Debug.WriteLine("Аудио скопировано!");
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Аудио уже существует!");
+                            }
                         }
                         else
                         {
-                            Debug.WriteLine("Аудио уже существует!");
+                            Debug.WriteLine("Длительность не совпадает, копирование отменено");
                         }
                     }
                     else
@@ -766,24 +1129,70 @@ namespace WpfApp1
                         Debug.WriteLine($"Исходное аудио не найдено: {sourceAudioPath}");
                     }
                 }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Ошибка: {ex.Message}");
             }
-        }
-
-
-        private void addPlay_Click(object sender, RoutedEventArgs e)
-        {
-            if (TracksListView.SelectedItem is Track selectedTrack)
+            finally
             {
-
+                AllTrackView();
+                TracksListView.SelectionChanged += TracksListView_SelectionChanged;
             }
         }
 
 
-        
+        private void NewPlayList_Click(object sender, RoutedEventArgs e)
+        {
+            myPopup.IsOpen = true;
+        }
+
+        //на потом
+      
+
+
+        private void NewPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+
+                string text = namePlaylistBox.Text;
+
+                if (text == null)
+                {
+
+                    MessageBox.Show("Пустовато");
+
+                }
+
+                string Path = SI.Path.Combine("playlist", $"{text}");
+
+                if(Directory.Exists(Path))
+                {
+                    MessageBox.Show("есть такой уже");
+                }
+                else
+                {
+                    Directory.CreateDirectory(Path);
+                }
+               
+
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+            finally
+            { 
+                myPopup.IsOpen = false;
+                PlayListVIew();
+            }
+
+        }
+
 
         //две функции спизженные с stackoverflow 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -820,9 +1229,208 @@ namespace WpfApp1
         }
 
 
+        private void NewPlaylist_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private string _currentTrackFilePath;
+        private string _Duration;
+        private async void AddPlay_Click_1(object sender, RoutedEventArgs e)
+        {
+            TracksListView.SelectionChanged -= TracksListView_SelectionChanged;
+
+            PopupPlaylist.IsOpen = true;
+
+            
+            var button = (Button)sender;
+            var track = (Track)button.DataContext;
+            TracksListView.SelectedItem = track;
+
+            Debug.WriteLine("Кнопка 'в плейлист' нажата");
+
+
+            try
+            {
+                if (TracksListView.SelectedItem is Track selectedTrack)
+                {
+
+                     _currentTrackFilePath = selectedTrack.FilePath;
+                   
+
+                }
+            }
+            catch { }
+            finally { TracksListView.SelectionChanged += TracksListView_SelectionChanged; }
+
+        }
+
+        private async void PlayListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            Debug.WriteLine("выбран плейлист");
+
+            
+
+
+            try
+            {
+                string TrackPath = _currentTrackFilePath;
+
+                if (PlayListView1.SelectedItem is PlayList selectedPlaylist)
+                {
+                    Debug.WriteLine(TrackPath);
+                    Debug.WriteLine("выделение заебца");
+                    Debug.WriteLine(selectedPlaylist.Directory);
 
 
 
+                    string filename = SI.Path.GetFileNameWithoutExtension(TrackPath);
+
+
+                    string sourceImagePath = SI.Path.GetFullPath(SI.Path.Combine("temp_img", $"{filename}.jpg"));
+                    string sourceAudioPath = SI.Path.GetFullPath(SI.Path.Combine("temp_song", $"{filename}.mp3"));
+
+                    string targetPath = selectedPlaylist.Directory;
+
+                    string targetImagePath = SI.Path.Combine(targetPath, $"{filename}.jpg");
+                    string targetSongPath = SI.Path.Combine(targetPath, $"{filename}.mp3");
+
+
+
+                    Debug.WriteLine(sourceImagePath);
+                    Debug.WriteLine(sourceAudioPath);
+
+
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    Debug.WriteLine("Сборка мусора");
+
+                    if (SI.File.Exists(sourceImagePath) | SI.File.Exists(sourceAudioPath))
+                    {
+                        if (!SI.File.Exists(targetPath))
+                        {
+                            SI.File.Copy(sourceImagePath, targetImagePath);
+
+
+                            Debug.WriteLine("Изображение скопировано!");
+                        }
+                        else
+                        {
+                            Debug.WriteLine("Изображение уже существует!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Исходное изображение не найдено: {sourceImagePath}");
+                    }
+
+
+
+                    try
+                    {
+                        TracksListView.SelectionChanged -= TracksListView_SelectionChanged;
+
+
+
+
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+
+                        if (TracksListView.SelectedItem is Track selectedTrack)
+                        {
+
+
+                            string searchText = SearchBox.Text.Trim();
+
+                            Debug.WriteLine("Скачивание трека от плейлиста");
+                            await PythonScript(1, searchText, selectedTrack.FilePath, selectedTrack.Name);
+                            ChangeImage(selectedTrack.ImageData);
+
+                            if (SI.File.Exists(sourceAudioPath))
+                            {
+                                if (CompareDuration(sourceAudioPath, selectedTrack.Duration))
+                                {
+                                    if (!SI.File.Exists(targetSongPath))
+                                    {
+                                        SI.File.Copy(sourceAudioPath, targetSongPath);
+                                        Debug.WriteLine("Аудио скопировано!");
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine("Аудио уже существует!");
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Длительность не совпадает, копирование отменено");
+                                }
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"Исходное аудио не найдено: {sourceAudioPath}");
+                            }
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+
+                      
+
+
+                        TracksListView.SelectionChanged += TracksListView_SelectionChanged;
+                    }
+
+
+                }
+            }
+
+            catch(Exception ex) 
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+
+                await Dispatcher.InvokeAsync((Action)(() =>
+                {
+                    PlayListView1.UnselectAll();
+                }), DispatcherPriority.Background);
+
+                PopupPlaylist.IsOpen = false;
+            }
+           
+                
+
+
+
+
+            }
+
+
+        
+
+        private void add_Play_Click(object sender, RoutedEventArgs e)
+        {
+            PopupPlaylist.IsOpen = true;
+
+
+
+
+        }
+
+        private void BackToPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            TracksListView1.Visibility = Visibility.Collapsed;
+            PlayListView.Visibility = Visibility.Visible;
+            NewPlayList.Visibility = Visibility.Visible;
+            BackToPlaylist.Visibility = Visibility.Collapsed;
+        }
     }
 
 
