@@ -26,7 +26,7 @@ namespace test.ViewModel.TabViewModel
     internal class ALLTrackTabView : INotifyPropertyChanged
     {
 
-        public ObservableCollection<Track> ALLTracks { get; set; } = new ObservableCollection<Track>();
+       
 
 
         private readonly IPythonScriptService _pythonScriptService;
@@ -38,6 +38,7 @@ namespace test.ViewModel.TabViewModel
         private readonly IPathService _pathService;
 
         private FileSystemWatcher _watcher;
+
 
 
         private string _basePath;
@@ -79,14 +80,15 @@ namespace test.ViewModel.TabViewModel
         public ICommand DellSong { get; set; }
         public ICommand AddToPlaylist { get; set; }
         public ICommand u { get; set; }
-
-        
+        public InitCollection Collections { get; set; }
 
 
         private readonly Dispatcher _dispatcher;
         public ALLTrackTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
             IDirectoryService directoryService, IPathService pathService)
         {
+            
+
             _dispatcher = uiDispatcher;
 
             _pathService = pathService;
@@ -104,7 +106,7 @@ namespace test.ViewModel.TabViewModel
             _allImgDir = getPath.AllImgPath;
             _allSongDir = getPath.AllSongPath;
 
-
+            Collections = new InitCollection();
             _watcher = new FileSystemWatcher(_allSongDir);
             _audioFileNameParser = new AudioFileNameParser();
 
@@ -140,8 +142,8 @@ namespace test.ViewModel.TabViewModel
             if (selectedItem != null)
             {
 
-                var index = ALLTracks.IndexOf(selectedItem);
-                var allItems = ALLTracks.ToList();
+                //var index = ALLTracks.IndexOf(selectedItem);
+                //var allItems = ALLTracks.ToList();
 
                 Debug.WriteLine(selectedItem.Name);
 
@@ -155,7 +157,7 @@ namespace test.ViewModel.TabViewModel
 
             string[] imgFiles = Directory.GetFiles(_allImgDir, "*.jpg");
 
-            await _dispatcher.InvokeAsync(() => { ALLTracks.Clear(); });
+            await _dispatcher.InvokeAsync(() => { Collections.ALLTracks.Clear(); });
 
             await _dispatcher.InvokeAsync(() => {
 
@@ -171,7 +173,7 @@ namespace test.ViewModel.TabViewModel
                 string imgPath = Path.GetFullPath(imgFile);
                 byte[] imageData = File.ReadAllBytes(imgPath);
 
-                    ALLTracks.Add(new Track
+                    Collections.ALLTracks.Add(new Track
                     {
                         Name = fileInfo.SongName,
                         Artist = fileInfo.SongArtist,

@@ -60,7 +60,7 @@
         </Popup>
 
 
-        <ListView x:Name="TracksListView1" Visibility="Collapsed" BorderThickness="0" Grid.Row="1" Margin="0,41,0,83" ItemsSource="{Binding PlayListsTrack}"
+        <ListView x:Name="TracksListView1" Visibility="Collapsed" BorderThickness="0" Grid.Row="1" Margin="0,41,0,83" ItemsSource="{Binding Collections.}" 
   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
   ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
   Background="Transparent" Grid.ColumnSpan="2" Grid.RowSpan="3">
@@ -145,7 +145,7 @@ Margin="10 0 30 0" Background="Black" Foreground="White"
         </ListView>
 
 
-        <ListView BorderThickness="0"  x:Name="PlayListView" Grid.Row="1" Background="Transparent" ItemsSource="{Binding PlayLists}" Grid.ColumnSpan="2">
+        <ListView BorderThickness="0"  x:Name="PlayListView" Grid.Row="1" Background="Transparent" ItemsSource="{Binding Collections.PlayLists}"  Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border  BorderBrush="Transparent" BorderThickness="0,0,0,1">
