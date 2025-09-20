@@ -23,7 +23,6 @@ namespace test.ViewModel.TabViewModel
 
     public class PlayListTabView : INotifyPropertyChanged
     {
-        public ObservableCollection<PlayList> PlayLists { get; set; } = new ObservableCollection<PlayList>();
 
         private FileSystemWatcher _watcher;
 
@@ -38,7 +37,7 @@ namespace test.ViewModel.TabViewModel
 
         private readonly IPathService _pathService;
 
-      
+
         private string _basePath;
 
         private string _tempImgPath;
@@ -54,9 +53,7 @@ namespace test.ViewModel.TabViewModel
 
         private string _popupTextBox;
 
-
-
-        public bool PopupIsOpen { get { return _popupIsOpen; } set { _popupIsOpen = value; OnPropertyChanged(); } } 
+        public bool PopupIsOpen { get { return _popupIsOpen; } set { _popupIsOpen = value; OnPropertyChanged(); } }
         public string PopupTextBox { get { return _popupTextBox; } set { _popupTextBox = value; OnPropertyChanged(); } }
 
         public ICommand newPlayList { get; private set; }
@@ -64,6 +61,8 @@ namespace test.ViewModel.TabViewModel
         public ICommand cansel { get; }
         public ICommand openPopup { get; }
 
+       
+        public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
             IPlayListService playListService, IPathService pathService )
         {
@@ -84,13 +83,12 @@ namespace test.ViewModel.TabViewModel
             _allImgDir = getPath.AllImgPath;
             _playList = getPath.PlayListPath;
 
-
             _watcher = new FileSystemWatcher(_playList);
             _audioFileNameParser = new AudioFileNameParser();
+            Collections = new InitCollection();
 
             _watcher.Created += UpdatePlayList;
             _watcher.Deleted += UpdatePlayList;
-
 
             _watcher.EnableRaisingEvents = true;
 
@@ -119,7 +117,7 @@ namespace test.ViewModel.TabViewModel
 
         private async void UpdatePlayList(object sender, FileSystemEventArgs e)
         {
-            await _dispatcher.InvokeAsync(() => { PlayLists.Clear(); });
+            await _dispatcher.InvokeAsync(() => { Collections.PlayLists.Clear(); });
 
             string[] folders = Directory.GetDirectories( _playList );
 
@@ -130,7 +128,7 @@ namespace test.ViewModel.TabViewModel
 
                     string Name = Path.GetFileName(folder);
 
-                    PlayLists.Add(new PlayList
+                    Collections.PlayLists.Add(new PlayList
                     {
                         Name = Name,
 

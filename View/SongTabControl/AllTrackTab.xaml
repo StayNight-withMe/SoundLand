@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
 
-        <ListView BorderThickness="0" IsEnabled="True" x:Name="TracksListView2" Grid.Row="1" Margin="0,41,0,83" ItemsSource="{Binding ALLTracks}"
+        <ListView BorderThickness="0" IsEnabled="True" x:Name="TracksListView2" Grid.Row="1" Margin="0,41,0,83" ItemsSource="{Binding Collections.ALLTracks}"
 ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
 SelectionMode="Single"
 ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
