@@ -1,0 +1,499 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "Z:\\hui1\\test\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\collection\\initcollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\collection\\initcollection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\mainsongtab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\mainsongtab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\playlisttab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\playlisttab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\applicationmusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\applicationmusic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\playlisttabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\playlisttabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\mainsongtab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\mainsongtab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\mainsongtabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\mainsongtabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\alltracktabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\alltracktabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\alltracktab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\alltracktab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\collectionclass\\alltrack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\collectionclass\\alltrack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\collectionclass\\track.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\collectionclass\\track.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\collectionclass\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\collectionclass\\playlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\playlisttab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\playlisttab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\implementations\\playlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\implementations\\playlistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\interfaces\\iaudiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\interfaces\\iaudiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\alltracktab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\alltracktab.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\implementations\\pathservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\implementations\\pathservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\interfaces\\iplaylistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\interfaces\\iplaylistservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\implementations\\directoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\implementations\\directoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\interfaces\\ipathservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\interfaces\\ipathservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\interfaces\\idirectoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\interfaces\\idirectoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\implementations\\audiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\implementations\\audiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\dtos\\filenameinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\dtos\\filenameinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directoryservice\\dtos\\getpath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directoryservice\\dtos\\getpath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\model\\pythonscriptservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\model\\pythonscriptservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 281,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 119,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InitCollection.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\Collection\\InitCollection.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\Collection\\InitCollection.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\Collection\\InitCollection.cs",
+              "RelativeToolTip": "test\\ViewModel\\Collection\\InitCollection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T19:01:50.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainSongTab.xaml.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\MainSongTab.xaml.cs",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\MainSongTab.xaml.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\MainSongTab.xaml.cs",
+              "RelativeToolTip": "test\\View\\SongTabControl\\MainSongTab.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T20:27:40.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayListTab.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\PlayListTab.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
+              "RelativeToolTip": "test\\View\\SongTabControl\\PlayListTab.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-17T20:22:46.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainSongTab.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\MainSongTab.xaml",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\MainSongTab.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\MainSongTab.xaml",
+              "RelativeToolTip": "test\\View\\SongTabControl\\MainSongTab.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-17T20:22:14.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainSongTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "RelativeToolTip": "test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAuwIkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T21:00:04.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ALLTrackTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "RelativeToolTip": "test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAIwFIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T20:24:54.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AllTrackTab.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\AllTrackTab.xaml",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\AllTrackTab.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\AllTrackTab.xaml",
+              "RelativeToolTip": "test\\View\\SongTabControl\\AllTrackTab.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-17T20:22:25.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PlayList.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\PlayList.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\CollectionClass\\PlayList.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\PlayList.cs",
+              "RelativeToolTip": "test\\ViewModel\\CollectionClass\\PlayList.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T17:23:42.274Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AllTrack.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\AllTrack.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\CollectionClass\\AllTrack.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\AllTrack.cs",
+              "RelativeToolTip": "test\\ViewModel\\CollectionClass\\AllTrack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T16:20:14.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayListTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "RelativeToolTip": "test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAIwIQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T20:24:52.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicationMusic.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\ApplicationMusic.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\ApplicationMusic.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\ApplicationMusic.cs",
+              "RelativeToolTip": "test\\ViewModel\\ApplicationMusic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T14:04:12.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Track.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\Track.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\CollectionClass\\Track.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\CollectionClass\\Track.cs",
+              "RelativeToolTip": "test\\ViewModel\\CollectionClass\\Track.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T17:23:03.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PlayListService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\PlayListService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Implementations\\PlayListService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\PlayListService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Implementations\\PlayListService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAmwBYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:53:36.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IAudioFileNameParser.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IAudioFileNameParser.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Interfaces\\IAudioFileNameParser.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IAudioFileNameParser.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Interfaces\\IAudioFileNameParser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:43:45.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AllTrackTab.xaml.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\AllTrackTab.xaml.cs",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\AllTrackTab.xaml.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\AllTrackTab.xaml.cs",
+              "RelativeToolTip": "test\\View\\SongTabControl\\AllTrackTab.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T20:25:04.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PlayListTab.xaml.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml.cs",
+              "RelativeDocumentMoniker": "test\\View\\SongTabControl\\PlayListTab.xaml.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml.cs",
+              "RelativeToolTip": "test\\View\\SongTabControl\\PlayListTab.xaml.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T20:22:53.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "test\\ViewModel\\RelayCommand.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\RelayCommand.cs",
+              "RelativeToolTip": "test\\ViewModel\\RelayCommand.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T14:04:10.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IPlayListService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IPlayListService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Interfaces\\IPlayListService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IPlayListService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Interfaces\\IPlayListService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:49:53.993Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PathService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\PathService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Implementations\\PathService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\PathService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Implementations\\PathService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T13:15:36.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IPathService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IPathService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Interfaces\\IPathService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IPathService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Interfaces\\IPathService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:45:00.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DirectoryService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\DirectoryService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Implementations\\DirectoryService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\DirectoryService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Implementations\\DirectoryService.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAABEAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T13:39:37.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IDirectoryService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IDirectoryService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Interfaces\\IDirectoryService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Interfaces\\IDirectoryService.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Interfaces\\IDirectoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:44:21.154Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AudioFileNameParser.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\AudioFileNameParser.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\Implementations\\AudioFileNameParser.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\Implementations\\AudioFileNameParser.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\Implementations\\AudioFileNameParser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T13:39:38.259Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FileNameInfo.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\DTOs\\FileNameInfo.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\DTOs\\FileNameInfo.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\DTOs\\FileNameInfo.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\DTOs\\FileNameInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:42:29.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "GetPath.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\DTOs\\GetPath.cs",
+              "RelativeDocumentMoniker": "test\\Services\\DirectoryService\\DTOs\\GetPath.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryService\\DTOs\\GetPath.cs",
+              "RelativeToolTip": "test\\Services\\DirectoryService\\DTOs\\GetPath.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T19:45:15.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PythonScriptService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\Model\\PythonScriptService.cs",
+              "RelativeDocumentMoniker": "test\\Model\\PythonScriptService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\Model\\PythonScriptService.cs",
+              "RelativeToolTip": "test\\Model\\PythonScriptService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T14:35:52.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "App.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\App.xaml",
+              "RelativeDocumentMoniker": "test\\App.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\App.xaml",
+              "RelativeToolTip": "test\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-19T17:50:41.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "test\\View\\MainWindow.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\View\\MainWindow.xaml",
+              "RelativeToolTip": "test\\View\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-09-08T22:16:46.908Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
