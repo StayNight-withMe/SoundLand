@@ -28,8 +28,13 @@ namespace test.SongTabControl
         public AllTrackTab()
         {
             InitializeComponent();
+            var pathService = new PathService();
+            var audioParser = new AudioFileNameParser(pathService);
+            var directoryService = new DirectoryService();
+            var dispatcher = Application.Current.Dispatcher;
 
-            this.DataContext = new ALLTrackTabView(Application.Current.Dispatcher, new AudioFileNameParser(), new DirectoryService(), new PathService());
+            // Передаём в конструктор:
+            this.DataContext = new ALLTrackTabView(dispatcher, audioParser, directoryService, pathService);
         }
     }
 }

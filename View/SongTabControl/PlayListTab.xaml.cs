@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 using test.Services;
 
 using test.SongTabControl;
@@ -21,8 +22,15 @@ namespace test.SongTabControl
         public PlayListTab()
         {
             InitializeComponent();
-     
-            this.DataContext = new PlayListTabView(Application.Current.Dispatcher, new AudioFileNameParser(), new PlayListService(), new PathService());
+
+            var pathService = new PathService();
+            var audioParser = new AudioFileNameParser(pathService);
+            var directoryService = new PlayListService();
+            var dispatcher = Application.Current.Dispatcher;
+            var pythonService = new PythonScriptService();
+
+            this.DataContext = new PlayListTabView(dispatcher,audioParser, directoryService, pathService);         
         }
+
     }
 }

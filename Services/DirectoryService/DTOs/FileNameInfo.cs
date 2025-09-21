@@ -13,5 +13,6 @@ namespace test.Services
         public string SongArtist;
         public string SongDuration;
         public string ImgFilePath;
+        public string SongFilePath;
     }
 }

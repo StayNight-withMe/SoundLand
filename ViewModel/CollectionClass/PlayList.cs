@@ -11,7 +11,7 @@ namespace test.ViewModel.CollectionClass
     {
         public string Name { get; set; }
         
-
+        
         public string Directory { get; set; }
     }
 }

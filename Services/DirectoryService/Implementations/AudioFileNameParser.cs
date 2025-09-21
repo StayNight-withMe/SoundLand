@@ -15,6 +15,13 @@ namespace test.Services
 
     public class AudioFileNameParser : IAudioFileNameParser
     {
+        private readonly IPathService _pathService;
+        public AudioFileNameParser(IPathService pathService)
+        {
+            _pathService = pathService;
+        }
+
+
 
         private string[] GetFileParts(string filePart)
         {
@@ -46,16 +53,22 @@ namespace test.Services
             return $"{minutes.PadLeft(2, '0')}:{seconds.PadLeft(2, '0')}";
         }
 
-
+        //public string GetSongPath(string[] filePart)
+        //{
+        //     GetPath getPath = new GetPath();
+        //    string SongFilePath = Path.Combine(getPath.TempSongPath, $"{Path.GetFileNameWithoutExtension(filePart)}.mp3");
+        //}
 
         
         public FileNameInfo ParseAll(string filePart)
         {
-            GetPath getPath = new GetPath();
+            GetPath getPath = _pathService.ParseAll(); ;
 
             var parts = GetFileParts(filePart);
 
             //string imgFilePath = Path.Combine(getPath.BasePath, Path.GetFileName(filePart));
+
+            string SongFilePath = Path.Combine(getPath.TempSongPath, $"{Path.GetFileNameWithoutExtension(filePart)}.mp3");
             
 
             return new FileNameInfo
@@ -65,6 +78,7 @@ namespace test.Services
                 SongArtist = GetSongArtist(parts),
                 SongDuration = GetSongDuration(parts),
                 ImgFilePath = filePart,
+                SongFilePath = SongFilePath
             };
 
         }

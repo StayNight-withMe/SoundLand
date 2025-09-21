@@ -12,9 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
-using test.Model;
+//using test.Model;
 using test.Services;
-
+//using test.Services.ScriptService.Interfaces;
 using test.ViewModel.CollectionClass;
 
 
@@ -108,7 +108,7 @@ namespace test.ViewModel.TabViewModel
 
             Collections = new InitCollection();
             _watcher = new FileSystemWatcher(_allSongDir);
-            _audioFileNameParser = new AudioFileNameParser();
+  
 
             _watcher.Created += UpdateListView;
             _watcher.Deleted += UpdateListView;
