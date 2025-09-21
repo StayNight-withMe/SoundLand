@@ -2,7 +2,7 @@
 using test.ViewModel.TabViewModel;
 using System.Windows;
 using System.Windows.Threading;
-using test.Model;
+
 using test.Services;
 
 namespace test.SongTabControl
@@ -13,7 +13,14 @@ namespace test.SongTabControl
         {
             InitializeComponent();
 
-            this.DataContext = new MainSongTabView(new PythonScriptService(), new AudioFileNameParser(), new DirectoryService(), new PathService());
+            var pathService = new PathService();
+            var audioParser = new AudioFileNameParser(pathService);
+            var playListService = new PlayListService();
+            var dispatcher = Application.Current.Dispatcher;
+            var pythonService = new PythonScriptService();
+         
+            this.DataContext = new MainSongTabView(pythonService, audioParser, playListService, pathService);
+
         }
     }
 }

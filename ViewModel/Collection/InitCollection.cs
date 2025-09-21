@@ -1,16 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using test.Model; 
+//using test.Model; 
 
 namespace test.ViewModel.CollectionClass 
 { 
     public class InitCollection : INotifyPropertyChanged
     {
-
+        //хуео так делать, но из-за того что не будет ебанутого покрытия тестами думаю похуй
+        //правильнее на будущее сделать сервис управления колекциями
         private static ObservableCollection<PlayList> _sharedPlayLists = new();
-
-        
         public ObservableCollection<PlayList> PlayLists { get => _sharedPlayLists; set { _sharedPlayLists = value; OnPropertyChanged(); } }
 
 

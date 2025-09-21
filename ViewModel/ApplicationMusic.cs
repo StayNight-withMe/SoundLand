@@ -15,7 +15,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 //using System.Windows.Shapes;
 using System.Xml.Linq;
-using test.Model;
+//using test.Model;
 using test.Services;
 
 namespace test.ViewModel

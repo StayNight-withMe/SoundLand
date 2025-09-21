@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using test.Model;
+
 using test.Services;
 
 using test.ViewModel.CollectionClass;
@@ -50,16 +51,17 @@ namespace test.ViewModel.TabViewModel
 
 
         private bool _popupIsOpen;
-
         private string _popupTextBox;
+        private PlayList _selectedPlayList;
 
         public bool PopupIsOpen { get { return _popupIsOpen; } set { _popupIsOpen = value; OnPropertyChanged(); } }
         public string PopupTextBox { get { return _popupTextBox; } set { _popupTextBox = value; OnPropertyChanged(); } }
+        public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
 
-        public ICommand newPlayList { get; private set; }
-        public ICommand dellPlayList { get; private set; }
-        public ICommand cansel { get; }
-        public ICommand openPopup { get; }
+        public ICommand NewPlayList { get; private set; }
+        public ICommand DellPlayList { get; private set; }
+        public ICommand Cansel { get; }
+        public ICommand OpenPopup { get; }
 
        
         public InitCollection Collections { get; set; }
@@ -84,7 +86,6 @@ namespace test.ViewModel.TabViewModel
             _playList = getPath.PlayListPath;
 
             _watcher = new FileSystemWatcher(_playList);
-            _audioFileNameParser = new AudioFileNameParser();
             Collections = new InitCollection();
 
             _watcher.Created += UpdatePlayList;
@@ -94,19 +95,15 @@ namespace test.ViewModel.TabViewModel
 
             UpdatePlayList(null, fakeEventArgs);
 
-            dellPlayList = new RelayCommand<PlayList>(DellPLayList);
-            newPlayList = new RelayCommand<object>(_ => CreatedPlayList());
-            openPopup = new RelayCommand<object>(_ => PopupOpenWithtext());
-            cansel = new RelayCommand<object>(_ => PopupIsOpen = false);
+            DellPlayList = new RelayCommand<PlayList>(DellPLayListHandler);
+            NewPlayList = new RelayCommand<object>(_ => CreatedPlayListHandler());
+            OpenPopup = new RelayCommand<object>(_ => OpenPopupHandler());
+            Cansel = new RelayCommand<object>(_ => PopupIsOpen = false);
             
         
         }
         
-
-
-
-
-        private void PopupOpenWithtext()
+        private void OpenPopupHandler()
         {
             PopupIsOpen = true;
             string text = "Новый плейлист";
@@ -131,29 +128,23 @@ namespace test.ViewModel.TabViewModel
                     Collections.PlayLists.Add(new PlayList
                     {
                         Name = Name,
-
                         Directory = folder,
 
                     });
                     
-
-
                 }
-
-            
             });
-
 
         }
 
-        private void DellPLayList(PlayList playList)
+        private void DellPLayListHandler(PlayList playList)
         {
             _directoryService.DelPlayList(playList.Directory);
         }
 
 
 
-        private void CreatedPlayList()
+        private void CreatedPlayListHandler()
         {
             _directoryService.CreatePlayList(_popupTextBox);
             PopupIsOpen = false;

@@ -22,7 +22,7 @@
 
         <Button x:Name="NewPlayList" BorderThickness="0" Content="создать плейлист" Grid.Row="0" Background="Transparent" Opacity="0.9" Foreground="Black"
                                         FontSize="35"  Grid.ColumnSpan="2" Margin="0,0,0,750" Grid.RowSpan="2" 
-               Command="{Binding openPopup}" 
+               Command="{Binding OpenPopup}" 
                 />
 
 
@@ -44,14 +44,14 @@
                                 Content="Создать плейлист" 
                                 Background="Black" 
                                 Foreground="White"
-                                Command="{Binding newPlayList}"/>
+                                Command="{Binding NewPlayList}"/>
                     
 
                     <Button Width="200" Height="50" 
                                 Content="Отменить" 
                                 Background="Black" 
                                 Foreground="White"
-                                Command="{Binding cansel}"/>
+                                Command="{Binding Cansel}"/>
 
 
                 </StackPanel>
@@ -145,7 +145,7 @@ Margin="10 0 30 0" Background="Black" Foreground="White"
         </ListView>
 
 
-        <ListView BorderThickness="0"  x:Name="PlayListView" Grid.Row="1" Background="Transparent" ItemsSource="{Binding Collections.PlayLists}"  Grid.ColumnSpan="2">
+        <ListView BorderThickness="0"  x:Name="PlayListView" Grid.Row="1" SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" Background="Transparent" ItemsSource="{Binding Collections.PlayLists}"  Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border  BorderBrush="Transparent" BorderThickness="0,0,0,1">
@@ -169,7 +169,7 @@ Margin="10 0 30 0" Background="Black" Foreground="White"
 
                             <Button Grid.Column="2" x:Name="DelPlayList"  Content="Удалить" 
                              Foreground="White" Background="Black" VerticalAlignment="Center" Height="25" Width="80"
-                            HorizontalAlignment="Right" Margin="0,0,10,0"  Command="{Binding DataContext.dellPlayList, 
+                            HorizontalAlignment="Right" Margin="0,0,10,0"  Command="{Binding DataContext.DellPlayList, 
                 RelativeSource={RelativeSource AncestorType=ListView}}"
         CommandParameter="{Binding}" />
 
