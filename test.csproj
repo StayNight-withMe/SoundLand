@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\DirectoryPathServices\Base\" />
+    <Folder Include="Services\PlayListService\DTOs\" />
+    <Folder Include="ViewModel\CollectionClass\" />
+  </ItemGroup>
+
 </Project>

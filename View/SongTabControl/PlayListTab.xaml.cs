@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using test.Services;
 
 using test.SongTabControl;
 using test.ViewModel;
+using test.ViewModel.CollectionClass;
 using test.ViewModel.TabViewModel;
 
 
@@ -21,16 +23,10 @@ namespace test.SongTabControl
     {
         public PlayListTab()
         {
+
             InitializeComponent();
 
-            var pathService = new PathService();
-            var audioParser = new AudioFileNameParser(pathService);
-            var directoryService = new PlayListService();
-            var dispatcher = Application.Current.Dispatcher;
-            var pythonService = new PythonScriptService();
-
-            this.DataContext = new PlayListTabView(dispatcher,audioParser, directoryService, pathService);         
+            this.DataContext = this;
         }
-
     }
 }
