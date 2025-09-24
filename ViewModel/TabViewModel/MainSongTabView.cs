@@ -14,18 +14,20 @@ using test.ViewModel.CollectionClass;
 
 namespace test.ViewModel.TabViewModel
 {
-    public class MainSongTabView : INotifyPropertyChanged
+    public class MainSongTabView : BaseViewModel
     {
         
-
-
         private readonly IPythonScriptService _pythonScriptService;
 
         private readonly IAudioFileNameParser _audioFileNameParser;
 
-        private readonly IPlayListService _directoryService;
+        private readonly IDirectoryService _directoryService;
+
+        private readonly IPlayListService _playListService;
 
         private readonly IPathService _pathService;
+
+        
 
         private readonly GetPath _getPath;
 
@@ -71,17 +73,20 @@ namespace test.ViewModel.TabViewModel
 
         public InitCollection Collections { get; set; }
         public MainSongTabView(IPythonScriptService pythonScriptService, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService)
         {
             _pathService = pathService;
 
-            _directoryService = playListService;
+            _playListService = playListService;
 
             _audioFileNameParser = audioFileNameParser;
-
-            _pythonScriptService = pythonScriptService;
-
             
+            _pythonScriptService = pythonScriptService;
+            
+            _directoryService = directoryService;
+
+
+
             ToALLTrack = new RelayCommand<Track>(ToALLTrackHandler);
             SearchSong = new RelayCommand<object>(_ => SearchSongHandler());
             ToPlayList = new RelayCommand<Track>(ToPlayListHandler);
@@ -108,7 +113,7 @@ namespace test.ViewModel.TabViewModel
 
                 await _pythonScriptService.PythonScript("Untitled-3.py", 1, _inputText, _tempChoiceTrack.FileName, _tempChoiceTrack.Name);
 
-                _directoryService.AddTrackToPlayList(SelectedPlayList, _tempChoiceTrack);
+                _playListService.AddTrackToPlayList(SelectedPlayList, _tempChoiceTrack);
 
             }
             
@@ -209,11 +214,6 @@ namespace test.ViewModel.TabViewModel
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
 
 
     }

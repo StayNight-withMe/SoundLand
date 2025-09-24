@@ -3,6 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
 
+        <Popup x:Name="PopupPlaylist" IsOpen="{Binding PopupIsOpen}" Placement="Right" Height="200" Width="200" Grid.Row="0" Grid.ColumnSpan="2">
+            <Border Background="Transparent">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <Button Content="добавить" Command="{Binding AddToPlaylist}" CommandParameter="{Binding}" Background="Gray" FontSize="15"  Foreground="White"/>
+
+                        <Button Content="Отмена" Background="Gray" Command="{Binding СancelPopup}" CommandParameter="{Binding}" FontSize="15" Foreground="White" />
+
+                    </StackPanel>
+
+
+
+                    <ListView BorderThickness="0" Grid.Row="0" SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" x:Name="PlayListVieaw1" Background="Black" ItemsSource="{Binding Collections.PlayLists}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Transparent" BorderThickness="0,0,0,1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" FontSize="16"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"
+                                            Margin="10,0"/>
+
+
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+        </Popup>
+
+
+
+
         <ListView BorderThickness="0" IsEnabled="True" x:Name="TracksListView2" Grid.Row="1" Margin="0,41,0,83" ItemsSource="{Binding Collections.ALLTracks}"
 ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"
 SelectionMode="Single"
@@ -42,7 +89,8 @@ Background="Transparent" Grid.ColumnSpan="2" Grid.RowSpan="3">
                       HorizontalAlignment="Right" Foreground="White" Margin="10 0 0 0" Background="Black"  Command="{Binding DataContext.DellSong, RelativeSource={RelativeSource AncestorType=UserControl}}" 
         CommandParameter="{Binding}"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
-                                <Button x:Name="add_Play" Content="в плейлист" Width="100" Height="25" 
+                                <Button x:Name="add_Play" Command="{Binding DataContext.OpenPopup, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+        CommandParameter="{Binding}"  Content="в плейлист" Width="100" Height="25" 
                       Margin="10 0 30 0" HorizontalAlignment="Right" Background="Black"  
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White"/>
                             </StackPanel>

@@ -15,11 +15,12 @@ namespace test.SongTabControl
 
             var pathService = new PathService();
             var audioParser = new AudioFileNameParser(pathService);
-            var playListService = new PlayListService();
+            var playListService = new PlayListServiceForSearchTrack(pathService);
+            var directoryService = new DirectoryService();
             var dispatcher = Application.Current.Dispatcher;
             var pythonService = new PythonScriptService();
          
-            this.DataContext = new MainSongTabView(pythonService, audioParser, playListService, pathService);
+            this.DataContext = new MainSongTabView(pythonService, audioParser, playListService, pathService, directoryService);
 
         }
     }

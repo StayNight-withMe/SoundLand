@@ -8,10 +8,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
-
 using test.Services;
 
 using test.ViewModel.CollectionClass;
@@ -22,22 +23,29 @@ namespace test.ViewModel.TabViewModel
 
 
 
-    public class PlayListTabView : INotifyPropertyChanged
+    public class PlayListTabView : BaseViewModel
     {
 
         private FileSystemWatcher _watcher;
 
         private Dispatcher _dispatcher;
 
-
+        
         private readonly IPythonScriptService _pythonScriptService;
 
         private readonly IAudioFileNameParser _audioFileNameParser;
 
-        private readonly IPlayListService _directoryService;
+        private readonly TrackCollectionService _collectionService;
+
+        private readonly IDirectoryService _directoryService;
+        
+        private readonly IPlayListService _playlistService;
 
         private readonly IPathService _pathService;
 
+        private string _buttonTextCreatePlayList = "Создать плейлист";
+
+        private string _buttonTextBack = "Назад";
 
         private string _basePath;
 
@@ -49,32 +57,50 @@ namespace test.ViewModel.TabViewModel
 
         private string _playList;
 
-
         private bool _popupIsOpen;
+
         private string _popupTextBox;
+
+        private string _buttonText;
+
+        public PlayList _tempChoice;
+
         private PlayList _selectedPlayList;
 
-        public bool PopupIsOpen { get { return _popupIsOpen; } set { _popupIsOpen = value; OnPropertyChanged(); } }
-        public string PopupTextBox { get { return _popupTextBox; } set { _popupTextBox = value; OnPropertyChanged(); } }
-        public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
+        private Visibility _visiblePlayListView;
+
+        //private bool _userHere = true;
+
+         
+        public bool PopupIsOpen { get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
+        public string PopupTextBox { get => _popupTextBox;  set { _popupTextBox = value; OnPropertyChanged(); } }
+        public string ButtonText { get => _buttonText; set { _buttonText = value; OnPropertyChanged(); } }
+        public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); if(value != null) _tempChoice = value; } }
+        public Visibility VisiblePlayListView { get => _visiblePlayListView; set { _visiblePlayListView = value; OnPropertyChanged(); } }
+        //public bool UserHere { get => _userHere; set { _userHere = value; OnPropertyChanged(); } }
+
 
         public ICommand NewPlayList { get; private set; }
         public ICommand DellPlayList { get; private set; }
         public ICommand Cansel { get; }
         public ICommand OpenPopup { get; }
+        public ICommand PlayListChoice { get; set; }
 
-       
         public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService )
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService collectionService)
         {
             _dispatcher = uiDispatcher;
 
             _pathService = pathService;
 
-            _directoryService = playListService;
+            _directoryService = directoryService;
 
             _audioFileNameParser = audioFileNameParser;
+
+            _playlistService = playListService;
+
+            _collectionService = collectionService;
 
             GetPath getPath = pathService.ParseAll();
 
@@ -99,16 +125,87 @@ namespace test.ViewModel.TabViewModel
             NewPlayList = new RelayCommand<object>(_ => CreatedPlayListHandler());
             OpenPopup = new RelayCommand<object>(_ => OpenPopupHandler());
             Cansel = new RelayCommand<object>(_ => PopupIsOpen = false);
-            
-        
+            ButtonText = _buttonTextCreatePlayList;
+            PlayListChoice = new RelayCommand<object>(_ => PlayListChoiceHandlr());
+
+
+
         }
-        
+
+
+        private void PlayListChoiceHandlr()
+        {
+            VisiblePlayListView = Visibility.Collapsed;
+            Debug.WriteLine("Двойно нажатие на плейлист");
+            Debug.WriteLine(_tempChoice.Name );
+            ButtonText = _buttonTextBack;
+            _collectionService.playList = _tempChoice;
+
+
+
+            _dispatcher.InvokeAsync(() => {
+
+
+
+
+                string[] imgFiles = Directory.GetFiles(_tempChoice.Directory, "*.jpg");
+                _collectionService.Clear();
+
+
+                Debug.WriteLine("Заполнение колекции треков из плейлиста");
+
+                foreach (var imgFile in imgFiles)
+                {
+                    string fullImgPath = Path.GetFullPath(imgFile);
+
+                    FileNameInfo fileInfo = _audioFileNameParser.ParseAll(fullImgPath);
+
+                    Debug.WriteLine($"Song: {fileInfo.SongName}, Artist: {fileInfo.SongArtist}, File: {fileInfo.FileName}, Duration: {fileInfo.SongDuration}");
+
+                    string imgPath = Path.GetFullPath(imgFile);
+                    byte[] imageData = File.ReadAllBytes(imgPath);
+
+
+
+                    _collectionService.Add(new Track
+                    {
+                        Name = fileInfo.SongName,
+                        Artist = fileInfo.SongArtist,
+                        FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
+                        Duration = fileInfo.SongDuration,
+                        ImageData = imageData,
+                        ImgFilePath = fileInfo.ImgFilePath,
+                        SongFilePath = fileInfo.SongFilePath,
+                    });
+
+                   
+                }
+
+
+
+            });
+
+        }
+
+
         private void OpenPopupHandler()
         {
-            PopupIsOpen = true;
-            string text = "Новый плейлист";
-            int count = _directoryService.LenghtDirectory(_playList, text) + 1;
-            PopupTextBox = text + count.ToString();
+            if(ButtonText == _buttonTextBack)
+            {
+                VisiblePlayListView = Visibility.Visible;
+                ButtonText = _buttonTextCreatePlayList;
+                _collectionService.Collection.Clear();
+            }
+            else
+            {
+                Debug.WriteLine("Окрытие попута");
+                PopupIsOpen = true;
+                Debug.WriteLine(PopupIsOpen);
+                string text = "Новый плейлист";
+                int count = _directoryService.LenghtDirectory(_playList, text) + 1;
+                PopupTextBox = text + count.ToString();
+            }
+          
         }
 
 
@@ -139,14 +236,14 @@ namespace test.ViewModel.TabViewModel
 
         private void DellPLayListHandler(PlayList playList)
         {
-            _directoryService.DelPlayList(playList.Directory);
+            _playlistService.DelPlayList(playList.Directory);
         }
 
 
 
         private void CreatedPlayListHandler()
         {
-            _directoryService.CreatePlayList(_popupTextBox);
+            _playlistService.CreatePlayList(_popupTextBox);
             PopupIsOpen = false;
         }
 
@@ -154,11 +251,7 @@ namespace test.ViewModel.TabViewModel
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
-        }
+        
 
     }
 }
