@@ -185,9 +185,9 @@
 
             <Image x:Name="PlaySong" Width="70" Grid.Column="0" HorizontalAlignment="Left" Margin="30,0,0,0" Height="60"/>
 
-            <ProgressBar x:Name="ProgressBar" Background="Black" Foreground="White"
-                         HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                         Margin="10,0,20,10" Minimum="0" Value="0" Grid.Column="2" Height="10" IsEnabled="True"/>
+            <Slider x:Name="ProgressBar"  Style="{StaticResource CustomSliderStyle}" Background="Transparent" Foreground="Black"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Center"  Value="50"
+                         Margin="10,0,20,10" Minimum="0" Maximum="100" Grid.Column="2" Height="10" IsEnabled="True"/>
 
             <TextBlock x:Name="Duration" Text="00:00" Foreground="Black" Grid.Column="3" HorizontalAlignment="Right" Margin="0,30,0,0" FontSize="16"/>
 
