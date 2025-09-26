@@ -65,14 +65,14 @@
             </Border>
         </Popup>
 
-        
-           
 
-           
 
-        
 
-        <Grid x:Name="TrackOfPlayListContainer" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
+
+
+
+
+        <Grid x:Name="TrackOfPlayListContainer" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding ContainerVisible }" />
 
 
 

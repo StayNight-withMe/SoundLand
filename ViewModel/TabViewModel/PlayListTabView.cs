@@ -43,10 +43,6 @@ namespace test.ViewModel.TabViewModel
 
         private readonly IPathService _pathService;
 
-        private string _buttonTextCreatePlayList = "Создать плейлист";
-
-        private string _buttonTextBack = "Назад";
-
         private string _basePath;
 
         private string _tempImgPath;
@@ -69,19 +65,32 @@ namespace test.ViewModel.TabViewModel
 
         private Visibility _visiblePlayListView;
 
-        //private bool _userHere = true;
+        private Visibility _containerVisible;
 
-         
+        private ButtonState _buttonState;
+        
+        public enum ButtonState
+        {
+            Back,
+            CreatePlayList
+        }
+
+
+        public ButtonState ButtonStates { get => _buttonState; set { _buttonState = value; OnPropertyChanged(); OnPropertyChanged(nameof(ButtonText)); } }
         public bool PopupIsOpen { get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
         public string PopupTextBox { get => _popupTextBox;  set { _popupTextBox = value; OnPropertyChanged(); } }
-        public string ButtonText { get => _buttonText; set { _buttonText = value; OnPropertyChanged(); } }
         public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); if(value != null) _tempChoice = value; } }
         public Visibility VisiblePlayListView { get => _visiblePlayListView; set { _visiblePlayListView = value; OnPropertyChanged(); } }
-        //public bool UserHere { get => _userHere; set { _userHere = value; OnPropertyChanged(); } }
+        public Visibility ContainerVisible { get => _containerVisible; set { _containerVisible = value; OnPropertyChanged(); } }
+        public string ButtonText => ButtonStates switch
+        {
+            ButtonState.Back => "Назад",
+            ButtonState.CreatePlayList => "Создать плейлист",
+            _ => "косяк"
+        };
 
-
-        public ICommand NewPlayList { get; private set; }
-        public ICommand DellPlayList { get; private set; }
+        public ICommand NewPlayList { get; set; }
+        public ICommand DellPlayList { get; set; }
         public ICommand Cansel { get; }
         public ICommand OpenPopup { get; }
         public ICommand PlayListChoice { get; set; }
@@ -125,29 +134,26 @@ namespace test.ViewModel.TabViewModel
             NewPlayList = new RelayCommand<object>(_ => CreatedPlayListHandler());
             OpenPopup = new RelayCommand<object>(_ => OpenPopupHandler());
             Cansel = new RelayCommand<object>(_ => PopupIsOpen = false);
-            ButtonText = _buttonTextCreatePlayList;
-            PlayListChoice = new RelayCommand<object>(_ => PlayListChoiceHandlr());
-
+            ButtonStates = ButtonState.CreatePlayList;
+            PlayListChoice = new RelayCommand<object>(_ => PlayListChoiceHandler());
+            ContainerVisible = Visibility.Collapsed;
 
 
         }
 
 
-        private void PlayListChoiceHandlr()
+        private void PlayListChoiceHandler()
         {
             VisiblePlayListView = Visibility.Collapsed;
+            ContainerVisible = Visibility.Visible;
             Debug.WriteLine("Двойно нажатие на плейлист");
             Debug.WriteLine(_tempChoice.Name );
-            ButtonText = _buttonTextBack;
+            ButtonStates = ButtonState.Back;
             _collectionService.playList = _tempChoice;
 
 
 
             _dispatcher.InvokeAsync(() => {
-
-
-
-
                 string[] imgFiles = Directory.GetFiles(_tempChoice.Directory, "*.jpg");
                 _collectionService.Clear();
 
@@ -190,10 +196,11 @@ namespace test.ViewModel.TabViewModel
 
         private void OpenPopupHandler()
         {
-            if(ButtonText == _buttonTextBack)
+            if(ButtonStates == ButtonState.Back)
             {
                 VisiblePlayListView = Visibility.Visible;
-                ButtonText = _buttonTextCreatePlayList;
+                ContainerVisible = Visibility.Collapsed;
+                ButtonStates = ButtonState.CreatePlayList;
                 _collectionService.Collection.Clear();
             }
             else
