@@ -78,7 +78,7 @@ namespace test.Services
 
 
         public void Start() => _mediaElement?.Play();
-        public void Stop() => _mediaElement.Stop(); 
+        public void Stop() => _mediaElement.Pause(); 
         public void Seek(double seconds) => _mediaElement.Position = TimeSpan.FromSeconds(seconds);
 
 
