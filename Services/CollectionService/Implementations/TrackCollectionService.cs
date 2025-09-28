@@ -32,7 +32,7 @@ namespace test.Services
             if (imgFiles.Length == 0)
                 return Enumerable.Empty<Track>();
 
-            var collection = new ObservableCollection<Track>(); 
+           
 
             foreach (var imgFile in imgFiles)
             {
@@ -43,25 +43,25 @@ namespace test.Services
 
                     byte[] imageData = File.ReadAllBytes(imgFile);
 
-                    collection.Add(new Track
+                    Collection.Add(new Track
                     {
                         Name = fileInfo.SongName,
                         Artist = fileInfo.SongArtist,
                         FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
                         Duration = fileInfo.SongDuration,
-                        ImageData = imageData,
                         ImgFilePath = fileInfo.ImgFilePath,
                         SongFilePath = fileInfo.SongFilePath,
                     });
                 }
+                //я хз пока что и мне лень слои catch добавить, но нужно
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"Ошибка обработки файла {imgFile}: {ex.Message}");
                     continue;
                 }
             }
-            Collection = collection;
-            return collection;
+           
+            return Collection;
            
         }
 
