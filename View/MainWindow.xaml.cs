@@ -26,27 +26,14 @@ namespace test
         {
             InitializeComponent();
 
-            DataContext = new ApplicationMusic();
-
-            
-
-        
-            //var userControl1 = new PlayListTab(sharedService);
-            //var userControl2 = new TrackOfPlayList(sharedService);
-
-
             var pathService = new PathService();
             var audioParser = new AudioFileNameParser(pathService);
             var playListService = new PlayListServiceForAllTrack(pathService);
             var directoryService = new DirectoryService();
             var dispatcher = Application.Current.Dispatcher;
             var pythonService = new PythonScriptService();
-
-
-
             var playListTab = new PlayListTab();
-            //TrackOfPlayListControl.DataContext = new TrackOfPlayListView(sharedService);
-
+   
 
             var sharedService = new TrackCollectionService();
             playListTab.DataContext = new PlayListTabView(
@@ -57,7 +44,7 @@ namespace test
 
 
              var trackOfPlayList = new TrackOfPlayList();
-            trackOfPlayList.DataContext = new TrackOfPlayListView(sharedService, pathService, audioParser);
+            trackOfPlayList.DataContext = new TrackOfPlayListView(sharedService, pathService, audioParser, directoryService, playListService);
 
             // Добавляем TrackOfPlayList в нужное место
             // (предполагая, что у тебя есть контейнер для него)
@@ -67,7 +54,10 @@ namespace test
                 container.Children.Add(trackOfPlayList);
             }
 
-           
+            var mediaService = (DataContext as TrackOfPlayListView)?.MediaService as MediaService;
+            mediaService?.SetMediaElement(MediaPlayer);
+
+
         }
     }
 }

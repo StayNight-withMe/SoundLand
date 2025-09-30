@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Common\UIhelperService\" />
     <Folder Include="Services\DirectoryPathServices\Base\" />
     <Folder Include="Services\PlayListService\DTOs\" />
     <Folder Include="ViewModel\CollectionClass\" />

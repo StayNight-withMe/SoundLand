@@ -14,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using test.Services;
-
+using ButtonState = test.ViewModel.enamS.ButtonState;
 using test.ViewModel.CollectionClass;
 
 
@@ -30,18 +30,9 @@ namespace test.ViewModel.TabViewModel
 
         private Dispatcher _dispatcher;
 
-        
-        private readonly IPythonScriptService _pythonScriptService;
-
-        private readonly IAudioFileNameParser _audioFileNameParser;
-
         private readonly TrackCollectionService _collectionService;
 
-        private readonly IDirectoryService _directoryService;
-        
         private readonly IPlayListService _playlistService;
-
-        private readonly IPathService _pathService;
 
         private string _basePath;
 
@@ -69,13 +60,6 @@ namespace test.ViewModel.TabViewModel
 
         private ButtonState _buttonState;
         
-        public enum ButtonState
-        {
-            Back,
-            CreatePlayList
-        }
-
-
         public ButtonState ButtonStates { get => _buttonState; set { _buttonState = value; OnPropertyChanged(); OnPropertyChanged(nameof(ButtonText)); } }
         public bool PopupIsOpen { get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
         public string PopupTextBox { get => _popupTextBox;  set { _popupTextBox = value; OnPropertyChanged(); } }
@@ -86,7 +70,6 @@ namespace test.ViewModel.TabViewModel
         {
             ButtonState.Back => "Назад",
             ButtonState.CreatePlayList => "Создать плейлист",
-            _ => "косяк"
         };
 
         public ICommand NewPlayList { get; set; }
@@ -98,14 +81,10 @@ namespace test.ViewModel.TabViewModel
         public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
             IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService collectionService)
+            : base(audioFileNameParser,
+             playListService, pathService, directoryService)
         {
             _dispatcher = uiDispatcher;
-
-            _pathService = pathService;
-
-            _directoryService = directoryService;
-
-            _audioFileNameParser = audioFileNameParser;
 
             _playlistService = playListService;
 
@@ -150,8 +129,6 @@ namespace test.ViewModel.TabViewModel
             Debug.WriteLine(_tempChoice.Name );
             ButtonStates = ButtonState.Back;
             _collectionService.playList = _tempChoice;
-
-
 
             _dispatcher.InvokeAsync(() => {
                 string[] imgFiles = Directory.GetFiles(_tempChoice.Directory, "*.jpg");

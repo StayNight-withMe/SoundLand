@@ -21,13 +21,8 @@ namespace test.ViewModel.TabViewModel
         
         private readonly IPythonScriptService _pythonScriptService;
 
-        private readonly IAudioFileNameParser _audioFileNameParser;
-
-        private readonly IDirectoryService _directoryService;
 
         private readonly IPlayListService _playListService;
-
-        private readonly IPathService _pathService;
 
         private readonly GetPath _getPath;
 
@@ -93,7 +88,8 @@ namespace test.ViewModel.TabViewModel
         public string PlayPauseButtonText => State switch
         {
             PlayPauseButtonStates.Play => "Play",
-            PlayPauseButtonStates.Pause => "Pause"
+            PlayPauseButtonStates.Pause => "Pause",
+            
 
         };
 
@@ -118,26 +114,22 @@ namespace test.ViewModel.TabViewModel
 
         public InitCollection Collections { get; set; }
         public MainSongTabView(IPythonScriptService pythonScriptService, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService trackCollectionService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService trackCollectionService) 
+            : base(audioFileNameParser,
+             playListService, pathService, directoryService)
         {
-            _pathService = pathService;
-
             _playListService = playListService;
 
-            _audioFileNameParser = audioFileNameParser;
-
             _pythonScriptService = pythonScriptService;
-
-            _directoryService = directoryService;
 
             _mediaService = new MediaService();
 
             _trackCollectionService = trackCollectionService;
 
             _mediaService.PositionChanged += OnPositionChanged;
+
             _mediaService.DurationChanged += OnDurationChanged;
       
-
 
             ToALLTrack = new RelayCommand<Track>(ToALLTrackHandler);
             SearchSong = new RelayCommand<object>(_ => SearchSongHandler());
@@ -161,13 +153,15 @@ namespace test.ViewModel.TabViewModel
         {
             if (State == PlayPauseButtonStates.Pause)
             {
-                State = PlayPauseButtonStates.Play;
-                MediaService.Start();
-            }
-            else
-            {
-                State = PlayPauseButtonStates.Pause;
                 MediaService.Stop();
+                State = PlayPauseButtonStates.Play;
+                
+            }
+            else if(State == PlayPauseButtonStates.Play)
+            {
+                MediaService.Start();
+                State = PlayPauseButtonStates.Pause;
+               
             }
         }
 
@@ -229,6 +223,7 @@ namespace test.ViewModel.TabViewModel
 
                 Image = Path.GetFullPath(selectedItem.ImgFilePath);
                 State = PlayPauseButtonStates.Pause;
+                _mediaService.Seek(0);
                 MediaService.Start();    
                 
             }
