@@ -23,6 +23,7 @@ namespace test.SongTabControl
             var dispatcher = Application.Current.Dispatcher;
             var pythonService = new PythonScriptService();
 
+
             DataContext = new MainSongTabView(pythonService, audioParser, playListService, pathService, directoryService, TrackcollectionService);
 
             var mediaService = (DataContext as MainSongTabView)?.MediaService as MediaService;
