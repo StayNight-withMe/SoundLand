@@ -53,9 +53,7 @@ namespace test.Services
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += OnTimerTick;
-            
             _timer.Start();
-
         }   
 
 
@@ -69,7 +67,8 @@ namespace test.Services
             DurationChanged?.Invoke(TotalSeconds);
         }
 
-        // ✅ Когда трек закончился — уведомляем и останавливаем таймер
+       
+
         private void OnMediaEnded(object sender, RoutedEventArgs e)
         {
             PositionChanged?.Invoke(TotalSeconds);
@@ -78,7 +77,7 @@ namespace test.Services
 
 
         public void Start() => _mediaElement?.Play();
-        public void Stop() => _mediaElement.Pause(); 
+        public void Stop() => _mediaElement?.Pause(); 
         public void Seek(double seconds) => _mediaElement.Position = TimeSpan.FromSeconds(seconds);
 
 

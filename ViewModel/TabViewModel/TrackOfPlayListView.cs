@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using test.Services;
 using test.ViewModel.CollectionClass;
 using PlayState = test.ViewModel.enamS.PlayPauseButtonStates;
@@ -26,7 +27,8 @@ namespace test.ViewModel
 
         private Track _selectedTrack;
 
-      
+        
+
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
         public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); } }
         public PlayList PlayList { get => _playList; set => _playList = value ?? _playList; }
@@ -39,18 +41,17 @@ namespace test.ViewModel
         {
             PlayState.Play => "Play",
             PlayState.Pause => "Pause",
-
-
         };
 
 
+        public ICommand PlayPause {  get; set; }
         public TrackOfPlayListView(TrackCollectionService collectionService, PathService pathService, IAudioFileNameParser audioFileNameParser, IDirectoryService directoryService, IPlayListService playListService)
                     : base(audioFileNameParser,
              playListService, pathService, directoryService)
         {
             //    GetPath getPath = pathService.ParseAll();
 
-
+            MediaService = new MediaService();
             collectionService.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == nameof(TrackCollectionService.playList))
@@ -65,21 +66,31 @@ namespace test.ViewModel
                 }
             };
 
+            PlayPause = new RelayCommand<object>(_ => PlayPauseHandler());
+        }
 
 
 
+        private void PlayPauseHandler()
+        {
+            if (State == PlayState.Pause)
+            {
+                MediaService.Stop();
+                State = PlayState.Play;
 
+            }
+            else if (State == PlayState.Play)
+            {
+                MediaService.Start();
+                State = PlayState.Pause;
 
-           
+            }
         }
 
 
         public void SelectedTrackHandler(Track track)
         {
             Debug.WriteLine(track.Name);
-
-            
-
         }
 
 

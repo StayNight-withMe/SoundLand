@@ -117,8 +117,9 @@
 
                 <!-- Пауза/Играть -->
                 <Button x:Name="PlayPouse" 
-                Content="Play" 
+                Content="{Binding PlayPauseButtonText}" 
                 Style="{StaticResource ButtonStyle}" 
+                Command="{Binding PlayPause, Mode=TwoWay}"
                 Width="70" 
                 Height="70" 
                 

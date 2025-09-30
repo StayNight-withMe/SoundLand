@@ -49,7 +49,7 @@ namespace test.ViewModel.TabViewModel
 
                 if (value != null)
                 {
-                    OnTrackSelected(value);
+                    OnTrackSelected(value); 
                 }
             }
         }
@@ -265,11 +265,8 @@ namespace test.ViewModel.TabViewModel
                     SongFilePath = fileInfo.SongFilePath,
                 });
 
-
             }
-
         }
-
 
 
         public async void ToALLTrackHandler(Track track)
@@ -289,11 +286,7 @@ namespace test.ViewModel.TabViewModel
             await _directoryService.CopyFileToDerictory(sourceImagePath, targetImgDir);
             await _directoryService.CopyFileToDerictory(sourceAudioPath, targetSongDir);
 
-
         }
-
-
-
 
 
     }
