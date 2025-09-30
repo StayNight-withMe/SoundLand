@@ -48,6 +48,7 @@ namespace test.Services
                         Name = fileInfo.SongName,
                         Artist = fileInfo.SongArtist,
                         FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
+                        ImageData = imageData,
                         Duration = fileInfo.SongDuration,
                         ImgFilePath = fileInfo.ImgFilePath,
                         SongFilePath = fileInfo.SongFilePath,

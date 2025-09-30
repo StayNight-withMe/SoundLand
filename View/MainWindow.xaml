@@ -22,7 +22,9 @@
 
     <Grid x:Name="GridOfWindow" >
 
-
+        
+        
+        
 
         <Grid>
             <MediaElement x:Name="BackGroundPlayer" LoadedBehavior="Manual" Stretch="UniformToFill"  />
@@ -43,8 +45,9 @@
             </Grid.ColumnDefinitions>
 
 
+            <MediaElement x:Name="MediaPlayer" Visibility="Collapsed"
+      LoadedBehavior="Manual" Source="{Binding SourceForMediaElement}" Volume="{Binding ElementName=slider, Path=Value}" UnloadedBehavior="Stop"/>
 
-           
 
 
             <TabControl BorderThickness="0" x:Name="tab" Grid.Column="1" Grid.Row="0" Background="Transparent">

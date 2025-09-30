@@ -26,15 +26,7 @@ namespace test.ViewModel.TabViewModel
     public class ALLTrackTabView : BaseViewModel
     {
 
-        private readonly IPythonScriptService _pythonScriptService;
-
-        private readonly IAudioFileNameParser _audioFileNameParser;
-
-        private readonly IPlayListService _playlistService;
-
-        private readonly IPathService _pathService;
-
-        private readonly IDirectoryService _directoryService;
+ 
 
         private FileSystemWatcher _watcher;
 
@@ -96,18 +88,11 @@ namespace test.ViewModel.TabViewModel
 
         private readonly Dispatcher _dispatcher;
         public ALLTrackTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService) 
+            : base(audioFileNameParser,
+             playListService, pathService, directoryService)
         {
             _dispatcher = uiDispatcher;
-
-            _pathService = pathService;
-
-            _directoryService = directoryService;
-
-            _audioFileNameParser = audioFileNameParser;
-
-            _playlistService = playListService;
-
 
             GetPath getPath = pathService.ParseAll();
 
