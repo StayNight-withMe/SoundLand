@@ -14,7 +14,6 @@ using test.ViewModel;
 using test.ViewModel.CollectionClass;
 using test.ViewModel.TabViewModel;
 
-
 namespace test
 {
     /// <summary>
@@ -26,38 +25,37 @@ namespace test
         {
             InitializeComponent();
 
-            var pathService = new PathService();
-            var audioParser = new AudioFileNameParser(pathService);
-            var playListService = new PlayListServiceForAllTrack(pathService);
-            var directoryService = new DirectoryService();
             var dispatcher = Application.Current.Dispatcher;
-            var pythonService = new PythonScriptService();
+
+            // ✅ Создаём DI контейнер:
+            var di = new DependencyInjection(dispatcher);
+
+            // ✅ Регистрируем ВСЕ сервисы ОДИН РАЗ:
+            ViewModelRegistration.RegisterCoreServices(di);      // ✅ Основные сервисы
+            ViewModelRegistration.RegisterPlayListTab(di);       // ✅ Для PlayListTab
+            ViewModelRegistration.RegisterTrackOfPlayList(di);   // ✅ Для TrackOfPlayList
+
+            // ✅ Создаём PlayListTab:
             var playListTab = new PlayListTab();
-   
-
-            var sharedService = new TrackCollectionService();
-            playListTab.DataContext = new PlayListTabView(
-                    dispatcher, audioParser, playListService, pathService, directoryService, sharedService
-                );
-
+            playListTab.DataContext = di.Resolve<PlayListTabView>();
             PlayListContainer.Children.Add(playListTab);
 
+            // ✅ Создаём TrackOfPlayList:
+            var trackOfPlayList = new TrackOfPlayList();
+            trackOfPlayList.DataContext = di.Resolve<TrackOfPlayListView>();
 
-             var trackOfPlayList = new TrackOfPlayList();
-            trackOfPlayList.DataContext = new TrackOfPlayListView(sharedService, pathService, audioParser, directoryService, playListService);
-
-            // Добавляем TrackOfPlayList в нужное место
-            // (предполагая, что у тебя есть контейнер для него)
-
+            // ✅ Добавляем TrackOfPlayList в контейнер:
             if (playListTab.FindName("TrackOfPlayListContainer") is Panel container)
             {
                 container.Children.Add(trackOfPlayList);
             }
 
-            var mediaService = (DataContext as TrackOfPlayListView)?.MediaService as MediaService;
+            // ❌ Было:
+            // var mediaService = (DataContext as TrackOfPlayListView)?.MediaService as MediaService;
+
+            // ✅ Стало:
+            var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
             mediaService?.SetMediaElement(MediaPlayer);
-
-
         }
     }
 }

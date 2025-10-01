@@ -1,75 +1,125 @@
-﻿using System;
-using System.Collections;
+﻿// Infrastructure/DependencyInjection.cs
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Threading;
 
-
-namespace test.Infrastructure
+public class DependencyInjection
 {
-    public class DependencyInjection<T> 
+    private Dictionary<Type, Type> _registrations = new Dictionary<Type, Type>();
+    private Dictionary<Type, object> _singletons = new Dictionary<Type, object>();
+    private readonly Dispatcher _uiDispatcher;
+
+    public DependencyInjection(Dispatcher uiDispatcher)
     {
+        _uiDispatcher = uiDispatcher ?? throw new ArgumentNullException(nameof(uiDispatcher));
+    }
 
-        private Dictionary<Type, Type> DependencyType = new Dictionary<Type, Type>();
+ 
+    public void Register<TInterface, TImplementation>()
+        where TImplementation : class, TInterface
+    {
+        _registrations[typeof(TInterface)] = typeof(TImplementation);
+    }
 
-        private object[] DependencyObj;
 
-        public void Register<TInterface, TImplementation>()
-     where TImplementation : class, TInterface
+    public void RegisterSingleton<TInterface, TImplementation>()
+        where TImplementation : class, TInterface
+    {
+        _registrations[typeof(TInterface)] = typeof(TImplementation);
+        _singletons[typeof(TInterface)] = null;  
+    }
+
+ 
+    public void RegisterInstance<T>(T instance) where T : class
+    {
+        _registrations[typeof(T)] = instance.GetType();
+        _singletons[typeof(T)] = instance;  
+    }
+
+    public T Resolve<T>() where T : class
+    {
+        return (T)GetDependency(typeof(T));
+    }
+
+    private object GetDependency(Type serviceType)
+    {
+        Type concreteType;
+        
+        if (_singletons.ContainsKey(serviceType))
         {
-            DependencyType.Add(typeof(TInterface),typeof(TImplementation));
-        }
-
-
-        public TService Resolve<TService>()
-        {
-          
-            return (TService)GetDependency(typeof(TService));
-        }
-
-        public object GetDependency(Type serviceType)
-        {
-
-            Type concreteType;
-
-
-            if (DependencyType.TryGetValue(serviceType, out Type implementationType))
+        
+            if (_singletons[serviceType] == null)
             {
-                concreteType = implementationType; // Нашли реализацию
+                 concreteType = _registrations[serviceType];
+                _singletons[serviceType] = CreateInstance(concreteType);
+            }
+            return _singletons[serviceType];
+        }
+
+        
+    
+        if (_registrations.TryGetValue(serviceType, out Type implementationType))
+        {
+            concreteType = implementationType;
+        }
+        else
+        {
+            concreteType = serviceType;
+        }
+
+        
+        if (concreteType == typeof(Dispatcher))
+        {
+            return _uiDispatcher;
+        }
+
+        return CreateInstance(concreteType);
+    }
+
+    private object CreateInstance(Type type)
+    {
+        
+        if (type.IsAbstract || type.IsInterface)
+        {
+            throw new InvalidOperationException($"Нельзя создать экземпляр абстрактного класса или интерфейса: {type.FullName}");
+        }
+
+        
+        if (type == typeof(Dispatcher))
+        {
+            return _uiDispatcher;
+        }
+
+        ConstructorInfo constructor = type.GetConstructors()
+            .OrderByDescending(c => c.GetParameters().Length)
+            .FirstOrDefault();
+
+        if (constructor == null)
+        {
+            // Для типов без конструкторов:
+            return Activator.CreateInstance(type);
+        }
+
+        ParameterInfo[] parameters = constructor.GetParameters();
+        object[] args = new object[parameters.Length];
+
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            Type paramType = parameters[i].ParameterType;
+
+            
+            if (paramType == typeof(Dispatcher))
+            {
+                args[i] = _uiDispatcher;
             }
             else
             {
-               
-                concreteType = serviceType;
+                args[i] = GetDependency(paramType);
             }
-
-            ConstructorInfo constructor = concreteType.GetConstructors().FirstOrDefault();
-
-            if (constructor == null) { throw new InvalidOperationException(); }
-
-            ParameterInfo[] parameters = constructor.GetParameters();
-
-
-            List<object> resolvedDependencies = new List<object>();
-
-
-            foreach (ParameterInfo param in parameters)
-            {
-             
-                object dependencyInstance = GetDependency(param.ParameterType);
-                resolvedDependencies.Add(dependencyInstance);
-            }
-
-  
-            return constructor.Invoke(resolvedDependencies.ToArray());
-
-
-
-           
         }
 
-
+        return constructor.Invoke(args);
     }
 }

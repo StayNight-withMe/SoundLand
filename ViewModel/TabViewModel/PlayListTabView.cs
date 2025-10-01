@@ -30,7 +30,7 @@ namespace test.ViewModel.TabViewModel
 
         private Dispatcher _dispatcher;
 
-        private readonly TrackCollectionService _collectionService;
+        private readonly ITrackCollectionService _collectionService;
 
         private readonly IPlayListService _playlistService;
 
@@ -80,7 +80,7 @@ namespace test.ViewModel.TabViewModel
 
         public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService collectionService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService collectionService)
             : base(audioFileNameParser,
              playListService, pathService, directoryService)
         {
@@ -132,7 +132,7 @@ namespace test.ViewModel.TabViewModel
 
             _dispatcher.InvokeAsync(() => {
                 string[] imgFiles = Directory.GetFiles(_tempChoice.Directory, "*.jpg");
-                _collectionService.Clear();
+                _collectionService.Collection.Clear();
 
 
                 Debug.WriteLine("Заполнение колекции треков из плейлиста");
@@ -150,7 +150,7 @@ namespace test.ViewModel.TabViewModel
 
 
 
-                    _collectionService.Add(new Track
+                    _collectionService.Collection.Add(new Track
                     {
                         Name = fileInfo.SongName,
                         Artist = fileInfo.SongArtist,
