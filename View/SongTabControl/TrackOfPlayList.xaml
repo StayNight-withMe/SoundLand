@@ -148,7 +148,7 @@
         <ListView x:Name="TracksListView1" Visibility="Visible" Panel.ZIndex="0" BorderThickness="0"  Margin="0,41,0, 83" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Tracks}" 
   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Column="1" Grid.RowSpan="2"
   ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
-  Background="Transparent" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"  >
+  Background="Pink" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"  >
             <ListView.ItemTemplate>
                 
                 

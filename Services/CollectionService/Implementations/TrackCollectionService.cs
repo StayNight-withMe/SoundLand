@@ -15,14 +15,21 @@ using test.ViewModel;
 
 namespace test.Services
 {
-    public class TrackCollectionService: BaseCollectionService<Track>, INotifyPropertyChanged
+    public class TrackCollectionService: INotifyPropertyChanged, ITrackCollectionService
     {
 
         private PlayList _playList;
         private ObservableCollection<Track> _collection;
-        public PlayList playList { get => _playList; set { _playList = value; Debug.WriteLine($"{value.Name} в свойстве присвоение значения"); OnPropertyChanged(); } }
-        public new ObservableCollection<Track> Collection { get => _collection; set { _collection = value; OnPropertyChanged(); } }
+        public PlayList playList { get => _playList; set { _playList = value; Debug.WriteLine($"{value.Name} в свойстве присвоение значения"); 
+                OnPropertyChanged(); } }
+        public ObservableCollection<Track> Collection { get => _collection; set { _collection = value;
+                OnPropertyChanged(); } }
 
+
+        public TrackCollectionService()
+        {
+            _collection = new ObservableCollection<Track>();
+        }
         public IEnumerable<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser)
         {
             if (!Directory.Exists(path))
@@ -32,7 +39,7 @@ namespace test.Services
             if (imgFiles.Length == 0)
                 return Enumerable.Empty<Track>();
 
-           
+            Collection.Clear();
 
             foreach (var imgFile in imgFiles)
             {
