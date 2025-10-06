@@ -21,16 +21,17 @@ namespace test.ViewModel.TabViewModel
         
         private readonly IPythonScriptService _pythonScriptService;
 
-
         private readonly IPlayListService _playListService;
-
-        private readonly GetPath _getPath;
-
-        private Track _tempChoiceTrack;
 
         private IMediaService _mediaService;
 
         private TrackCollectionService _trackCollectionService;
+
+        private readonly GetPath _getPath;       
+
+        private Track _tempChoiceTrack;
+        
+     
 
         private bool _popupIsOpen;
         public bool PopupIsOpen { get => _popupIsOpen; set { _popupIsOpen = value; OnPropertyChanged(); } }

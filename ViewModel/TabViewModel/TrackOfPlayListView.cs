@@ -27,13 +27,26 @@ namespace test.ViewModel
 
         private Track _selectedTrack;
 
+        private string _imgPath;
 
-
+        public string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
-        public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); Debug.WriteLine(value[1].Name); } }
+        public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); } }
         public PlayList PlayList { get => _playList; set { _playList = value ?? _playList; OnPropertyChanged(); } }
-        public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged();  } }
+        public Track SelectedTrack
+        {
+            get => _selectedTrack;
+            set
+            {
+                _selectedTrack = value;
+                OnPropertyChanged();
 
+                if (value != null)
+                {
+                    OnTrackSelected(value);
+                }
+            }
+        }
         private PlayState _states;
         public PlayState State { get => _states; set { _states = value; OnPropertyChanged(); OnPropertyChanged(nameof(PlayPauseButtonText)); } }
 
@@ -55,7 +68,7 @@ namespace test.ViewModel
         {
             MediaService = new MediaService();
 
-            // ✅ Подписываемся на изменения:
+            
             if (collectionService is INotifyPropertyChanged npc)
             {
                 npc.PropertyChanged += (sender, e) =>
@@ -105,9 +118,14 @@ namespace test.ViewModel
         }
 
 
-        public void SelectedTrackHandler(Track track)
+        public void OnTrackSelected(Track track)
         {
             Debug.WriteLine(track.Name);
+
+            ImgPath = track.ImgFilePath; 
+            
+
+
         }
 
 

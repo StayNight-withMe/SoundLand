@@ -45,7 +45,7 @@
             BorderBrush="White"
             BorderThickness="2">
                 <Image x:Name="AlbumCoverImage"
-               Source="{Binding AlbumCoverPath}"
+               Source="{Binding ImgPath}"
                Width="290"
                Height="290"
                Stretch="UniformToFill"

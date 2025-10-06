@@ -58,6 +58,7 @@ public class DependencyInjection
             return _singletons[serviceType];
         }
 
+        //ef
         
     
         if (_registrations.TryGetValue(serviceType, out Type implementationType))

@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using state = test.ViewModel.enamS.PlayPauseButtonStates;
+using State = test.ViewModel.enamS.PlayPauseButtonStates;
 
 namespace test.Services
 {
-    public class MediaServiceHelper
+    public class MediaServiceHelpeFor : BaseMediaServiceHelper
     {
 
 
-        public static string GetPlayPauseButtonText(state state) => state switch
+        public override void SelectedTrack()
         {
-            state.Play => "Play",
-            state.Pause => "Pause",
-            _ => "Play"
-        };
-
-        public void PlayPouseHandler(ref string ButtonText, IMediaService mediaService)
-        {
-         
 
         }
+
+
+
+
+      
     }
 }
