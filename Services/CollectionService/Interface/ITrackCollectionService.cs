@@ -13,7 +13,7 @@ namespace test.Services
     {
         public PlayList playList { get; set; }
         public ObservableCollection<Track> Collection { get; set; }
-        public IEnumerable<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser);
+        public ObservableCollection<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser);
 
 
     }

@@ -203,7 +203,6 @@ namespace test.ViewModel.TabViewModel
             
                 foreach ( string folder in folders )
                 {
-
                     string Name = Path.GetFileName(folder);
 
                     Collections.PlayLists.Add(new PlayList

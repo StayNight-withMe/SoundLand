@@ -79,20 +79,13 @@ namespace test.ViewModel
                     {
                         var service = (ITrackCollectionService)sender;
                         PlayList = service.playList;
-
-                        if (PlayList != null)
-                        {
-                            Debug.WriteLine($"{PlayList.Directory} переданный плейлист");
-
-                            var tracks = service.GetTracks(
+                            Tracks = service.GetTracks(
                                 Path.Combine(PlayList.Directory, @"img"),
-                                audioFileNameParser) ?? Enumerable.Empty<Track>();
-
-                            Tracks = new ObservableCollection<Track>(tracks);
+                                audioFileNameParser); 
                             VisibleTrackListView = Visibility.Visible;
 
                             Debug.WriteLine($"Tracks загружены: {Tracks.Count} элементов");
-                        }
+                        
                     }
                 };
             }

@@ -30,14 +30,12 @@ namespace test.Services
         {
             _collection = new ObservableCollection<Track>();
         }
-        public IEnumerable<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser)
+        public ObservableCollection<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser)
         {
-            if (!Directory.Exists(path))
-                return Enumerable.Empty<Track>();
+
 
             string[] imgFiles = Directory.GetFiles(path, "*.jpg");
-            if (imgFiles.Length == 0)
-                return Enumerable.Empty<Track>();
+           
 
             Collection.Clear();
 
