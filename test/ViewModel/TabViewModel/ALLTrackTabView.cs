@@ -12,9 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
-using test.Model;
+//using test.Model;
 using test.Services;
-
+//using test.Services.ScriptService.Interfaces;
 using test.ViewModel.CollectionClass;
 
 
@@ -23,22 +23,12 @@ namespace test.ViewModel.TabViewModel
 {
 
 
-    internal class ALLTrackTabView : INotifyPropertyChanged
+    public class ALLTrackTabView : BaseViewModel
     {
 
-       
-
-
-        private readonly IPythonScriptService _pythonScriptService;
-
-        private readonly IAudioFileNameParser _audioFileNameParser;
-
-        private readonly IDirectoryService _directoryService;
-
-        private readonly IPathService _pathService;
+ 
 
         private FileSystemWatcher _watcher;
-
 
 
         private string _basePath;
@@ -51,7 +41,14 @@ namespace test.ViewModel.TabViewModel
 
         private string _allSongDir;
 
-        //public string inputText; //паблик потому что по бинду получает значение из textbox
+        private bool _popupIsOpen;
+
+        private Track _selectedTrack;
+
+        private PlayList _selectedPlayList;
+
+        private Track _tempChoice;
+        //public string inputText; 
         //public string InputText
         //{
         //    get => inputText;
@@ -59,7 +56,8 @@ namespace test.ViewModel.TabViewModel
 
         //}
 
-        private Track _selectedTrack;
+
+
         public Track SelectedTrack
         {
             get => _selectedTrack;
@@ -75,27 +73,26 @@ namespace test.ViewModel.TabViewModel
             }
         }
 
+        public bool PopupIsOpen {  get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
+        public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
+
 
 
         public ICommand DellSong { get; set; }
         public ICommand AddToPlaylist { get; set; }
-        public ICommand u { get; set; }
+        public ICommand OpenPopup { get; set; }
+        public ICommand СancelPopup { get; set; }
+
         public InitCollection Collections { get; set; }
 
 
         private readonly Dispatcher _dispatcher;
         public ALLTrackTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            IDirectoryService directoryService, IPathService pathService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService) 
+            : base(audioFileNameParser,
+             playListService, pathService, directoryService)
         {
-            
-
             _dispatcher = uiDispatcher;
-
-            _pathService = pathService;
-
-            _directoryService = directoryService;
-
-            _audioFileNameParser = audioFileNameParser;
 
             GetPath getPath = pathService.ParseAll();
 
@@ -108,7 +105,7 @@ namespace test.ViewModel.TabViewModel
 
             Collections = new InitCollection();
             _watcher = new FileSystemWatcher(_allSongDir);
-            _audioFileNameParser = new AudioFileNameParser();
+  
 
             _watcher.Created += UpdateListView;
             _watcher.Deleted += UpdateListView;
@@ -118,16 +115,35 @@ namespace test.ViewModel.TabViewModel
             UpdateListView(null, fakeEventArgs);
 
 
-
-            DellSong = new RelayCommand<Track>(DellSelectSong);
-
+            СancelPopup = new RelayCommand<object>(_ => PopupIsOpen = false);
+            OpenPopup = new RelayCommand<Track>(OpenPopupHandler);
+            DellSong = new RelayCommand<Track>(DellSongHandler);
+            AddToPlaylist = new RelayCommand<object>(_ => AddToPlayListHandler());
         }
 
 
-        async void DellSelectSong(Track track)
+
+        private void OpenPopupHandler(Track track)
+        {
+            _tempChoice = track;
+            PopupIsOpen = true;
+        }
+
+        private void AddToPlayListHandler()
+        {
+            Debug.WriteLine("AddToPlayListHandler запустилась");
+            if(SelectedPlayList != null)
+            {
+                _playlistService.AddTrackToPlayList(SelectedPlayList, _tempChoice);
+            }
+            PopupIsOpen = false;
+        }
+
+
+        async void DellSongHandler(Track track)
         {
 
-            Debug.WriteLine("Функция Удаления запуустилась ");
+            Debug.WriteLine("Функция Удаления запустилась");
 
            
             await _directoryService.DellFile(Path.Combine(_allImgDir, $"{track.FileName}.jpg") );
@@ -194,11 +210,6 @@ namespace test.ViewModel.TabViewModel
 
       
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            if (PropertyChanged != null) { PropertyChanged(this, new PropertyChangedEventArgs(name)); }
-        }
 
     }
 

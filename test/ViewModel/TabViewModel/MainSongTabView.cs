@@ -3,9 +3,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using test.Model;
+
 using test.Services;
 
 using test.ViewModel.CollectionClass;
@@ -13,34 +16,28 @@ using test.ViewModel.CollectionClass;
 
 namespace test.ViewModel.TabViewModel
 {
-    public class MainSongTabView : INotifyPropertyChanged
+    public class MainSongTabView : BaseViewModel
     {
         
-
-
         private readonly IPythonScriptService _pythonScriptService;
 
-        private readonly IAudioFileNameParser _audioFileNameParser;
+        private readonly IPlayListService _playListService;
 
-        private readonly IDirectoryService _directoryService;
+        private IMediaService _mediaService;
 
-        private readonly IPathService _pathService;
+        private TrackCollectionService _trackCollectionService;
 
+        private readonly GetPath _getPath;       
 
+        private Track _tempChoiceTrack;
         
-
-
+     
 
         private bool _popupIsOpen;
         public bool PopupIsOpen { get => _popupIsOpen; set { _popupIsOpen = value; OnPropertyChanged(); } }
 
-
         private string? _inputText;
-        public string InputText
-        {
-            get => _inputText;
-            set { _inputText = value; OnPropertyChanged(); }
-        }
+        public string InputText {  get => _inputText; set { _inputText = value; OnPropertyChanged(); }  }
 
         private Track? _selectedTrack;
         public Track SelectedTrack
@@ -49,52 +46,161 @@ namespace test.ViewModel.TabViewModel
             set
             {
                 _selectedTrack = value;
-                OnPropertyChanged(nameof(SelectedTrack));
+                OnPropertyChanged();
 
                 if (value != null)
                 {
-                    OnItemSelected(value);
+                    OnTrackSelected(value); 
                 }
             }
         }
 
+        private PlayList _selectedPlayList;
+        public PlayList SelectedPlayList
+        {
+            get => _selectedPlayList;
+            set { _selectedPlayList = value; OnPropertyChanged(); }
+        }
 
-        public ICommand ButtonSearchClick { get; set; }
+        private string _sourceForMediaElement;
+        public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
+        public IMediaService MediaService { get => _mediaService; set { _mediaService = value; } }
+        
+        private string _image;    
+        public string Image { get => _image; set { _image = value; OnPropertyChanged(); } }
+
+        private double _songSliderValue;
+        public double SongSliderValue { get => _songSliderValue; set { _songSliderValue = value; OnPropertyChanged(); if (TotalSeconds > 0)
+                {
+                    double seconds = (value / 100) * TotalSeconds;
+                    _mediaService.Seek(seconds);
+                } /*Debug.WriteLine(_songSliderValue);*/
+            } }
+
+
+        private PlayPauseButtonStates _states;
+        public enum PlayPauseButtonStates
+        {
+            Play,
+            Pause,
+        }
+
+        public PlayPauseButtonStates State { get => _states; set { _states = value; OnPropertyChanged(); OnPropertyChanged(nameof(PlayPauseButtonText)); } }
+        public string PlayPauseButtonText => State switch
+        {
+            PlayPauseButtonStates.Play => "Play",
+            PlayPauseButtonStates.Pause => "Pause",
+            
+
+        };
+
+        private double _totalSeconds;
+        public double TotalSeconds
+        {
+            get => _totalSeconds;
+            set
+            {
+                _totalSeconds = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SearchSong { get; set; }
         public ICommand SelectionChanged { get; set; }
         public ICommand ToALLTrack { get; set; }
         public ICommand ToPlayList { get; set; }
+        public ICommand AddToPlayList { get; set; }
+        public ICommand СancelPopup { get; set; }
+        public ICommand PlayPause { get; set; }
 
         public InitCollection Collections { get; set; }
         public MainSongTabView(IPythonScriptService pythonScriptService, IAudioFileNameParser audioFileNameParser,
-            IDirectoryService directoryService, IPathService pathService)
+            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, TrackCollectionService trackCollectionService) 
+            : base(audioFileNameParser,
+             playListService, pathService, directoryService)
         {
-            _pathService = pathService;
-
-            _directoryService = directoryService;
-
-            _audioFileNameParser = audioFileNameParser;
+            _playListService = playListService;
 
             _pythonScriptService = pythonScriptService;
 
-            ToALLTrack = new RelayCommand<Track>(SaveTrack);
-            ButtonSearchClick = new RelayCommand<object>(_ => ViewSearch());
-            ToPlayList = new RelayCommand<Track>(AddPlayList);
+            _mediaService = new MediaService();
 
+            _trackCollectionService = trackCollectionService;
+
+            _mediaService.PositionChanged += OnPositionChanged;
+
+            _mediaService.DurationChanged += OnDurationChanged;
+      
+
+            ToALLTrack = new RelayCommand<Track>(ToALLTrackHandler);
+            SearchSong = new RelayCommand<object>(_ => SearchSongHandler());
+            ToPlayList = new RelayCommand<Track>(ToPlayListHandler);
+            СancelPopup = new RelayCommand<Object>(_ => PopupIsOpen = false);
+            AddToPlayList = new RelayCommand<Object>(_ => AddToPlayListHandler());
             Collections = new InitCollection();
+            PlayPause = new RelayCommand<object>(_ => PlayPauseHandler());
 
+            _getPath = _pathService.ParseAll();
+            State = PlayPauseButtonStates.Pause;
+        }
+
+        private void OnDurationChanged(double duration)
+        {
+            TotalSeconds = duration;
         }
 
 
+        private void PlayPauseHandler()
+        {
+            if (State == PlayPauseButtonStates.Pause)
+            {
+                MediaService.Stop();
+                State = PlayPauseButtonStates.Play;
+                
+            }
+            else if(State == PlayPauseButtonStates.Play)
+            {
+                MediaService.Start();
+                State = PlayPauseButtonStates.Pause;
+               
+            }
+        }
 
 
-        void AddPlayList(Track track)
+        private void OnPositionChanged(double position)
+        {
+            if (_mediaService.TotalSeconds > 0)
+            {
+                
+                SongSliderValue = (position / _mediaService.TotalSeconds) * 100;
+            }
+        }
+
+        private void ToPlayListHandler(Track track)
+        {
+            _tempChoiceTrack = track;
+            PopupIsOpen = true;
+        }
+
+        private async void AddToPlayListHandler()
         {
             
-            PopupIsOpen = true;
-            Debug.WriteLine($"Попытка открыть попут {PopupIsOpen}");
+            if (SelectedPlayList != null)
+            {
+                Debug.WriteLine(_tempChoiceTrack.Name);
+
+                await _pythonScriptService.PythonScript("Untitled-3.py", 1, _inputText, _tempChoiceTrack.FileName, _tempChoiceTrack.Name);
+
+                _playListService.AddTrackToPlayList(SelectedPlayList, _tempChoiceTrack);
+
+            }
+            
+            PopupIsOpen = false;
+
         }
 
-        private void OnItemSelected(Track selectedItem)
+      
+        private async Task OnTrackSelected(Track selectedItem)
         {
             Debug.WriteLine("Получение элемента");
             if (selectedItem != null)
@@ -102,37 +208,40 @@ namespace test.ViewModel.TabViewModel
 
                 var index = Collections.Tracks.IndexOf(selectedItem);
                 var allItems = Collections.Tracks.ToList();
-
                 Debug.WriteLine(selectedItem.Name);
 
+                await _pythonScriptService.PythonScript("Untitled-3.py", 1, _inputText, selectedItem.FileName, selectedItem.Name);
+
+                SourceForMediaElement = Path.GetFullPath(selectedItem.SongFilePath);
+
+                Debug.WriteLine(selectedItem.SongFilePath);
+
+                if (MediaService?.MediaElement == null)
+                {
+                    MessageBox.Show("медиав-серисс = 0");
+                    return;
+                }
+
+                Image = Path.GetFullPath(selectedItem.ImgFilePath);
+                State = PlayPauseButtonStates.Pause;
+                _mediaService.Seek(0);
+                MediaService.Start();    
+                
             }
         }
 
-
-
-
-
-
-
-
-        public async Task ViewSearch()
+        public async Task SearchSongHandler()
         {
 
-            GetPath getPath = _pathService.ParseAll();
-
-            await _directoryService.ClearDirectory(getPath.TempImgPath);
-            await _directoryService.ClearDirectory(getPath.TempSongPath);
-
-        
+            await _directoryService.ClearDirectory(_getPath.TempImgPath);
+            await _directoryService.ClearDirectory(_getPath.TempSongPath);
+     
             await _pythonScriptService.PythonScript("Untitled-3.py", 2, _inputText, "emp", "emp");
 
-
-            string[] imgFiles = Directory.GetFiles(getPath.TempImgPath, "*.jpg");
+            string[] imgFiles = Directory.GetFiles(_getPath.TempImgPath, "*.jpg");
             Collections.Tracks.Clear();
 
-            var parser = new AudioFileNameParser();
-
-
+      
             foreach (var imgFile in imgFiles)
             {
                 string fullImgPath = Path.GetFullPath(imgFile);
@@ -154,17 +263,14 @@ namespace test.ViewModel.TabViewModel
                     Duration = fileInfo.SongDuration,
                     ImageData = imageData,
                     ImgFilePath = fileInfo.ImgFilePath,
-
+                    SongFilePath = fileInfo.SongFilePath,
                 });
 
-
             }
-
         }
 
 
-
-        public async void SaveTrack(Track track)
+        public async void ToALLTrackHandler(Track track)
         {
 
             await _pythonScriptService.PythonScript("Untitled-3.py", 1, _inputText, track.FileName, track.Name);
@@ -181,15 +287,6 @@ namespace test.ViewModel.TabViewModel
             await _directoryService.CopyFileToDerictory(sourceImagePath, targetImgDir);
             await _directoryService.CopyFileToDerictory(sourceAudioPath, targetSongDir);
 
-
-        }
-
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
 

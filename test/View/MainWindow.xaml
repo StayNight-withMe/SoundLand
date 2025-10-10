@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:test"
-         xmlns:song="clr-namespace:test.SongTabControl" 
+   
+        xmlns:song="clr-namespace:test.SongTabControl" 
+         xmlns:local="clr-namespace:test.SongTabControl"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1920">
     <Window.Resources>
@@ -21,7 +22,9 @@
 
     <Grid x:Name="GridOfWindow" >
 
-
+        
+        
+        
 
         <Grid>
             <MediaElement x:Name="BackGroundPlayer" LoadedBehavior="Manual" Stretch="UniformToFill"  />
@@ -42,8 +45,9 @@
             </Grid.ColumnDefinitions>
 
 
+            <MediaElement x:Name="MediaPlayer" Visibility="Collapsed"
+      LoadedBehavior="Manual" Source="{Binding SourceForMediaElement}" Volume="{Binding ElementName=slider, Path=Value}" UnloadedBehavior="Stop"/>
 
-           
 
 
             <TabControl BorderThickness="0" x:Name="tab" Grid.Column="1" Grid.Row="0" Background="Transparent">
@@ -69,8 +73,7 @@
                         </TabItem>
                         <TabItem Header="Плейлисты" BorderThickness="0" Style="{StaticResource BlackTabItemStyle}">
 
-                            <song:PlayListTab/>
-
+                            <Grid x:Name="PlayListContainer"/>
 
                         </TabItem>
 

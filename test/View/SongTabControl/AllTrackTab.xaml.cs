@@ -20,16 +20,19 @@ using test.ViewModel.TabViewModel;
 
 namespace test.SongTabControl
 {
-    /// <summary>
-    /// Логика взаимодействия для AllTrackTab.xaml
-    /// </summary>
     public partial class AllTrackTab : UserControl
     {
         public AllTrackTab()
         {
             InitializeComponent();
+            var pathService = new PathService();
+            var audioParser = new AudioFileNameParser(pathService);
+            var playListService = new PlayListServiceForAllTrack(pathService);
+            var directoryService = new DirectoryService();
+            var dispatcher = Application.Current.Dispatcher;
 
-            this.DataContext = new ALLTrackTabView(Application.Current.Dispatcher, new AudioFileNameParser(), new DirectoryService(), new PathService());
+            // Передаём в конструктор:
+            this.DataContext = new ALLTrackTabView(dispatcher, audioParser, playListService, pathService, directoryService);
         }
     }
 }

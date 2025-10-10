@@ -8,7 +8,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using test.Services;
+using test.SongTabControl;
 using test.ViewModel;
+using test.ViewModel.CollectionClass;
+using test.ViewModel.TabViewModel;
 
 namespace test
 {
@@ -21,7 +25,33 @@ namespace test
         {
             InitializeComponent();
 
-            DataContext = new ApplicationMusic();
+            var dispatcher = Application.Current.Dispatcher;
+
+         
+            var di = new DependencyInjection(dispatcher);
+
+            ViewModelRegistration.RegisterCoreServices(di);      
+            ViewModelRegistration.RegisterPlayListTab(di);       
+            ViewModelRegistration.RegisterTrackOfPlayList(di);   
+
+       
+            var playListTab = new PlayListTab();
+            playListTab.DataContext = di.Resolve<PlayListTabView>();
+            PlayListContainer.Children.Add(playListTab);
+
+        
+            var trackOfPlayList = new TrackOfPlayList();
+            trackOfPlayList.DataContext = di.Resolve<TrackOfPlayListView>();
+
+        
+            if (playListTab.FindName("TrackOfPlayListContainer") is Panel container)
+            {
+                container.Children.Add(trackOfPlayList);
+            }
+
+          
+            var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
+            mediaService?.SetMediaElement(MediaPlayer);
         }
     }
 }
