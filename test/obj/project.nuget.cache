@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "1YPYllSJNtU=",
+  "success": true,
+  "projectFilePath": "Z:\\hui1\\test\\test\\test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rog\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.135\\microsoft.xaml.behaviors.wpf.1.1.135.nupkg.sha512"
+  ],
+  "logs": []
+}
