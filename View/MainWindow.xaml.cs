@@ -19,36 +19,34 @@ namespace test
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+  public partial class MainWindow : Window
+{
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+
+        var dispatcher = Application.Current.Dispatcher;
+        var di = new DependencyInjection(dispatcher);
+
+        ViewModelRegistration.RegisterCoreServices(di);
+        ViewModelRegistration.RegisterPlayListTab(di);
+        ViewModelRegistration.RegisterTrackOfPlayList(di);
+
+        var playListTab = new PlayListTab();
+        playListTab.DataContext = di.Resolve<PlayListTabView>();
+        PlayListContainer.Children.Add(playListTab);
+
+        var trackOfPlayList = new TrackOfPlayList();
+        trackOfPlayList.DataContext = di.Resolve<TrackOfPlayListView>();
+
+        if (playListTab.FindName("TrackOfPlayListContainer") is Panel container)
         {
-            InitializeComponent();
-
-            var dispatcher = Application.Current.Dispatcher;
-            var di = new DependencyInjection(dispatcher);
-
-            ViewModelRegistration.RegisterCoreServices(di);
-            ViewModelRegistration.RegisterPlayListTab(di);
-            ViewModelRegistration.RegisterTrackOfPlayList(di);
-
-
-            var playListTab = new PlayListTab();
-            playListTab.DataContext = di.Resolve<PlayListTabView>();
-            PlayListContainer.Children.Add(playListTab);
-
-
-            var trackOfPlayList = new TrackOfPlayList();
-            trackOfPlayList.DataContext = di.Resolve<TrackOfPlayListView>();
-
-
-            if (playListTab.FindName("TrackOfPlayListContainer") is Panel container)
-            {
-                container.Children.Add(trackOfPlayList);
-            }
-
-            var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
-            mediaService?.SetMediaElement(MediaPlayer);
+            container.Children.Add(trackOfPlayList);
         }
+
+        // ✅ Теперь правильно:
+        var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
+        mediaService?.SetMediaElement(MediaPlayer);  // ✅ Работает!
     }
+}
 }

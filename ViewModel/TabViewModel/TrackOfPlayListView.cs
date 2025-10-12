@@ -9,21 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using test.Services;
 using test.ViewModel.CollectionClass;
+using static test.ViewModel.enamS;
 using PlayState = test.ViewModel.enamS.PlayPauseButtonStates;
 
 namespace test.ViewModel
 {
     public class TrackOfPlayListView : BaseViewModel
     {
-        public IMediaService MediaService;
-
-        public ITrackCollectionService _trackCollectionService;
+        private IMediaService _mediaService;
 
         private PlayList _playList;
 
         private Visibility _visibleTrackListView;
+
+        private PlayState _states;
 
         private ObservableCollection<Track> _tracks;
 
@@ -31,26 +33,18 @@ namespace test.ViewModel
 
         private string _imgPath;
 
+        private string _sourceForMediaElement;
+
+
+        public IMediaService MediaService { get { return _mediaService; Debug.WriteLine("МедиаСервисберем"); } set { _mediaService = value; } }
+        public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
         public string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
         public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); } }
         public PlayList PlayList { get => _playList; set { _playList = value ?? _playList; OnPropertyChanged(); } }
-        public Track SelectedTrack
-        {
-            get => _selectedTrack;
-            set
-            {
-                _selectedTrack = value;
-                OnPropertyChanged();
-
-                if (value != null)
-                {
-                    OnTrackSelected(value);
-                }
-            }
-        }
-        private PlayState _states;
+        public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnTrackSelected(value); } } }
         public PlayState State { get => _states; set { _states = value; OnPropertyChanged(); OnPropertyChanged(nameof(PlayPauseButtonText)); } }
+
 
         public string PlayPauseButtonText  => State switch
         {
@@ -75,7 +69,7 @@ namespace test.ViewModel
 
             _trackCollectionService = collectionService;
 
-            MediaService = new MediaService();
+            _mediaService = new MediaService();
 
             SubOnCollecion();
 
@@ -118,9 +112,6 @@ namespace test.ViewModel
 
             }
 
-
-
-
         }
 
 
@@ -128,24 +119,64 @@ namespace test.ViewModel
         {
             if (State == PlayState.Pause)
             {
-                MediaService.Stop();
+                _mediaService.Stop();
                 State = PlayState.Play;
 
             }
             else if (State == PlayState.Play)
             {
-                MediaService.Start();
+                _mediaService.Start();
                 State = PlayState.Pause;
 
             }
         }
 
 
-        public void OnTrackSelected(Track track)
+        public async Task OnTrackSelected(Track track)
         {
-            Debug.WriteLine(track.Name);
+            Debug.WriteLine($"{track.Name} трек");
 
-            ImgPath = track.ImgFilePath; 
+            ImgPath = track.ImgFilePath;
+
+            var i = Path.Combine(_getPath.PlayListPath, _trackCollectionService.playList.Name);
+
+            var ii = Path.Combine(i, "song" ,track.FileName+".mp3");
+
+            Debug.WriteLine(Path.Combine(i, $"{track.FileName}.mp3"));
+
+            SourceForMediaElement = ii;
+
+            if (MediaService?.MediaElement == null)
+            {
+                MessageBox.Show("медиав-серисс = 0");
+            }
+            else
+            {
+                Console.WriteLine("МедиаСервисНорм");
+            }
+
+            State = PlayState.Pause;
+            if (!File.Exists(SourceForMediaElement))
+            {
+                Debug.WriteLine($"❌ Файл не найден: {SourceForMediaElement}");
+                MessageBox.Show($"Файл не найден: {SourceForMediaElement}");
+                return;
+            }
+
+            Debug.WriteLine($"Файл найден: {SourceForMediaElement}");
+
+      
+            Debug.WriteLine($"URI: {MediaService.MediaElement.Source}");
+
+     
+            MediaService.Seek(0);
+            MediaService.Start(); 
+
+            Debug.WriteLine($"MediaElement.State: {MediaService.MediaElement.LoadedBehavior}");
+            Debug.WriteLine($"MediaElement.IsPlaying: {MediaService.MediaElement.Clock?.CurrentState}");
+
+            State = PlayState.Pause;  // ✅ Изменение состояния
+
 
         }
 

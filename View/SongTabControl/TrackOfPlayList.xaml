@@ -7,6 +7,9 @@
 
     <Grid>
 
+        
+        
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -16,6 +19,15 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+
+
+
+
+        <MediaElement x:Name="MediaPlayer" Visibility="Collapsed"
+                LoadedBehavior="Manual" Source="{Binding SourceForMediaElement}" Volume="1.0" UnloadedBehavior="Stop"/>
+
+
 
         <Grid Grid.RowSpan="2" 
       Background="Transparent" 
@@ -32,7 +44,6 @@
             </Grid.RowDefinitions>
 
 
-            
 
 
             <Border Grid.Row="0"
@@ -52,6 +63,9 @@
                Margin="5"
                Opacity="0.9" />
             </Border>
+
+
+           
 
             <!-- ✅ 2. Прогресс-бар и тайминги (всё в одной строке) -->
             <Grid Grid.Row="1" 
@@ -144,6 +158,9 @@
             </StackPanel>
 
         </Grid>
+
+
+    
 
         <ListView x:Name="TracksListView1" Visibility="Visible" Panel.ZIndex="0" BorderThickness="0"  Margin="0,41,0, 83" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Tracks}" 
   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Column="1" Grid.RowSpan="2"

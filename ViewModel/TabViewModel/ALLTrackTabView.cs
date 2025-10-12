@@ -21,8 +21,6 @@ using test.ViewModel.CollectionClass;
 
 namespace test.ViewModel.TabViewModel
 {
-
-
     public class ALLTrackTabView : BaseViewModel
     {
 
@@ -36,28 +34,10 @@ namespace test.ViewModel.TabViewModel
 
         private Track _tempChoice;
 
-        public Track SelectedTrack
-        {
-            get => _selectedTrack;
-            set
-            {
-                _selectedTrack = value;
-                OnPropertyChanged();
-
-                if (value != null)
-                {
-                    OnItemSelected(value);
-                }
-            }
-        }
-
+        public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnItemSelected(value); } } }
         public bool PopupIsOpen {  get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
         public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
         public ObservableCollection<Track> Tracks { get { return _trackCollectionService.Collection; } set { _trackCollectionService.Collection = value;  } }
-
-
-
-
         public ICommand DellSong { get; set; }
         public ICommand AddToPlaylist { get; set; }
         public ICommand OpenPopup { get; set; }
@@ -135,7 +115,6 @@ namespace test.ViewModel.TabViewModel
 
             }
         }
-
 
         public async void UpdateListView(object sender, FileSystemEventArgs e)
         {

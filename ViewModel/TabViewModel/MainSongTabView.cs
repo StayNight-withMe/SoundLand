@@ -34,28 +34,9 @@ namespace test.ViewModel.TabViewModel
         public string InputText {  get => _inputText; set { _inputText = value; OnPropertyChanged(); }  }
 
         private Track? _selectedTrack;
-        public Track SelectedTrack
-        {
-            get => _selectedTrack;
-            set
-            {
-                _selectedTrack = value;
-                OnPropertyChanged();
-
-                if (value != null)
-                {
-                    OnTrackSelected(value); 
-                }
-            }
-        }
-
+        public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnTrackSelected(value); } } }
         private PlayList _selectedPlayList;
-        public PlayList SelectedPlayList
-        {
-            get => _selectedPlayList;
-            set { _selectedPlayList = value; OnPropertyChanged(); }
-        }
-
+        public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
         private string _sourceForMediaElement;
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
         public IMediaService MediaService { get => _mediaService; set { _mediaService = value; } }
@@ -68,7 +49,7 @@ namespace test.ViewModel.TabViewModel
                 {
                     double seconds = (value / 100) * TotalSeconds;
                     _mediaService.Seek(seconds);
-                } /*Debug.WriteLine(_songSliderValue);*/
+                } 
             } }
 
 
@@ -101,7 +82,6 @@ namespace test.ViewModel.TabViewModel
         public ICommand AddToPlayList { get; set; }
         public ICommand СancelPopup { get; set; }
         public ICommand PlayPause { get; set; }
-
         public InitCollection Collections { get; set; }
         public MainSongTabView(IPythonScriptService pythonScriptService, IAudioFileNameParser audioFileNameParser,
             IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService trackCollectionService) 
@@ -214,7 +194,7 @@ namespace test.ViewModel.TabViewModel
 
                 Image = Path.GetFullPath(selectedItem.ImgFilePath);
                 State = ButtonState.Pause;
-                _mediaService.Seek(0);
+                MediaService.Seek(0);
                 MediaService.Start();    
                 
             }
