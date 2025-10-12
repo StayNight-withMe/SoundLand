@@ -133,6 +133,7 @@ namespace test.ViewModel.TabViewModel
             VisiblePlayListView = Visibility.Collapsed;
             ContainerVisible = Visibility.Visible;
             Debug.WriteLine("Двойно нажатие на плейлист");
+            if (_tempChoice != null ) 
             Debug.WriteLine(_tempChoice.Name);
             ButtonStates = ButtonState.Back;
             _collectionService.playList = _tempChoice;

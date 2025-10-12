@@ -12,6 +12,7 @@ using ButtonState = test.ViewModel.enamS.PlayPauseButtonStates;
 using test.Services;
 
 using test.ViewModel.CollectionClass;
+using test.SongTabControl;
 
 
 namespace test.ViewModel.TabViewModel
@@ -37,11 +38,11 @@ namespace test.ViewModel.TabViewModel
         public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnTrackSelected(value); } } }
         private PlayList _selectedPlayList;
         public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
-        private string _sourceForMediaElement;
+        private string? _sourceForMediaElement;
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
         public IMediaService MediaService { get => _mediaService; set { _mediaService = value; } }
         
-        private string _image;    
+        private string? _image;    
         public string Image { get => _image; set { _image = value; OnPropertyChanged(); } }
 
         private double _songSliderValue;
@@ -66,13 +67,17 @@ namespace test.ViewModel.TabViewModel
         private double _totalSeconds;
         public double TotalSeconds
         {
-            get => _totalSeconds;
+            get =>  _totalSeconds;
             set
             {
                 _totalSeconds = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SecondForView));
             }
         }
+
+        public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); ; return time.ToString(@"mm\:ss");  } set {  }  }
+
 
         public ObservableCollection<Track> Tracks { get => _trackCollectionService.Collection; set { _trackCollectionService.Collection = value; } }
         public ICommand SearchSong { get; set; }
@@ -202,14 +207,60 @@ namespace test.ViewModel.TabViewModel
 
         public async Task SearchSongHandler()
         {
+            MediaService.Stop();
+            _trackCollectionService.Collection.Clear();
+        
+        
 
-            await _directoryService.ClearDirectory(_getPath.TempImgPath);
+            SourceForMediaElement = null;
+          
+
+            if(Image != null)
+            {
+
+                try
+                {
+                  
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    Thread.Sleep(200);  
+
+                    // 2. Пытаемся удалить:
+                    File.Delete(Image);
+
+                }
+                catch (IOException)
+                {
+
+                   
+                    try
+                    {
+                        File.Delete(Image);
+
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                finally
+                {
+                    Image = @"Z:\hui1\test\test\bin\Debug\net9.0-windows\unnamed.jpg";
+                }
+
+
+            }
+
+
             await _directoryService.ClearDirectory(_getPath.TempSongPath);
-     
+            await _directoryService.ClearDirectory(_getPath.TempImgPath);
+            
+      
+
             await _pythonScriptService.PythonScript("Untitled-3.py", 2, _inputText, "emp", "emp");
 
             string imgFiles = Path.Combine(_getPath.TempImgPath, "*.jpg");
-            _trackCollectionService.Collection.Clear();
+           
 
             _trackCollectionService.GetTracks(_getPath.TempImgPath, _audioFileNameParser);
         }

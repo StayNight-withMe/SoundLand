@@ -32,7 +32,8 @@ namespace test.Services
                     DirectoryInfo di = new DirectoryInfo(path);
                     foreach (FileInfo file in di.GetFiles())
                     {
-                        file.Delete();
+
+                        DeleteFileViaFileInfo(file);
                     }
                     foreach (DirectoryInfo dir in di.GetDirectories())
                     {
@@ -141,6 +142,65 @@ namespace test.Services
 
         }
 
+
+        public  bool DeleteFileViaFileInfo(FileInfo file)
+        {
+            try
+            {
+                // ✅ Сбрасываем все атрибуты защиты:
+                file.Attributes = FileAttributes.Normal;
+
+                // ✅ Удаляем файл:
+                file.Delete();
+
+                Debug.WriteLine($"✅ Файл удалён через FileInfo: {file.FullName}");
+                return true;
+            }
+            catch (UnauthorizedAccessException authEx)
+            {
+                Debug.WriteLine($"🚫 Нет прав доступа к файлу: {file.FullName} - {authEx.Message}");
+
+                // ✅ Пробуем снять атрибуты принудительно:
+                try
+                {
+                    File.SetAttributes(file.FullName, FileAttributes.Normal);
+                    file.Delete();
+                    return true;
+                }
+                catch (Exception ex2)
+                {
+                    Debug.WriteLine($"❌ Не удалось удалить даже после сброса атрибутов: {ex2.Message}");
+                    return false;
+                }
+            }
+            catch (IOException ioEx)
+            {
+                Debug.WriteLine($"🔄 Файл занят: {file.FullName} - {ioEx.Message}");
+
+                // ✅ Повторные попытки:
+                for (int i = 0; i < 3; i++)
+                {
+                    Thread.Sleep(100 * (i + 1));
+                    try
+                    {
+                        file.Delete();
+                        Debug.WriteLine($"✅ Файл удалён на {i + 1} попытке");
+                        return true;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"💥 Ошибка удаления файла {file.FullName}: {ex.Message}");
+                return false;
+            }
+        }
 
 
     }

@@ -44,9 +44,9 @@ namespace test
             container.Children.Add(trackOfPlayList);
         }
 
-        // ✅ Теперь правильно:
+  
         var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
-        mediaService?.SetMediaElement(MediaPlayer);  // ✅ Работает!
+        mediaService?.SetMediaElement(trackOfPlayList.MediaPlayer);  // ✅ Работает!
     }
 }
 }

@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 		>
-      
+
 
     <Grid>
 
-        
-        
-        
+
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -64,8 +64,18 @@
                Opacity="0.9" />
             </Border>
 
-
-           
+            <TextBlock Text="{Binding SongName}" 
+           FontFamily="Segoe UI"          
+           FontWeight="SemiBold"         
+           FontSize="18"                   
+           TextAlignment="Center" 
+           Foreground="Black" 
+           TextWrapping="Wrap"             
+           TextTrimming="CharacterEllipsis"
+           VerticalAlignment="Center"
+           HorizontalAlignment="Center"
+           Margin="10,10,10,200" 
+           Grid.Row="1"/>
 
             <!-- ✅ 2. Прогресс-бар и тайминги (всё в одной строке) -->
             <Grid Grid.Row="1" 
@@ -87,18 +97,20 @@
 
                 <!-- Прогресс-бар — ВСЯ ШИРИНА, кликабельный -->
                 <Slider x:Name="ProgressSlider"
+                        IsMoveToPointEnabled="True" 
                 Grid.Column="1"
                 Minimum="0"
                 Maximum="100"
-                Value="{Binding ProgressValue, Mode=TwoWay}"
+                Value="{Binding SongSliderValue, Mode=TwoWay}"
+                Style="{StaticResource CustomSliderStyle}"
+                        IsEnabled="True"
                 Background="DarkGray"                           
                         Foreground="White"
-                    Height="6"
-                Margin="10,0"
+                Margin="10,6,10,3"
                  />
 
-                    <!-- Общая длительность -->
-                    <TextBlock Grid.Column="2"
+                <!-- Общая длительность -->
+                <TextBlock Grid.Column="2"
                    Text="{Binding TotalTime, StringFormat='{}{0:mm\\:ss}'}"
                    Foreground="White"
                    FontSize="14"
@@ -121,10 +133,13 @@
                 Height="50" 
                  />
 
+
+
                 <!-- Назад -->
                 <Button x:Name="Back" 
                 Content="⏮" 
-                Style="{StaticResource ButtonStyle}" 
+                Style="{StaticResource ButtonStyle}"
+                Command="{Binding PreviousTrack, Mode=TwoWay}"
                 Width="50" 
                 Height="50" 
                  />
@@ -142,6 +157,7 @@
                 <!-- Вперед -->
                 <Button x:Name="Next" 
                 Content="⏭" 
+                Command="{Binding NextTrack, Mode=TwoWay}"
                 Style="{StaticResource ButtonStyle}" 
                 Width="50" 
                 Height="50" 
@@ -160,16 +176,16 @@
         </Grid>
 
 
-    
+
 
         <ListView x:Name="TracksListView1" Visibility="Visible" Panel.ZIndex="0" BorderThickness="0"  Margin="0,41,0, 83" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Tracks}" 
   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Column="1" Grid.RowSpan="2"
   ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
   Background="Pink" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"  >
             <ListView.ItemTemplate>
-                
-                
-                
+
+
+
                 <DataTemplate>
                     <Border BorderBrush="Transparent" BorderThickness="0,0,0,1" Padding="10">
                         <Grid>
@@ -247,10 +263,10 @@ Margin="10 0 30 0" Background="Black" Foreground="White"
                         </Setter.Value>
                     </Setter>
                 </Style>
-                
-                
-                
-                
+
+
+
+
             </ListView.ItemContainerStyle>
 
             <ListView.Template>
@@ -274,9 +290,9 @@ Margin="10 0 30 0" Background="Black" Foreground="White"
 
         </ListView>
 
-        
-        
-        
-        
+
+
+
+
     </Grid>
 </UserControl>
