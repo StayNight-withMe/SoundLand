@@ -19,6 +19,8 @@ namespace test.ViewModel
     {
         public IMediaService MediaService;
 
+        public ITrackCollectionService _trackCollectionService;
+
         private PlayList _playList;
 
         private Visibility _visibleTrackListView;
@@ -65,10 +67,27 @@ namespace test.ViewModel
        IDirectoryService directoryService,
        IPlayListService playListService)
         {
+            _audioFileNameParser = audioFileNameParser;
+
+            _directoryService = directoryService;
+
+            _getPath = pathService.ParseAll();
+
+            _trackCollectionService = collectionService;
+
             MediaService = new MediaService();
 
+            SubOnCollecion();
 
-            if (collectionService is INotifyPropertyChanged npc)
+            VisibleTrackListView = Visibility.Visible;
+
+            PlayPause = new RelayCommand<object>(_ => PlayPauseHandler());
+        }
+
+
+        private void SubOnCollecion()
+        {
+            if (_trackCollectionService is INotifyPropertyChanged npc)
             {
                 Debug.WriteLine("подписка почти");
                 npc.PropertyChanged += (sender, e) =>
@@ -87,7 +106,7 @@ namespace test.ViewModel
 
                             var tracks = service.GetTracks(
                                 Path.Combine(PlayList.Directory, @"img"),
-                                audioFileNameParser) ?? Enumerable.Empty<Track>();
+                                _audioFileNameParser) ?? Enumerable.Empty<Track>();
 
                             Tracks = new ObservableCollection<Track>(tracks);
                             VisibleTrackListView = Visibility.Visible;
@@ -96,12 +115,12 @@ namespace test.ViewModel
                         }
                     }
                 };
-                    
+
             }
 
-            VisibleTrackListView = Visibility.Visible;
 
-            PlayPause = new RelayCommand<object>(_ => PlayPauseHandler());
+
+
         }
 
 

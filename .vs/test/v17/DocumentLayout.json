@@ -1,81 +1,81 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "Z:\\hui1\\test\\",
+  "WorkspaceRootPath": "Z:\\hui1\\test\\test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\playlisttabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\tabviewmodel\\playlisttabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\playlisttabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\trackofplaylistview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\tabviewmodel\\trackofplaylistview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\trackofplaylistview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\collectionservice\\implementations\\trackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\services\\collectionservice\\implementations\\trackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\collectionservice\\implementations\\trackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\collectionservice\\interface\\itrackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\services\\collectionservice\\interface\\itrackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\collectionservice\\interface\\itrackcollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directorypathservices\\implementations\\directoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\services\\directorypathservices\\implementations\\directoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directorypathservices\\implementations\\directoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\directorypathservices\\implementations\\audiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\services\\directorypathservices\\implementations\\audiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\directorypathservices\\implementations\\audiofilenameparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\mainsongtabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\tabviewmodel\\mainsongtabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\mainsongtabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\playlisttab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\view\\songtabcontrol\\playlisttab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\playlisttab.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\tabviewmodel\\alltracktabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\tabviewmodel\\alltracktabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\tabviewmodel\\alltracktabview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\trackofplaylist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\view\\songtabcontrol\\trackofplaylist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\trackofplaylist.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\infrastructure\\dependencyinjection\\implementations\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\infrastructure\\dependencyinjection\\implementations\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\infrastructure\\dependencyinjection\\implementations\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\viewmodel\\base\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\viewmodel\\base\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\viewmodel\\base\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\infrastructure\\dependencyinjection\\implementations\\viewmodelregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\infrastructure\\dependencyinjection\\implementations\\viewmodelregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\infrastructure\\dependencyinjection\\implementations\\viewmodelregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\common\\mediaservicehelper\\implementations\\mediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\common\\mediaservicehelper\\implementations\\mediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\common\\mediaservicehelper\\implementations\\mediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\common\\mediaservicehelper\\base\\basemediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\common\\mediaservicehelper\\base\\basemediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\common\\mediaservicehelper\\base\\basemediaservicehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\view\\songtabcontrol\\trackofplaylist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\view\\songtabcontrol\\trackofplaylist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\view\\songtabcontrol\\trackofplaylist.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\services\\collectionservice\\interface\\icollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|z:\\hui1\\test\\test\\test\\services\\collectionservice\\interface\\icollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A508FB38-E7AE-4F06-B671-ED34C715F452}|test\\test.csproj|solutionrelative:test\\services\\collectionservice\\interface\\icollectionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -96,37 +96,35 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "TrackOfPlayListView.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
               "RelativeToolTip": "test\\ViewModel\\TabViewModel\\TrackOfPlayListView.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAvwFoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:51:29.371Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T20:51:29.371Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "TrackCollectionService.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
               "RelativeDocumentMoniker": "test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
               "RelativeToolTip": "test\\Services\\CollectionService\\Implementations\\TrackCollectionService.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAqwBIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:39:15.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T20:39:15.085Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "PlayListTabView.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
               "RelativeToolTip": "test\\ViewModel\\TabViewModel\\PlayListTabView.cs",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAAANkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAYwNkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-01T20:38:59.78Z",
               "EditorCaption": ""
@@ -135,22 +133,21 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "ITrackCollectionService.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
               "RelativeDocumentMoniker": "test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
               "RelativeToolTip": "test\\Services\\CollectionService\\Interface\\ITrackCollectionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T20:39:11.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T20:39:11.442Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "RelayCommand.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\RelayCommand.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\RelayCommand.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\RelayCommand.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\RelayCommand.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\RelayCommand.cs",
               "RelativeToolTip": "test\\ViewModel\\RelayCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -160,9 +157,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "AudioFileNameParser.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
               "RelativeDocumentMoniker": "test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
               "RelativeToolTip": "test\\Services\\DirectoryPathServices\\Implementations\\AudioFileNameParser.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAUwDAAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -172,9 +169,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "DirectoryService.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
               "RelativeDocumentMoniker": "test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
               "RelativeToolTip": "test\\Services\\DirectoryPathServices\\Implementations\\DirectoryService.cs",
               "ViewState": "AgIAAGsAAAAAAAAAAAAQwCgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -184,9 +181,9 @@
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "PlayListTab.xaml",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
               "RelativeDocumentMoniker": "test\\View\\SongTabControl\\PlayListTab.xaml",
-              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\PlayListTab.xaml",
               "RelativeToolTip": "test\\View\\SongTabControl\\PlayListTab.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-10-08T21:24:46.559Z"
@@ -195,9 +192,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "ALLTrackTabView.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
               "RelativeToolTip": "test\\ViewModel\\TabViewModel\\ALLTrackTabView.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAQwFAAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -207,9 +204,9 @@
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "TrackOfPlayList.xaml",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml",
               "RelativeDocumentMoniker": "test\\View\\SongTabControl\\TrackOfPlayList.xaml",
-              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml",
               "RelativeToolTip": "test\\View\\SongTabControl\\TrackOfPlayList.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-10-01T20:50:21.718Z"
@@ -218,9 +215,9 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "MainSongTabView.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
               "RelativeToolTip": "test\\ViewModel\\TabViewModel\\MainSongTabView.cs",
               "ViewState": "AgIAAMUAAAAAAAAAAAAkwOgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -230,9 +227,9 @@
               "$type": "Document",
               "DocumentIndex": 11,
               "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
               "RelativeToolTip": "test\\Infrastructure\\DependencyInjection\\Implementations\\DependencyInjection.cs",
               "ViewState": "AgIAABwAAAAAAAAAAABBwB4AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -242,9 +239,9 @@
               "$type": "Document",
               "DocumentIndex": 12,
               "Title": "BaseViewModel.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\ViewModel\\Base\\BaseViewModel.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\ViewModel\\Base\\BaseViewModel.cs",
               "RelativeDocumentMoniker": "test\\ViewModel\\Base\\BaseViewModel.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\ViewModel\\Base\\BaseViewModel.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\ViewModel\\Base\\BaseViewModel.cs",
               "RelativeToolTip": "test\\ViewModel\\Base\\BaseViewModel.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -254,9 +251,9 @@
               "$type": "Document",
               "DocumentIndex": 15,
               "Title": "MediaServiceHelper.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
               "RelativeDocumentMoniker": "test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
               "RelativeToolTip": "test\\Common\\MediaServiceHelper\\Implementations\\MediaServiceHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -266,9 +263,9 @@
               "$type": "Document",
               "DocumentIndex": 16,
               "Title": "BaseMediaServiceHelper.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
               "RelativeDocumentMoniker": "test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
               "RelativeToolTip": "test\\Common\\MediaServiceHelper\\Base\\BaseMediaServiceHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -278,9 +275,9 @@
               "$type": "Document",
               "DocumentIndex": 13,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\MainWindow.xaml.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\View\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "test\\View\\MainWindow.xaml.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\View\\MainWindow.xaml.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\View\\MainWindow.xaml.cs",
               "RelativeToolTip": "test\\View\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -290,9 +287,9 @@
               "$type": "Document",
               "DocumentIndex": 17,
               "Title": "TrackOfPlayList.xaml.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
               "RelativeDocumentMoniker": "test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
               "RelativeToolTip": "test\\View\\SongTabControl\\TrackOfPlayList.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -302,9 +299,9 @@
               "$type": "Document",
               "DocumentIndex": 14,
               "Title": "ViewModelRegistration.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
               "RelativeDocumentMoniker": "test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
               "RelativeToolTip": "test\\Infrastructure\\DependencyInjection\\Implementations\\ViewModelRegistration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -314,9 +311,9 @@
               "$type": "Document",
               "DocumentIndex": 18,
               "Title": "ICollectionService.cs",
-              "DocumentMoniker": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
+              "DocumentMoniker": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
               "RelativeDocumentMoniker": "test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
-              "ToolTip": "Z:\\hui1\\test\\test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
+              "ToolTip": "Z:\\hui1\\test\\test\\test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
               "RelativeToolTip": "test\\Services\\CollectionService\\Interface\\ICollectionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

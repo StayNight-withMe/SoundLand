@@ -66,3 +66,4 @@ Z:\hui1\test1\test\obj\Debug\net9.0-windows\refint\test.dll
 Z:\hui1\test1\test\obj\Debug\net9.0-windows\test.pdb
 Z:\hui1\test1\test\obj\Debug\net9.0-windows\test.genruntimeconfig.cache
 Z:\hui1\test1\test\obj\Debug\net9.0-windows\ref\test.dll
+Z:\hui1\test\test\obj\Debug\net9.0-windows\test.sourcelink.json

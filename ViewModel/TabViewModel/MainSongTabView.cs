@@ -94,7 +94,6 @@ namespace test.ViewModel.TabViewModel
         }
 
         public ObservableCollection<Track> Tracks { get => _trackCollectionService.Collection; set { _trackCollectionService.Collection = value; } }
-
         public ICommand SearchSong { get; set; }
         public ICommand SelectionChanged { get; set; }
         public ICommand ToALLTrack { get; set; }

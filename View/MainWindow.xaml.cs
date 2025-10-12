@@ -26,8 +26,6 @@ namespace test
             InitializeComponent();
 
             var dispatcher = Application.Current.Dispatcher;
-
-
             var di = new DependencyInjection(dispatcher);
 
             ViewModelRegistration.RegisterCoreServices(di);
@@ -48,7 +46,6 @@ namespace test
             {
                 container.Children.Add(trackOfPlayList);
             }
-
 
             var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
             mediaService?.SetMediaElement(MediaPlayer);
