@@ -1,0 +1,94 @@
+﻿<Window x:Class="test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   
+        xmlns:song="clr-namespace:test.SongTabControl" 
+         xmlns:local="clr-namespace:test.SongTabControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1000" Width="1920">
+    <Window.Resources>
+
+
+    </Window.Resources>
+
+
+
+
+
+
+
+
+    <Grid x:Name="GridOfWindow" >
+
+        
+        
+        
+
+        <Grid>
+            <MediaElement x:Name="BackGroundPlayer" LoadedBehavior="Manual" Stretch="UniformToFill"  />
+
+        </Grid>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="11*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <MediaElement x:Name="MediaPlayer" Visibility="Collapsed"
+      LoadedBehavior="Manual" Source="{Binding SourceForMediaElement}" Volume="{Binding ElementName=slider, Path=Value}" UnloadedBehavior="Stop"/>
+
+
+
+            <TabControl BorderThickness="0" x:Name="tab" Grid.Column="1" Grid.Row="0" Background="Transparent">
+
+                <TabItem  Header="Поиск" Style="{StaticResource BlackTabItemStyle}"  >
+
+                    <song:MainSongTab/>
+                    
+                </TabItem>
+
+
+
+                <TabItem Style="{StaticResource BlackTabItemStyle}" Header="Плейлисты">
+
+
+                    <TabControl BorderThickness="0" Background="Transparent">
+
+                        <TabItem Style="{StaticResource BlackTabItemStyle}" Header="Все треки">
+
+                            <song:AllTrackTab/>
+
+
+                        </TabItem>
+                        <TabItem Header="Плейлисты" BorderThickness="0" Style="{StaticResource BlackTabItemStyle}">
+
+                            <Grid x:Name="PlayListContainer"/>
+
+                        </TabItem>
+
+                    </TabControl>
+
+                </TabItem>
+            </TabControl>
+
+            <Grid Grid.Row="0" Grid.Column="2" Margin="0 20 20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="100"/>
+
+                    <ColumnDefinition Width="Auto" MinWidth="50"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
