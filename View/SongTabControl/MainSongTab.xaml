@@ -177,7 +177,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="PlayPauseBtn" Content="{Binding PlayPauseButtonText}" Command="{Binding PlayPause}" Style="{StaticResource ButtonStyle}"
-                    Height="50" Width="50" Grid.Column="1"
+                    Height="50" Width="50" Margin="-10 0 0 0" Grid.Column="1"
                     HorizontalAlignment="Left"/>
 
             <MediaElement x:Name="MediaPlayer" Visibility="Collapsed"
@@ -185,12 +185,15 @@
 
             <Image x:Name="PlaySong" Width="70" Grid.Column="0" HorizontalAlignment="Left" Margin="30,0,0,0"  Source="{Binding Image}" Height="60"/>
 
+
+            <TextBlock x:Name="Duration1" Text="{Binding SecondsProcess}" Foreground="Black" Grid.Column="1" HorizontalAlignment="Right" Margin="0 ,30, 0, 0" FontSize="16"/>
+
             <Slider x:Name="ProgressBar"  IsMoveToPointEnabled="True" Value="{Binding SongSliderValue, Mode=TwoWay}"
  Style="{StaticResource CustomSliderStyle}" Background="Transparent" Foreground="Black"
                          HorizontalAlignment="Stretch" VerticalAlignment="Center"  
                          Margin="10,0,20,10" Minimum="0" Maximum="100" Grid.Column="2" Height="10" IsEnabled="True"/>
 
-            <TextBlock x:Name="Duration" Text="{Binding SecondForView}" Foreground="Black" Grid.Column="3" HorizontalAlignment="Right" Margin="0,30,0,0" FontSize="16"/>
+            <TextBlock x:Name="Duration" Text="{Binding SecondForView}" Foreground="Black" Grid.Column="3" HorizontalAlignment="Right" Margin="0 ,30,20, 0" FontSize="16"/>
 
             <Slider x:Name="slider" IsMoveToPointEnabled="True"
  Style="{StaticResource CustomSliderStyle}"

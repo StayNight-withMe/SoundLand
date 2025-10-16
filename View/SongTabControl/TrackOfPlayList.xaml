@@ -74,8 +74,21 @@
            TextTrimming="CharacterEllipsis"
            VerticalAlignment="Center"
            HorizontalAlignment="Center"
-           Margin="10,10,10,200" 
+           Margin="36,10,10,200" 
            Grid.Row="1"/>
+
+            <TextBlock Text="{Binding SongArtist}" 
+FontFamily="Segoe UI"          
+FontWeight="SemiBold"         
+FontSize="18"                   
+TextAlignment="Center" 
+Foreground="Gray" 
+TextWrapping="Wrap"             
+TextTrimming="CharacterEllipsis"
+VerticalAlignment="Center"
+HorizontalAlignment="Center"
+Margin="36,10,10,150" 
+Grid.Row="1"/>
 
             <!-- ✅ 2. Прогресс-бар и тайминги (всё в одной строке) -->
             <Grid Grid.Row="1" 
@@ -88,12 +101,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Текущее время -->
-                <TextBlock Grid.Column="0"
-                   Text="{Binding CurrentTime, StringFormat='{}{0:mm\\:ss}'}"
-                   Foreground="White"
-                   FontSize="14"
-                   Margin="0,0,10,0" />
+             
 
                 <!-- Прогресс-бар — ВСЯ ШИРИНА, кликабельный -->
                 <Slider x:Name="ProgressSlider"
@@ -109,12 +117,19 @@
                 Margin="10,6,10,3"
                  />
 
-                <!-- Общая длительность -->
-                <TextBlock Grid.Column="2"
-                   Text="{Binding TotalTime, StringFormat='{}{0:mm\\:ss}'}"
-                   Foreground="White"
+           
+                <TextBlock Grid.Column="0"
+                   Text="{Binding SecondProcess}"
+                   Foreground="Black"
                    FontSize="14"
-                   Margin="10,0,0,0" />
+                   Margin="0, 98,0,0" />
+
+                <TextBlock Grid.Column="2"
+   Text="{Binding SecondForView}"
+   Foreground="Black"
+   FontSize="14"
+   Margin="10,98,0,0" />
+
             </Grid>
 
             <!-- ✅ 3. Кнопки управления — центрированные, круглые, большие -->
@@ -206,8 +221,8 @@
 
                             <Image Source="{Binding ImageData}" Width="50" Height="50" Margin="10,0,10,0"/>
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left"/>
-                                <TextBlock Text="{Binding Artist}" Foreground="#555" FontSize="14"/>
+                                <TextBlock Text="{Binding Name, Converter={StaticResource StringLengthConverter}, ConverterParameter=15}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Artist, Converter={StaticResource StringLengthConverter}, ConverterParameter=15}" Foreground="#555" FontSize="14"/>
                             </StackPanel>
                             <TextBlock Grid.Column="2" Text="{Binding Duration}" Margin="10 18 10 10" VerticalAlignment="Center" FontSize="14"/>
                             <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">

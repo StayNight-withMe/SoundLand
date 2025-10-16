@@ -4,12 +4,19 @@
              xmlns:local="clr-namespace:test"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              StartupUri="View/MainWindow.xaml">
+
     <Application.Resources>
+        <!-- ✅ Один ResourceDictionary: -->
         <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="View/Styles/Style.xaml"/>
-        </ResourceDictionary.MergedDictionaries>
+
+            <!-- ✅ Сначала локальные ресурсы: -->
+            <local:StringLengthConverter x:Key="StringLengthConverter"/>
+
+            <!-- ✅ Потом merged dictionaries: -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/Styles/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Application.Resources>
-    
 </Application>

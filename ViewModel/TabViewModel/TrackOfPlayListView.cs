@@ -38,8 +38,7 @@ namespace test.ViewModel
         private string _sourceForMediaElement;
 
         private Track _tempchoice;
-
-        public IMediaService MediaService { get { return _mediaService; Debug.WriteLine("МедиаСервисберем"); } set { _mediaService = value; } }
+        public IMediaService MediaService { get { return _mediaService; } set { _mediaService = value; OnPropertyChanged(); } }
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
         public string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
@@ -54,15 +53,19 @@ namespace test.ViewModel
         private double _songSliderValue;
         public double SongSliderValue
         {
-            get => _songSliderValue; set
-            {
+            get => _songSliderValue; 
+            set {
                 _songSliderValue = value; OnPropertyChanged(); if (TotalSeconds > 0)
                 {
                     double seconds = (value / 100) * TotalSeconds;
                     _mediaService.Seek(seconds);
+                    OnPropertyChanged(nameof(SecondProcess));
                 }
             }
         }
+
+        private string _songArtist;
+        public string SongArtist { get => _songArtist; set { _songArtist = value; OnPropertyChanged(); } }
 
         private double _totalSeconds;
         public double TotalSeconds
@@ -76,9 +79,9 @@ namespace test.ViewModel
             }
         }
 
-        public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); ; return time.ToString(@"mm\:ss"); } set { } }
+        public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); return time.ToString(@"mm\:ss"); } }
 
-
+        public string SecondProcess { get { TimeSpan time = TimeSpan.FromSeconds(SongSliderValue); return time.ToString(@"mm\:ss"); } }
 
         public string PlayPauseButtonText  => State switch
         {
@@ -198,8 +201,7 @@ namespace test.ViewModel
             int currentIndex = Tracks.IndexOf(_tempchoice);
 
             if (currentIndex == -1)
-            {
-                // ✅ Текущий трек не найден - начинаем с первого:
+            { 
                 StartSong(Tracks[0]);
                 return;
             }
@@ -208,12 +210,12 @@ namespace test.ViewModel
 
             if (skip)
             {
-                // ✅ Следующий трек (циклически):
+
                 newIndex = (currentIndex + 1) % Tracks.Count;
             }
             else
             {
-                // ✅ Предыдущий трек (циклически):
+                
                 newIndex = (currentIndex - 1 + Tracks.Count) % Tracks.Count;
             }
 
@@ -227,6 +229,7 @@ namespace test.ViewModel
             _tempchoice = track;
 
             SongName = track.Name;
+            SongArtist = track.Artist;
             ImgPath = track.ImgFilePath;
 
             var i = Path.Combine(_getPath.PlayListPath, _trackCollectionService.playList.Name);

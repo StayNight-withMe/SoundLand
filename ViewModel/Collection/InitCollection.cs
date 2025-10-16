@@ -7,7 +7,7 @@ namespace test.ViewModel.CollectionClass
 { 
     public class InitCollection : INotifyPropertyChanged
     {
-        //хуео так делать, но из-за того что не будет ебанутого покрытия тестами думаю похуй
+        //хуео так делать, но из-за того что не будет ебанутого покрытия тестами думаю похуй ПОКА ЧТО
         //правильнее на будущее сделать сервис управления колекциями
         private static ObservableCollection<PlayList> _sharedPlayLists = new();
         public ObservableCollection<PlayList> PlayLists { get => _sharedPlayLists; set { _sharedPlayLists = value; OnPropertyChanged(); } }

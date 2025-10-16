@@ -75,8 +75,8 @@ Background="Transparent" Grid.ColumnSpan="2" Grid.RowSpan="3">
 
 
                             <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left"/>
-                                <TextBlock Text="{Binding Artist}" Foreground="#555" FontSize="14"/>
+                                <TextBlock Text="{Binding Name, Converter={StaticResource StringLengthConverter}, ConverterParameter=25}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Artist, Converter={StaticResource StringLengthConverter}, ConverterParameter=25}" Foreground="#555" FontSize="14"/>
                             </StackPanel>
 
                             <TextBlock Grid.Column="2" Text="{Binding Duration}" Margin="10 18 10 10" VerticalAlignment="Center" FontSize="14"/>

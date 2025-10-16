@@ -46,14 +46,19 @@ namespace test.ViewModel.TabViewModel
         public string Image { get => _image; set { _image = value; OnPropertyChanged(); } }
 
         private double _songSliderValue;
-        public double SongSliderValue { get => _songSliderValue; set { _songSliderValue = value; OnPropertyChanged(); if (TotalSeconds > 0)
+        public double SongSliderValue { get => _songSliderValue; 
+            set { _songSliderValue = value; OnPropertyChanged();
+                if (TotalSeconds > 0)
                 {
                     double seconds = (value / 100) * TotalSeconds;
                     _mediaService.Seek(seconds);
+                    OnPropertyChanged(nameof(SecondsProcess));
+                    
                 } 
-            } }
+            } 
+        }
 
-
+        public string SecondsProcess { get {  TimeSpan time = TimeSpan.FromSeconds(SongSliderValue); return time.ToString(@"mm\:ss"); } }
         private ButtonState _states;
         public ButtonState State { get => _states; set { _states = value; OnPropertyChanged(); OnPropertyChanged(nameof(PlayPauseButtonText)); } }
         public string PlayPauseButtonText => State switch
@@ -76,7 +81,7 @@ namespace test.ViewModel.TabViewModel
             }
         }
 
-        public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); ; return time.ToString(@"mm\:ss");  } set {  }  }
+        public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); ; return time.ToString(@"mm\:ss");  } }
 
 
         public ObservableCollection<Track> Tracks { get => _trackCollectionService.Collection; set { _trackCollectionService.Collection = value; } }

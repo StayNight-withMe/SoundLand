@@ -28,5 +28,9 @@ namespace test.SongTabControl
             mediaService?.SetMediaElement(MediaPlayer);
 
         }
+
+
+
+
     }
 }

@@ -28,34 +28,8 @@ namespace test.ViewModel
         private string _duration;
 
 
-        public string Name { get => _name;
-             set
-            {
-                if (value == _name) return;
-
-
-                string processed = value?.Substring(0, Math.Min(value.Length, MaxLength))
-                                      .PadRight(MaxLength);
-
-                _name = processed ?? new string(' ', MaxLength);
-
-                OnPropertyChanged();
-            }
-        }
-        public string Artist { get => _artist; 
-            set
-            {
-                if (value == _artist) return;
-
-
-                string processed = value?.Substring(0, Math.Min(value.Length, MaxLength))
-                                      .PadRight(MaxLength);
-
-                _artist = processed ?? new string(' ', MaxLength);
-
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        public string Artist { get => _artist;  set { _artist = value;  OnPropertyChanged(); } }
         public string FileName { get => _fileName; set { _fileName = value; OnPropertyChanged(); } }
         public string ImgFilePath {  get => _imgFilePath; set { _imgFilePath = value; OnPropertyChanged(); } }
         public string? SongFilePath { get => _songFilePath; set { _songFilePath = value; OnPropertyChanged(); } }
