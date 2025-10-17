@@ -82,14 +82,14 @@ Background="Transparent" Grid.ColumnSpan="2" Grid.RowSpan="3">
                             <TextBlock Grid.Column="2" Text="{Binding Duration}" Margin="10 18 10 10" VerticalAlignment="Center" FontSize="14"/>
 
                             <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
-                                <Button x:Name="add" Content="+" HorizontalAlignment="Right" VerticalAlignment="Stretch" 
+                                <Button x:Name="add" Content="+" Style="{StaticResource ButtonStyle}"  HorizontalAlignment="Right" VerticalAlignment="Stretch" 
                       Background="Black" Height="25" Width="25" Foreground="White" Margin="0 0 0 0" 
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
-                                <Button x:Name="Dell" Content="удалить" Width="100" Height="25" 
+                                <Button x:Name="Dell" Content="удалить" Style="{StaticResource ButtonStyle}"  Width="100" Height="25" 
                       HorizontalAlignment="Right" Foreground="White" Margin="10 0 0 0" Background="Black"  Command="{Binding DataContext.DellSong, RelativeSource={RelativeSource AncestorType=UserControl}}" 
         CommandParameter="{Binding}"
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
-                                <Button x:Name="add_Play" Command="{Binding DataContext.OpenPopup, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                <Button x:Name="add_Play" Style="{StaticResource ButtonStyle}"  Command="{Binding DataContext.OpenPopup, RelativeSource={RelativeSource AncestorType=UserControl}}" 
         CommandParameter="{Binding}"  Content="в плейлист" Width="100" Height="25" 
                       Margin="10 0 30 0" HorizontalAlignment="Right" Background="Black"  
                       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" Foreground="White"/>

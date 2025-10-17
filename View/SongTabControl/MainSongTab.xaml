@@ -65,9 +65,9 @@
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
 
-                        <Button Content="добавить" Command="{Binding AddToPlayList}" CommandParameter="{Binding}" Background="Gray" FontSize="15"  Foreground="White"/>
+                        <Button Content="добавить" Command="{Binding AddToPlayList}" Style="{StaticResource ButtonStyle}"  CommandParameter="{Binding}" Background="Gray" FontSize="15"  Foreground="White"/>
 
-                        <Button Content="Отмена" Background="Gray" Command="{Binding СancelPopup}" CommandParameter="{Binding}" FontSize="15" Foreground="White" />
+                        <Button Content="Отмена" Background="Gray" Command="{Binding СancelPopup}" Style="{StaticResource ButtonStyle}"  CommandParameter="{Binding}" FontSize="15" Foreground="White" />
 
                         </StackPanel>
 
@@ -128,10 +128,10 @@
                             </StackPanel>
                             <TextBlock Grid.Column="2" Text="{Binding Duration}" Margin="10,18,10,10" VerticalAlignment="Center" FontSize="14"/>
                             <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
-                                <Button Content="+" Background="Black" Height="25" Width="25" Foreground="White" Padding="0"/>
-                                <Button Content="в все треки" Width="100" Height="25" Foreground="White"         Command="{Binding DataContext.ToALLTrack, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                <Button Content="+" Background="Black" Style="{StaticResource ButtonStyle}"  Height="25" Width="25" Foreground="White" Padding="0"/>
+                                <Button Content="в все треки" Style="{StaticResource ButtonStyle}"  Width="100" Height="25" Foreground="White"         Command="{Binding DataContext.ToALLTrack, RelativeSource={RelativeSource AncestorType=UserControl}}" 
         CommandParameter="{Binding}"    Background="Black" Padding="0" Margin="10,0,0,0"/>
-                                <Button Content="в плейлист" Width="100" Height="25" Background="Black" Foreground="White" Padding="0" Margin="10,0,30,0"
+                                <Button Content="в плейлист" Style="{StaticResource ButtonStyle}"  Width="100" Height="25" Background="Black" Foreground="White" Padding="0" Margin="10,0,30,0"
                                         Command="{Binding DataContext.ToPlayList, RelativeSource={RelativeSource AncestorType=UserControl}}" 
         CommandParameter="{Binding}"  
                                         />
@@ -191,13 +191,13 @@
             <Slider x:Name="ProgressBar"  IsMoveToPointEnabled="True" Value="{Binding SongSliderValue, Mode=TwoWay}"
  Style="{StaticResource CustomSliderStyle}" Background="Transparent" Foreground="Black"
                          HorizontalAlignment="Stretch" VerticalAlignment="Center"  
-                         Margin="10,0,20,10" Minimum="0" Maximum="100" Grid.Column="2" Height="10" IsEnabled="True"/>
+                         Margin="10,0,20,10" Minimum="0" Maximum="100" Grid.Column="2" Height="20" IsEnabled="True"/>
 
-            <TextBlock x:Name="Duration" Text="{Binding SecondForView}" Foreground="Black" Grid.Column="3" HorizontalAlignment="Right" Margin="0 ,30,20, 0" FontSize="16"/>
+            <TextBlock x:Name="Duration" Text="{Binding SecondForView}" Foreground="Black" Grid.Column="3" HorizontalAlignment="Right" Margin="0 ,30, 30, 0" FontSize="16"/>
 
             <Slider x:Name="slider" IsMoveToPointEnabled="True"
  Style="{StaticResource CustomSliderStyle}"
-                    Height="30" Width="100" HorizontalAlignment="Right" Margin="0,0,10,0"
+                    Height="30" Width="100" HorizontalAlignment="Right" Margin="0, 0,47,10"
                     Minimum="0" Maximum="1" Value="{Binding ElementName=MediaPlayer, Path=Volume}"
                     Background="Transparent" Foreground="Black" BorderBrush="Black" Grid.Column="4"/>
         </Grid>

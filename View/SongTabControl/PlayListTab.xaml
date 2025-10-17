@@ -4,9 +4,7 @@
 	         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     
             xmlns:song="clr-namespace:test.SongTabControl"
-             
-             
-             
+            
              xmlns:local="clr-namespace:test"
 		>
     <UserControl.Resources>
@@ -22,20 +20,15 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="NewPlayList" BorderThickness="0" Content="{Binding ButtonText}" Grid.Row="0" Background="Transparent" Opacity="0.9" Foreground="Black"
-                                        FontSize="35"  Grid.ColumnSpan="2" Margin="0,0,0,750" Grid.RowSpan="2" 
+        <Button x:Name="NewPlayList" BorderThickness="0" Style="{StaticResource HoverButtonStyle}" Content="{Binding ButtonText}" Grid.Row="0" Background="Transparent"
+                                        FontSize="35"  Grid.ColumnSpan="2" Margin="0,0,0,0" Grid.RowSpan="1" 
                Command="{Binding OpenPopup}" 
                 />
-
-
-
-
-
-
 
         <Popup Name="myPopup" IsOpen="{Binding PopupIsOpen}" Placement="Center" Grid.ColumnSpan="2" Margin="0,0,0,686" Grid.RowSpan="2">
             <Border BorderThickness="1"  HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -48,34 +41,24 @@
 
                     <Button Width="200" Height="50" 
                                 Content="Создать плейлист" 
-                                Background="Black" 
+                                Background="Black" Style="{StaticResource ButtonStyle}" 
                                 Foreground="White"
                                 Command="{Binding NewPlayList}"/>
-                    
+
 
                     <Button Width="200" Height="50" 
-                                Content="Отменить" 
+                                Content="Отменить" Style="{StaticResource ButtonStyle}" 
                                 Background="Black" 
                                 Foreground="White"
                                 Command="{Binding Cansel}"/>
-
-
                 </StackPanel>
-
             </Border>
         </Popup>
 
 
 
 
-
-
-
-
         <Grid x:Name="TrackOfPlayListContainer" Grid.Row="1" Grid.ColumnSpan="2" Visibility="{Binding ContainerVisible }" />
-
-
-
         <ListView BorderThickness="0"  x:Name="PlayListView" Grid.Row="1" Visibility="{Binding VisiblePlayListView}" SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" Background="Transparent" ItemsSource="{Binding Collections.PlayLists}"  Grid.ColumnSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
@@ -107,7 +90,7 @@
                             <Button Grid.Column="2" x:Name="DelPlayList"  Content="Удалить" 
                              Foreground="White" Background="Black" VerticalAlignment="Center" Height="25" Width="80"
                             HorizontalAlignment="Right" Margin="0,0,10,0"  Command="{Binding DataContext.DellPlayList, 
-                RelativeSource={RelativeSource AncestorType=ListView}}"
+                RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource ButtonStyle}" 
         CommandParameter="{Binding}" />
 
                         </Grid>
@@ -125,11 +108,6 @@
 
         </ListView>
     </Grid>
-
-
-
-
-
 
 
 

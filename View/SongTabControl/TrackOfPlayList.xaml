@@ -46,23 +46,16 @@
 
 
 
-            <Border Grid.Row="0"
-            Width="300"
-            Height="300"
-            CornerRadius="10"
-            Background="Gray"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            BorderBrush="White"
-            BorderThickness="2">
+            
                 <Image x:Name="AlbumCoverImage"
                Source="{Binding ImgPath}"
                Width="290"
                Height="290"
+                    
                Stretch="UniformToFill"
                Margin="5"
-               Opacity="0.9" />
-            </Border>
+               Opacity="1" />
+           
 
             <TextBlock Text="{Binding SongName}" 
            FontFamily="Segoe UI"          
@@ -90,7 +83,7 @@ HorizontalAlignment="Center"
 Margin="36,10,10,150" 
 Grid.Row="1"/>
 
-            <!-- ✅ 2. Прогресс-бар и тайминги (всё в одной строке) -->
+            
             <Grid Grid.Row="1" 
           Margin="20,10,20,10"
           HorizontalAlignment="Stretch">
@@ -103,7 +96,7 @@ Grid.Row="1"/>
 
              
 
-                <!-- Прогресс-бар — ВСЯ ШИРИНА, кликабельный -->
+                
                 <Slider x:Name="ProgressSlider"
                         IsMoveToPointEnabled="True" 
                 Grid.Column="1"
@@ -132,7 +125,7 @@ Grid.Row="1"/>
 
             </Grid>
 
-            <!-- ✅ 3. Кнопки управления — центрированные, круглые, большие -->
+           
             <StackPanel Grid.Row="2"
                 Orientation="Horizontal"
                 HorizontalAlignment="Center"
@@ -140,7 +133,7 @@ Grid.Row="1"/>
                 Margin="0,10,0,20"
                 >
 
-                <!-- Повтор -->
+                
                 <Button x:Name="PlayMode" 
                 Content="{Binding PlayModeSymbol}"
                 Command="{Binding PlayModeHander}"
@@ -231,12 +224,12 @@ Grid.Row="1"/>
                             </StackPanel>
                             <TextBlock Grid.Column="2" Text="{Binding Duration}" Margin="10 18 10 10" VerticalAlignment="Center" FontSize="14"/>
                             <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
-                                <Button x:Name="add" Content="+" HorizontalAlignment="Right" VerticalAlignment="Stretch" 
+                                <Button x:Name="add" Content="+" HorizontalAlignment="Right" VerticalAlignment="Stretch" Style="{StaticResource ButtonStyle}" 
                         Background="Black" Height="25" Width="25" Margin="0 0 0 0"  Padding="0" Foreground="White" />
-                                <Button x:Name="Dell" Content="удалить" Width="100" Height="25" 
+                                <Button x:Name="Dell" Content="удалить" Width="100" Height="25" Style="{StaticResource ButtonStyle}" 
                                 HorizontalAlignment="Right" Foreground="White" Margin="10 0 0 0" Background="Black"  
                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
-                                <Button x:Name="AddPlay" Content="в плейлист" Width="100" Height="25" 
+                                <Button x:Name="AddPlay" Content="в плейлист" Width="100" Height="25" Style="{StaticResource ButtonStyle}" 
 Margin="10 0 30 0" Background="Black" Foreground="White" 
  Padding="0">
 
