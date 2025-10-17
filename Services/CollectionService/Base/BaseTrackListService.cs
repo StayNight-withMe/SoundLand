@@ -17,13 +17,10 @@ namespace test.Services
         private ObservableCollection<T> _collection;
         public ObservableCollection<T> Collection { get => _collection; set { _collection = value;} } 
 
-
-
         public BaseCollectionService()
         {
             Collection = new ObservableCollection<T>();
         }
-        
         
         public virtual void Add(T item) => Collection.Add(item);
         public virtual void Remove(T item) => Collection.Remove(item); 

@@ -142,8 +142,10 @@ Grid.Row="1"/>
 
                 <!-- Повтор -->
                 <Button x:Name="PlayMode" 
-                Content="🔁" 
-                Style="{StaticResource ButtonStyle}" 
+                Content="{Binding PlayModeSymbol}"
+                Command="{Binding PlayModeHander}"
+                Style="{StaticResource ButtonStyle}"
+                FontSize="18"
                 Width="50" 
                 Height="50" 
                  />
@@ -154,6 +156,7 @@ Grid.Row="1"/>
                 <Button x:Name="Back" 
                 Content="⏮" 
                 Style="{StaticResource ButtonStyle}"
+                        FontSize="18"
                 Command="{Binding PreviousTrack, Mode=TwoWay}"
                 Width="50" 
                 Height="50" 
@@ -164,6 +167,7 @@ Grid.Row="1"/>
                 Content="{Binding PlayPauseButtonText}" 
                 Style="{StaticResource ButtonStyle}" 
                 Command="{Binding PlayPause, Mode=TwoWay}"
+                        
                 Width="70" 
                 Height="70" 
                 
@@ -172,6 +176,7 @@ Grid.Row="1"/>
                 <!-- Вперед -->
                 <Button x:Name="Next" 
                 Content="⏭" 
+                        FontSize="18"
                 Command="{Binding NextTrack, Mode=TwoWay}"
                 Style="{StaticResource ButtonStyle}" 
                 Width="50" 
@@ -196,7 +201,7 @@ Grid.Row="1"/>
         <ListView x:Name="TracksListView1" Visibility="Visible" Panel.ZIndex="0" BorderThickness="0"  Margin="0,41,0, 83" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding Tracks}" 
   ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Grid.Column="1" Grid.RowSpan="2"
   ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False"
-  Background="Pink" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"  >
+  Background="Transparent" SelectedItem="{Binding SelectedTrack, Mode=TwoWay}"  >
             <ListView.ItemTemplate>
 
 

@@ -10,11 +10,13 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using test.Services;
 using test.ViewModel.CollectionClass;
 using static test.ViewModel.enamS;
+using NextTrackState = test.ViewModel.enamS.NextMediaStates;
 using PlayState = test.ViewModel.enamS.PlayPauseButtonStates;
 
 namespace test.ViewModel
@@ -76,12 +78,38 @@ namespace test.ViewModel
                 _totalSeconds = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(SecondForView));
+                OnPropertyChanged(nameof(SecondProcess));
             }
         }
 
         public string SecondForView { get { TimeSpan time = TimeSpan.FromSeconds(_totalSeconds); return time.ToString(@"mm\:ss"); } }
 
-        public string SecondProcess { get { TimeSpan time = TimeSpan.FromSeconds(SongSliderValue); return time.ToString(@"mm\:ss"); } }
+        public string SecondProcess { get { double currentSeconds = (_songSliderValue / 100) * _totalSeconds; TimeSpan time = TimeSpan.FromSeconds(currentSeconds); return time.ToString(@"mm\:ss"); } }
+
+        private NextTrackState _playModeContent = NextTrackState.Next;
+
+        
+        public string PlayModeSymbol => _playModeContent switch
+        {
+            NextTrackState.Next => "🔁",
+            NextTrackState.Random => "🔀",
+            NextTrackState.Replay => "🔂",
+            _ => "🔁"
+        };
+
+        
+        public NextTrackState PlayModeState
+        {
+            get => _playModeContent;
+            set
+            {
+                _playModeContent = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PlayModeSymbol));  
+            }
+        }
+
+
 
         public string PlayPauseButtonText  => State switch
         {
@@ -93,6 +121,7 @@ namespace test.ViewModel
         public ICommand PlayPause {  get; set; }
         public ICommand NextTrack { get; set; }
         public ICommand PreviousTrack { get; set; }
+        public ICommand PlayModeHander { get; set; }
         public TrackOfPlayListView(
        ITrackCollectionService collectionService,  
        IPathService pathService,
@@ -114,6 +143,8 @@ namespace test.ViewModel
 
             _mediaService.DurationChanged += OnDurationChanged;
 
+            _mediaService.MediaEndedChanged += OnMediaEndedChanged;
+
             SubOnCollecion();
 
             VisibleTrackListView = Visibility.Visible;
@@ -121,6 +152,9 @@ namespace test.ViewModel
             PlayPause = new RelayCommand<object>(_ => PlayPauseHandler());
             NextTrack = new RelayCommand<object>(_ => NextorPreviousTrackHandler(true));
             PreviousTrack = new RelayCommand<object>(_ => NextorPreviousTrackHandler(false));
+            PlayModeHander = new RelayCommand<object>(_ => ChangeStatePlayMode());
+
+           
         }
 
 
@@ -160,6 +194,18 @@ namespace test.ViewModel
         }
 
 
+        private void ChangeStatePlayMode()
+        {
+            PlayModeState = PlayModeState switch
+            {
+                NextTrackState.Next => NextTrackState.Random,
+                NextTrackState.Random => NextTrackState.Replay,
+                NextTrackState.Replay => NextTrackState.Next,
+                _ => NextTrackState.Next
+            };
+
+
+        }
 
         private void OnDurationChanged(double duration)
         {
@@ -174,6 +220,36 @@ namespace test.ViewModel
                 SongSliderValue = (position / _mediaService.TotalSeconds) * 100;
             }
         }
+
+        private void OnMediaEndedChanged()
+        {
+
+            // NextorPreviousTrackHandler(true);
+            switch (PlayModeState)
+            {
+                case NextTrackState.Next:
+                    NextorPreviousTrackHandler(true);
+                    break;
+
+                case NextTrackState.Random:
+                    Random random = new Random();
+                    var i = random.Next(0, Tracks.Count);
+                    StartSong(Tracks[i]);
+
+                    break;
+
+                case NextTrackState.Replay:
+                    StartSong(_tempchoice);
+
+                    break;
+            }
+        }
+
+
+
+
+
+
 
 
         private void PlayPauseHandler()
@@ -197,6 +273,21 @@ namespace test.ViewModel
         {
             if (Tracks == null || Tracks.Count == 0 || _tempchoice == null)
                 return;
+
+            if(PlayModeState == NextTrackState.Random)
+            {
+                Random random = new Random();
+
+                MediaService.Seek(0);
+                var i = random.Next(0, Tracks.Count);
+                Debug.WriteLine(i);
+                StartSong(Tracks[i]);
+                Debug.WriteLine("включился рандомный трек вроде");
+                return;
+                
+
+
+            }
 
             int currentIndex = Tracks.IndexOf(_tempchoice);
 
@@ -274,7 +365,7 @@ namespace test.ViewModel
 
         public async void  OnTrackSelected(Track track)
         {
-         
+            MediaService.Seek(0);
             Debug.WriteLine($"{track.Name} трек");
 
             StartSong(track);

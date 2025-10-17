@@ -42,8 +42,8 @@ namespace test.ViewModel.TabViewModel
         public ICommand AddToPlaylist { get; set; }
         public ICommand OpenPopup { get; set; }
         public ICommand СancelPopup { get; set; }
-
         private readonly Dispatcher _dispatcher;
+        public InitCollection Collections { get; set; }
         public ALLTrackTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
             IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService trackCollection) 
         {
@@ -74,6 +74,8 @@ namespace test.ViewModel.TabViewModel
             UpdateListView(null, fakeEventArgs);
 
 
+            Collections = new InitCollection();
+
             СancelPopup = new RelayCommand<object>(_ => PopupIsOpen = false);
             OpenPopup = new RelayCommand<Track>(OpenPopupHandler);
             DellSong = new RelayCommand<Track>(DellSongHandler);
@@ -84,6 +86,7 @@ namespace test.ViewModel.TabViewModel
         {
             _tempChoice = track;
             PopupIsOpen = true;
+
         }
 
         private void AddToPlayListHandler()

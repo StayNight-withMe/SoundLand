@@ -19,7 +19,7 @@ namespace test.Services
 
         event Action<double> PositionChanged;
         event Action<double> DurationChanged;
-        
+        event Action MediaEndedChanged;
 
     }
 }

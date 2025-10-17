@@ -9,7 +9,7 @@ namespace test.ViewModel
     public class enamS
     {
         public enum PlayPauseButtonStates { Play, Pause }
-
         public enum ButtonState { Back, CreatePlayList }
+        public enum NextMediaStates { Random, Next, Replay }
     }
 }

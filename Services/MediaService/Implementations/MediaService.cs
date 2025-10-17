@@ -69,8 +69,10 @@ namespace test.Services
 
         private void OnMediaEnded(object sender, RoutedEventArgs e)
         {
-            PositionChanged?.Invoke(TotalSeconds);
-            _timer.Stop();
+            DurationChanged?.Invoke(TotalSeconds);
+            PositionChanged?.Invoke(0);
+            MediaEndedChanged.Invoke();
+            //_timer.Stop();
         }
 
 
@@ -80,7 +82,7 @@ namespace test.Services
 
         public event Action<double> DurationChanged;
         public event Action<double> PositionChanged;
-
+        public event Action MediaEndedChanged;
 
         public void SetMediaElement(MediaElement mediaElement)
         {
