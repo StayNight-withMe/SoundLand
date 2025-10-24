@@ -16,7 +16,7 @@ namespace test.Services
 
         public PlayListServiceForAllTrack(IPathService pathService) : base(pathService) { }
 
-        public async override void AddTrackToPlayList(PlayList playList, Track track)
+        public async override Task AddTrackToPlayList(PlayList playList, Track track)
         {
             GetPath getPath = _pathService.ParseAll();
             DirectoryService dir = new DirectoryService();

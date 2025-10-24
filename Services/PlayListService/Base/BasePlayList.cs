@@ -50,7 +50,7 @@ namespace test.Services
         }
 
 
-        public virtual void AddTrackToPlayList(PlayList playList, Track track) { }
+        public abstract Task AddTrackToPlayList(PlayList playList, Track track);
         
         
 

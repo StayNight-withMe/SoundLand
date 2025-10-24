@@ -147,10 +147,9 @@ namespace test.Services
         {
             try
             {
-                // ✅ Сбрасываем все атрибуты защиты:
+           
                 file.Attributes = FileAttributes.Normal;
 
-                // ✅ Удаляем файл:
                 file.Delete();
 
                 Debug.WriteLine($"✅ Файл удалён через FileInfo: {file.FullName}");
@@ -160,7 +159,7 @@ namespace test.Services
             {
                 Debug.WriteLine($"🚫 Нет прав доступа к файлу: {file.FullName} - {authEx.Message}");
 
-                // ✅ Пробуем снять атрибуты принудительно:
+     
                 try
                 {
                     File.SetAttributes(file.FullName, FileAttributes.Normal);
@@ -177,7 +176,7 @@ namespace test.Services
             {
                 Debug.WriteLine($"🔄 Файл занят: {file.FullName} - {ioEx.Message}");
 
-                // ✅ Повторные попытки:
+
                 for (int i = 0; i < 3; i++)
                 {
                     Thread.Sleep(100 * (i + 1));
