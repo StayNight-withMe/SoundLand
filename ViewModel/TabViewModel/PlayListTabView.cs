@@ -17,16 +17,16 @@ using test.Services;
 using ButtonState = test.ViewModel.enamS.ButtonState;
 using test.ViewModel.CollectionClass;
 using Accessibility;
+using CommunityToolkit.Mvvm.Messaging;
+using System.Configuration;
 
 
 namespace test.ViewModel.TabViewModel
 {
-
-
+    
 
     public class PlayListTabView : BaseViewModel
     {
-
         private FileSystemWatcher _watcher;
 
         private Dispatcher _dispatcher;
@@ -36,6 +36,8 @@ namespace test.ViewModel.TabViewModel
         private readonly ITrackCollectionService _collectionService;
 
         private readonly ICommonPlayListService _playlistService;
+
+        private  readonly IMessenger _messenger;
 
         private string _basePath;
 
@@ -85,11 +87,13 @@ namespace test.ViewModel.TabViewModel
         public ICommand PlayListChoice { get; set; }
         public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            ICommonPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService collectionService)
-
+            ICommonPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService collectionService, IMessenger messenger)
+            
         {
 
             _mediaService = new MediaService();
+
+            _messenger = messenger;
 
             _dispatcher = uiDispatcher;
 
@@ -132,6 +136,18 @@ namespace test.ViewModel.TabViewModel
         }
 
 
+        public void InitiateUpdate(string newValue)
+        {
+            // 1. Создаем record с новыми данными
+            var message = new DataUpdateMessage(newValue, "", "");
+
+            // 2. Отправляем сообщение через Messenger
+            _messenger.Send(message);
+
+            Console.WriteLine($"Отправитель отправил сообщение: {newValue}");
+        }
+
+
         private void PlayListChoiceHandler()
         {
             VisiblePlayListView = Visibility.Collapsed;
@@ -141,7 +157,7 @@ namespace test.ViewModel.TabViewModel
             Debug.WriteLine(_tempChoice.Name);
             ButtonStates = ButtonState.Back;
             _collectionService.playList = _tempChoice;
-
+            InitiateUpdate(Constants.defaultImagePath);
             _dispatcher.InvokeAsync(() => {
                 //string imgFiles = Path.Combine(, "*.jpg");
                 _collectionService.Collection.Clear();
@@ -194,7 +210,7 @@ namespace test.ViewModel.TabViewModel
                 ButtonStates = ButtonState.CreatePlayList;
                 _collectionService.Collection.Clear();
                 MediaService.Stop();
-                ImgPath = Constants.defaultImagePath;
+                
             }
             else
             {

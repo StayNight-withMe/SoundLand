@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace test
         {
 
             services.RegisterSingleton<ITrackCollectionService, TrackCollectionService>();
+            services.RegisterSingleton<IMessenger, WeakReferenceMessenger>();
             services.Register<IPathService, PathService>();
             services.Register<IAudioFileNameParser, AudioFileNameParser>();
             services.Register<IDirectoryService, DirectoryService>();

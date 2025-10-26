@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -24,7 +25,8 @@ using PlayState = test.ViewModel.enamS.PlayPauseButtonStates;
 
 namespace test.ViewModel
 {
-    public class TrackOfPlayListView : BaseViewModel
+    public sealed record DataUpdateMessage(string imageSource,  string TrackName, string Artist);
+    public class TrackOfPlayListView : BaseViewModel, IRecipient<DataUpdateMessage>
     {
 
         private readonly IPlayListServiceInside _playListServicel;
@@ -46,9 +48,12 @@ namespace test.ViewModel
         private string _sourceForMediaElement;
 
         private Track _tempchoice;
+        public readonly IMessenger _messenger;
         public IMediaService MediaService { get { return _mediaService; } set { _mediaService = value; OnPropertyChanged(); } }
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
-        public  string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
+        public  string ImgPath { get => _imgPath; set { 
+                _imgPath = value; OnPropertyChanged(); 
+            } }
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
         public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); } }
         public PlayList PlayList { get => _playList; set { _playList = value ?? _playList; OnPropertyChanged(); Debug.WriteLine($"Выбранный плейлист : {_playList}"); } }
@@ -135,12 +140,16 @@ namespace test.ViewModel
        IPathService pathService,
        IAudioFileNameParser audioFileNameParser,
        IDirectoryService directoryService,
-       IPlayListServiceInside playListService)
+       IPlayListServiceInside playListService,
+       IMessenger messenger  )
         {
-            _uiDispatcher = uiDispatcher;
-            _playListServicel = playListService;
-
             _mediaService = new MediaService();
+
+            _messenger = messenger;
+
+            _uiDispatcher = uiDispatcher;
+
+            _playListServicel = playListService;
 
             _audioFileNameParser = audioFileNameParser;
 
@@ -167,8 +176,18 @@ namespace test.ViewModel
             DeleteTrack = new RelayCommand<Track>(DeleteTrackHandler);
             ImgPath = Constants.defaultImagePath;
 
+            _messenger.Register<DataUpdateMessage>(this);
+
         }
 
+
+
+        public void Receive(DataUpdateMessage message)
+        {
+            ImgPath = message.imageSource;
+            SongName = message.TrackName;
+            SongArtist = message.Artist;
+        }
 
         private void SubOnCollecion()
         {
