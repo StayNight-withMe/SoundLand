@@ -23,6 +23,7 @@ namespace test.ViewModel.TabViewModel
 {
     public class ALLTrackTabView : BaseViewModel
     {
+        private readonly Dispatcher _dispatcher;
 
         private FileSystemWatcher _watcher;
 
@@ -34,6 +35,8 @@ namespace test.ViewModel.TabViewModel
 
         private Track _tempChoice;
 
+        private IPlayListService _playlistService;
+        
         public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnItemSelected(value); } } }
         public bool PopupIsOpen {  get => _popupIsOpen;  set { _popupIsOpen = value; OnPropertyChanged(); } }
         public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
@@ -42,7 +45,6 @@ namespace test.ViewModel.TabViewModel
         public ICommand AddToPlaylist { get; set; }
         public ICommand OpenPopup { get; set; }
         public ICommand СancelPopup { get; set; }
-        private readonly Dispatcher _dispatcher;
         public InitCollection Collections { get; set; }
         public ALLTrackTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
             IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService trackCollection) 
@@ -99,7 +101,7 @@ namespace test.ViewModel.TabViewModel
             PopupIsOpen = false;
         }
 
-        async void DellSongHandler(Track track)
+        private async void DellSongHandler(Track track)
         {
 
             Debug.WriteLine("Функция Удаления запустилась");
@@ -119,7 +121,7 @@ namespace test.ViewModel.TabViewModel
             }
         }
 
-        public async void UpdateListView(object sender, FileSystemEventArgs e)
+        private async void UpdateListView(object sender, FileSystemEventArgs e)
         {
             await _dispatcher.InvokeAsync(() => { _trackCollectionService.Collection.Clear(); });
             await _dispatcher.InvokeAsync(() => { _trackCollectionService.GetTracks(_getPath.AllImgPath, _audioFileNameParser); }); 

@@ -46,7 +46,11 @@ namespace test
 
   
         var mediaService = (trackOfPlayList.DataContext as TrackOfPlayListView)?.MediaService as MediaService;
-        mediaService?.SetMediaElement(trackOfPlayList.MediaPlayer);  // ✅ Работает!
-    }
+        var mediaService1 = (playListTab.DataContext as PlayListTabView)?.MediaService as MediaService;
+        
+        mediaService?.SetMediaElement(trackOfPlayList.MediaPlayer);
+         mediaService1?.SetMediaElement(trackOfPlayList.MediaPlayer);
+        }
 }
+
 }

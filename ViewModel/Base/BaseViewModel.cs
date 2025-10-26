@@ -16,7 +16,7 @@ namespace test.ViewModel
     {
         protected  IAudioFileNameParser _audioFileNameParser;
 
-        protected IPlayListService _playlistService;
+        //protected IPlayListService _playlistService;
 
         protected IDirectoryService _directoryService;
 

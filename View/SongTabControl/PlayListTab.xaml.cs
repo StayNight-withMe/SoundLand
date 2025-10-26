@@ -23,10 +23,7 @@ namespace test.SongTabControl
     {
         public PlayListTab()
         {
-
             InitializeComponent();
-
-            DataContext = this;
         }
     }
 }

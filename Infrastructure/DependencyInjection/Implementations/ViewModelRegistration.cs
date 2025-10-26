@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using test.Services;
+using test.Services.PlayListService.Implementations;
+using test.Services.PlayListService.Interfaces;
 using test.SongTabControl;
 
 namespace test
@@ -16,8 +18,6 @@ namespace test
         {
 
             services.RegisterSingleton<ITrackCollectionService, TrackCollectionService>();
-
-
             services.Register<IPathService, PathService>();
             services.Register<IAudioFileNameParser, AudioFileNameParser>();
             services.Register<IDirectoryService, DirectoryService>();
@@ -42,14 +42,14 @@ namespace test
 
         public static void RegisterPlayListTab(DependencyInjection services)
         {
-            services.Register<IPlayListService, PlayListServiceForPlayListDirectory>();
+            services.Register<ICommonPlayListService, PlayListServiceForAllTrack>();
 
         }
 
 
         public static void RegisterTrackOfPlayList(DependencyInjection services)
         {
-
+            services.Register<IPlayListServiceInside, PlayListServiceForTrackOdPlayList>();
         }
     }
 }

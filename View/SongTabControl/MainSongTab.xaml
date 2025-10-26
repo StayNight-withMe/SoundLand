@@ -71,9 +71,9 @@
 
                         </StackPanel>
 
-                            
 
-                    <ListView BorderThickness="0" Grid.Row="0" SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" x:Name="PlayListVieaw1" Background="Black" ItemsSource="{Binding Collections.PlayLists}">
+
+                    <ListView BorderThickness="0" Grid.Row="0"  SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" x:Name="PlayListVieaw1" Background="Black" ItemsSource="{Binding Collections.PlayLists}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Transparent" BorderThickness="0,0,0,1">

@@ -226,7 +226,7 @@ Grid.Row="1"/>
                             <StackPanel Grid.Column="3" HorizontalAlignment="Right" Orientation="Horizontal">
                                 <Button x:Name="add" Content="+" HorizontalAlignment="Right" VerticalAlignment="Stretch" Style="{StaticResource ButtonStyle}" 
                         Background="Black" Height="25" Width="25" Margin="0 0 0 0"  Padding="0" Foreground="White" />
-                                <Button x:Name="Dell" Content="удалить" Width="100" Height="25" Style="{StaticResource ButtonStyle}" 
+                                <Button x:Name="Dell" Content="удалить"  Command="{Binding DataContext.DeleteTrack, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Width="100" Height="25" Style="{StaticResource ButtonStyle}" 
                                 HorizontalAlignment="Right" Foreground="White" Margin="10 0 0 0" Background="Black"  
                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0"/>
                                 <Button x:Name="AddPlay" Content="в плейлист" Width="100" Height="25" Style="{StaticResource ButtonStyle}" 

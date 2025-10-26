@@ -33,42 +33,50 @@ namespace test.Services
         }
         public ObservableCollection<Track> GetTracks(string path, IAudioFileNameParser audioFileNameParser)
         {
+            try
+            {
+                string[] imgFiles = Directory.GetFiles(path, "*.jpg");
+                Collection.Clear();
 
+                foreach (var imgFile in imgFiles)
+                {
+                    try
+                    {
+                        FileNameInfo fileInfo = audioFileNameParser.ParseAll(imgFile);
+                        if (fileInfo == null) continue;
 
-            string[] imgFiles = Directory.GetFiles(path, "*.jpg");
+                        byte[] imageData = File.ReadAllBytes(imgFile);
+
+                        Collection.Add(new Track
+                        {
+                            Name = fileInfo.SongName,
+                            Artist = fileInfo.SongArtist,
+                            FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
+                            ImageData = imageData,
+                            Duration = fileInfo.SongDuration,
+                            ImgFilePath = fileInfo.ImgFilePath,
+                            SongFilePath = fileInfo.SongFilePath,
+                        });
+                    }
+                    //я хз пока что и мне лень слои catch добавить, но нужно
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Ошибка обработки файла {imgFile}: {ex.Message}");
+                        continue;
+                    }
+                }
+
+                return Collection;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+          
            
 
-            Collection.Clear();
-
-            foreach (var imgFile in imgFiles)
-            {
-                try
-                {
-                    FileNameInfo fileInfo = audioFileNameParser.ParseAll(imgFile);
-                    if (fileInfo == null) continue;
-
-                    byte[] imageData = File.ReadAllBytes(imgFile);
-
-                    Collection.Add(new Track
-                    {
-                        Name = fileInfo.SongName,
-                        Artist = fileInfo.SongArtist,
-                        FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
-                        ImageData = imageData,
-                        Duration = fileInfo.SongDuration,
-                        ImgFilePath = fileInfo.ImgFilePath,
-                        SongFilePath = fileInfo.SongFilePath,
-                    });
-                }
-                //я хз пока что и мне лень слои catch добавить, но нужно
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Ошибка обработки файла {imgFile}: {ex.Message}");
-                    continue;
-                }
-            }
          
-            return Collection;
            
         }
 

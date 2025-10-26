@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using test.Services;
+using test.Services.PlayListService.Interfaces;
 using test.ViewModel.CollectionClass;
 using static test.ViewModel.enamS;
 using NextTrackState = test.ViewModel.enamS.NextMediaStates;
@@ -23,6 +26,9 @@ namespace test.ViewModel
 {
     public class TrackOfPlayListView : BaseViewModel
     {
+
+        private readonly IPlayListServiceInside _playListServicel;
+        
         private IMediaService _mediaService;
 
         private PlayList _playList;
@@ -42,12 +48,14 @@ namespace test.ViewModel
         private Track _tempchoice;
         public IMediaService MediaService { get { return _mediaService; } set { _mediaService = value; OnPropertyChanged(); } }
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
-        public string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
+        public  string ImgPath { get => _imgPath; set { _imgPath = value; OnPropertyChanged(); } }
         public Visibility VisibleTrackListView { get => _visibleTrackListView; set { _visibleTrackListView = value; OnPropertyChanged(); } }
         public ObservableCollection<Track> Tracks { get => _tracks; set { _tracks = value; OnPropertyChanged(); } }
-        public PlayList PlayList { get => _playList; set { _playList = value ?? _playList; OnPropertyChanged(); } }
+        public PlayList PlayList { get => _playList; set { _playList = value ?? _playList; OnPropertyChanged(); Debug.WriteLine($"Выбранный плейлист : {_playList}"); } }
         public Track SelectedTrack { get => _selectedTrack; set { _selectedTrack = value; OnPropertyChanged(); if (value != null) { OnTrackSelected(value); } } }
         public PlayState State { get => _states; set { _states = value; OnPropertyChanged(); OnPropertyChanged(nameof(PlayPauseButtonText)); } }
+
+        private Dispatcher _uiDispatcher;
 
         private string _songName;
         public string SongName { get => _songName; set { _songName = value; OnPropertyChanged(); } }
@@ -88,7 +96,6 @@ namespace test.ViewModel
 
         private NextTrackState _playModeContent = NextTrackState.Next;
 
-        
         public string PlayModeSymbol => _playModeContent switch
         {
             NextTrackState.Next => "🔁",
@@ -97,7 +104,6 @@ namespace test.ViewModel
             _ => "🔁"
         };
 
-        
         public NextTrackState PlayModeState
         {
             get => _playModeContent;
@@ -108,7 +114,6 @@ namespace test.ViewModel
                 OnPropertyChanged(nameof(PlayModeSymbol));  
             }
         }
-
 
 
         public string PlayPauseButtonText  => State switch
@@ -122,13 +127,21 @@ namespace test.ViewModel
         public ICommand NextTrack { get; set; }
         public ICommand PreviousTrack { get; set; }
         public ICommand PlayModeHander { get; set; }
+        public ICommand DeleteTrack { get; set; }
+
         public TrackOfPlayListView(
+            Dispatcher uiDispatcher,
        ITrackCollectionService collectionService,  
        IPathService pathService,
        IAudioFileNameParser audioFileNameParser,
        IDirectoryService directoryService,
-       IPlayListService playListService)
+       IPlayListServiceInside playListService)
         {
+            _uiDispatcher = uiDispatcher;
+            _playListServicel = playListService;
+
+            _mediaService = new MediaService();
+
             _audioFileNameParser = audioFileNameParser;
 
             _directoryService = directoryService;
@@ -136,8 +149,6 @@ namespace test.ViewModel
             _getPath = pathService.ParseAll();
 
             _trackCollectionService = collectionService;
-
-            _mediaService = new MediaService();
 
             _mediaService.PositionChanged += OnPositionChanged;
 
@@ -153,8 +164,9 @@ namespace test.ViewModel
             NextTrack = new RelayCommand<object>(_ => NextorPreviousTrackHandler(true));
             PreviousTrack = new RelayCommand<object>(_ => NextorPreviousTrackHandler(false));
             PlayModeHander = new RelayCommand<object>(_ => ChangeStatePlayMode());
+            DeleteTrack = new RelayCommand<Track>(DeleteTrackHandler);
+            ImgPath = Constants.defaultImagePath;
 
-           
         }
 
 
@@ -216,7 +228,6 @@ namespace test.ViewModel
         {
             if (_mediaService.TotalSeconds > 0)
             {
-
                 SongSliderValue = (position / _mediaService.TotalSeconds) * 100;
             }
         }
@@ -249,7 +260,36 @@ namespace test.ViewModel
 
 
 
+        public async void DeleteTrackHandler(Track track)
+        {
+            if(track.Equals(SelectedTrack))
+            {
+                MessageBox.Show("Нельзя удалить трек, пока он выбран, \n пожалуйста, выберите другой трек");
+                return;
+            }
+            if (track == null)
+            {
+                Debug.WriteLine("Все хуево");
+                return;
+            }
+            Debug.WriteLine("запуск удаления");
+            await _playListServicel.DeleteTrackFromPlayList(track, PlayList);
+            Debug.WriteLine($"попытка удалить : {track.Name}");
+            Tracks.Clear();
+            Debug.WriteLine(_playList.Name);
+            if(_uiDispatcher == null)
+            {
+                Debug.WriteLine("нет диспетчера епта");
+                return;
+            }
+            await _uiDispatcher.InvokeAsync(() =>
+            {
+                Tracks = _trackCollectionService.GetTracks(
+                                Path.Combine(PlayList.Directory, @"img"), _audioFileNameParser);
+            });
+        
 
+        }
 
 
         private void PlayPauseHandler()
@@ -363,7 +403,7 @@ namespace test.ViewModel
             State = PlayState.Pause;
         }
 
-        public async void  OnTrackSelected(Track track)
+        public void OnTrackSelected(Track track)
         {
             MediaService.Seek(0);
             Debug.WriteLine($"{track.Name} трек");

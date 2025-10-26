@@ -9,7 +9,7 @@ using test.ViewModel;
 
 namespace test.Services
 {
-    public class PlayListServiceForSearchTrack : BasePlayList
+    public class PlayListServiceForSearchTrack : BasePlayList, IPlayListService
     {
 
         private readonly IPathService _pathService;
@@ -17,7 +17,7 @@ namespace test.Services
         public PlayListServiceForSearchTrack(IPathService pathService) : base(pathService) { }
 
 
-        public async override Task AddTrackToPlayList(PlayList playList, Track track)
+        public async Task AddTrackToPlayList(PlayList playList, Track track)
         {
             DirectoryService dir = new DirectoryService();
 

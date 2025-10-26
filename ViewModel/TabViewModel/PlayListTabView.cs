@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using test.Services;
 using ButtonState = test.ViewModel.enamS.ButtonState;
 using test.ViewModel.CollectionClass;
+using Accessibility;
 
 
 namespace test.ViewModel.TabViewModel
@@ -30,9 +31,11 @@ namespace test.ViewModel.TabViewModel
 
         private Dispatcher _dispatcher;
 
+        private IMediaService _mediaService;
+
         private readonly ITrackCollectionService _collectionService;
 
-        private readonly IPlayListService _playlistService;
+        private readonly ICommonPlayListService _playlistService;
 
         private string _basePath;
 
@@ -60,16 +63,15 @@ namespace test.ViewModel.TabViewModel
 
         private ButtonState _buttonState;
 
-        private readonly IDirectoryService _directoryService;
-
-        private readonly IAudioFileNameParser _audioFileNameParser;
-
+        public IMediaService MediaService { get { return _mediaService; } set { _mediaService = value; OnPropertyChanged(); } }
         public ButtonState ButtonStates { get => _buttonState; set { _buttonState = value; OnPropertyChanged(); OnPropertyChanged(nameof(ButtonText)); } }
         public bool PopupIsOpen { get => _popupIsOpen; set { _popupIsOpen = value; OnPropertyChanged(); } }
         public string PopupTextBox { get => _popupTextBox; set { _popupTextBox = value; OnPropertyChanged(); } }
         public PlayList SelectedPlayList { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); if (value != null) _tempChoice = value; } }
         public Visibility VisiblePlayListView { get => _visiblePlayListView; set { _visiblePlayListView = value; OnPropertyChanged(); } }
         public Visibility ContainerVisible { get => _containerVisible; set { _containerVisible = value; OnPropertyChanged(); } }
+
+
         public string ButtonText => ButtonStates switch
         {
             ButtonState.Back => "Назад",
@@ -81,12 +83,14 @@ namespace test.ViewModel.TabViewModel
         public ICommand Cansel { get; }
         public ICommand OpenPopup { get; }
         public ICommand PlayListChoice { get; set; }
-
         public InitCollection Collections { get; set; }
         public PlayListTabView(Dispatcher uiDispatcher, IAudioFileNameParser audioFileNameParser,
-            IPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService collectionService)
+            ICommonPlayListService playListService, IPathService pathService, IDirectoryService directoryService, ITrackCollectionService collectionService)
 
         {
+
+            _mediaService = new MediaService();
+
             _dispatcher = uiDispatcher;
 
             _playlistService = playListService;
@@ -139,39 +143,41 @@ namespace test.ViewModel.TabViewModel
             _collectionService.playList = _tempChoice;
 
             _dispatcher.InvokeAsync(() => {
-                string[] imgFiles = Directory.GetFiles(_tempChoice.Directory, "*.jpg");
+                //string imgFiles = Path.Combine(, "*.jpg");
                 _collectionService.Collection.Clear();
 
 
                 Debug.WriteLine("Заполнение колекции треков из плейлиста");
 
-                foreach (var imgFile in imgFiles)
-                {
-                    string fullImgPath = Path.GetFullPath(imgFile);
+                //foreach (var imgFile in imgFiles)
+                //{
+                //    string fullImgPath = Path.GetFullPath(imgFile);
 
-                    FileNameInfo fileInfo = _audioFileNameParser.ParseAll(fullImgPath);
+                //    FileNameInfo fileInfo = _audioFileNameParser.ParseAll(fullImgPath);
 
-                    Debug.WriteLine($"Song: {fileInfo.SongName}, Artist: {fileInfo.SongArtist}, File: {fileInfo.FileName}, Duration: {fileInfo.SongDuration}");
+                //    Debug.WriteLine($"Song: {fileInfo.SongName}, Artist: {fileInfo.SongArtist}, File: {fileInfo.FileName}, Duration: {fileInfo.SongDuration}");
 
-                    string imgPath = Path.GetFullPath(imgFile);
-                    byte[] imageData = File.ReadAllBytes(imgPath);
-
-
-
-                    _collectionService.Collection.Add(new Track
-                    {
-                        Name = fileInfo.SongName,
-                        Artist = fileInfo.SongArtist,
-                        FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
-                        Duration = fileInfo.SongDuration,
-                        ImageData = imageData,
-                        ImgFilePath = fileInfo.ImgFilePath,
-                        SongFilePath = fileInfo.SongFilePath,
-                    });
+                //    string imgPath = Path.GetFullPath(imgFile);
+                //    byte[] imageData = File.ReadAllBytes(imgPath);
 
 
-                }
 
+                //    _collectionService.Collection.Add(new Track
+                //    {
+                //        Name = fileInfo.SongName,
+                //        Artist = fileInfo.SongArtist,
+                //        FileName = Path.GetFileNameWithoutExtension(fileInfo.FileName),
+                //        Duration = fileInfo.SongDuration,
+                //        ImageData = imageData,
+                //        ImgFilePath = fileInfo.ImgFilePath,
+                //        SongFilePath = fileInfo.SongFilePath,
+                //    });
+
+
+                //}
+
+                
+                _collectionService.Collection = _collectionService.GetTracks(_tempChoice.Directory, _audioFileNameParser); 
 
 
             });
@@ -187,6 +193,8 @@ namespace test.ViewModel.TabViewModel
                 ContainerVisible = Visibility.Collapsed;
                 ButtonStates = ButtonState.CreatePlayList;
                 _collectionService.Collection.Clear();
+                MediaService.Stop();
+                ImgPath = Constants.defaultImagePath;
             }
             else
             {

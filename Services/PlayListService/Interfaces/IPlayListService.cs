@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using test.ViewModel.CollectionClass;
+using test.Services.PlayListService.Interfaces;
 using test.ViewModel;
+using test.ViewModel.CollectionClass;
 
 namespace test.Services
 {
-    public interface IPlayListService 
+    public interface IPlayListService : ICommonPlayListService
     {
-        
-        public void CreatePlayList(string namePlaylist); 
-        public void DelPlayList(string namePlaylist);
-        public virtual async void AddTrackToPlayList(PlayList playList, Track track) { }
+        public Task AddTrackToPlayList(PlayList playList, Track track);
     }
+
+
+
 }

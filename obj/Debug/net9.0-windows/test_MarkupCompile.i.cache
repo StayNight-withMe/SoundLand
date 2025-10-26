@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR
 Z:\hui1\test\test\App.xaml
 6-621645435
 
-511048792940
+52-131830942
 20116465478
 View\MainWindow.xaml;View\SongTabControl\AllTrackTab.xaml;View\SongTabControl\MainSongTab.xaml;View\SongTabControl\PlayListTab.xaml;View\SongTabControl\TrackOfPlayList.xaml;View\Styles\Style.xaml;
 
-True
+False
 

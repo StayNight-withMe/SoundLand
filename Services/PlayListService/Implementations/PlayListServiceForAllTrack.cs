@@ -10,13 +10,13 @@ using test.ViewModel;
 
 namespace test.Services
 {
-    public class PlayListServiceForAllTrack : BasePlayList
+    public class PlayListServiceForAllTrack : BasePlayList, IPlayListService
     {
 
 
         public PlayListServiceForAllTrack(IPathService pathService) : base(pathService) { }
 
-        public async override Task AddTrackToPlayList(PlayList playList, Track track)
+        public async Task AddTrackToPlayList(PlayList playList, Track track)
         {
             GetPath getPath = _pathService.ParseAll();
             DirectoryService dir = new DirectoryService();

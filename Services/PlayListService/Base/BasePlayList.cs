@@ -10,7 +10,7 @@ using test.ViewModel;
 
 namespace test.Services
 {
-    abstract public class BasePlayList : IPlayListService
+     public abstract class BasePlayList : ICommonPlayListService
     {
         protected readonly IPathService _pathService;
 
@@ -50,11 +50,11 @@ namespace test.Services
         }
 
 
-        public abstract Task AddTrackToPlayList(PlayList playList, Track track);
-        
-        
+        //public abstract  Task AddTrackToPlayList(PlayList playList, Track track);
 
-        
+       
+
+
 
 
     }
