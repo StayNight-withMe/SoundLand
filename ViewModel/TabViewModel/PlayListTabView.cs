@@ -203,23 +203,30 @@ namespace test.ViewModel.TabViewModel
 
         private void OpenPopupHandler()
         {
-            if (ButtonStates == ButtonState.Back)
+            try
             {
-                VisiblePlayListView = Visibility.Visible;
-                ContainerVisible = Visibility.Collapsed;
-                ButtonStates = ButtonState.CreatePlayList;
-                _collectionService.Collection.Clear();
-                MediaService.Stop();
-                
+                if (ButtonStates == ButtonState.Back)
+                {
+                    VisiblePlayListView = Visibility.Visible;
+                    ContainerVisible = Visibility.Collapsed;
+                    ButtonStates = ButtonState.CreatePlayList;
+                    _collectionService.Collection.Clear();
+                    MediaService.Stop();
+
+                }
+                else
+                {
+                    Debug.WriteLine("Окрытие попута");
+                    PopupIsOpen = true;
+                    Debug.WriteLine(PopupIsOpen);
+                    string text = "Новый плейлист";
+                    int count = _directoryService.LenghtDirectory(_playList, text) + 1;
+                    PopupTextBox = text + count.ToString();
+                }
             }
-            else
+         catch(Exception ex)
             {
-                Debug.WriteLine("Окрытие попута");
-                PopupIsOpen = true;
-                Debug.WriteLine(PopupIsOpen);
-                string text = "Новый плейлист";
-                int count = _directoryService.LenghtDirectory(_playList, text) + 1;
-                PopupTextBox = text + count.ToString();
+                Debug.WriteLine(ex.Message);
             }
 
         }

@@ -42,7 +42,7 @@ namespace test.ViewModel.TabViewModel
         private PlayList _playList;
 
         public PlayList SelectedPlayList { get => _playList; set { _selectedPlayList.Add(value); OnPropertyChanged(); OnPropertyChanged(nameof(SelectedPlayLists)); } }
-        public List<PlayList> SelectedPlayLists { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); } }
+        public List<PlayList> SelectedPlayLists { get => _selectedPlayList; set { _selectedPlayList = value; OnPropertyChanged(); OnPropertyChanged(nameof(SelectedPlayList)); } }
         private string? _sourceForMediaElement;
         public string SourceForMediaElement { get => _sourceForMediaElement; set { _sourceForMediaElement = value; OnPropertyChanged(); } }
         public IMediaService MediaService { get => _mediaService; set { _mediaService = value; } }
@@ -255,8 +255,8 @@ namespace test.ViewModel.TabViewModel
                 }
                 catch (IOException)
                 {
-
                    
+
                     try
                     {
                         File.Delete(Image);
@@ -264,12 +264,13 @@ namespace test.ViewModel.TabViewModel
                     }
                     catch
                     {
-
+                        
                     }
                 }
                 finally
                 {
-                    Image = @"Z:\hui1\test\test\bin\Debug\net9.0-windows\unnamed.jpg";
+                   Image = Constants.defaultImagePath;
+
                 }
 
 
@@ -288,7 +289,7 @@ namespace test.ViewModel.TabViewModel
 
             _trackCollectionService.GetTracks(_getPath.TempImgPath, _audioFileNameParser);
         }
-
+        //
 
         public async void ToALLTrackHandler(Track track)
         {

@@ -46,7 +46,14 @@ namespace test.Services
 
         public void DelPlayList(string namePlaylist)
         {
-            Directory.Delete(PlayListPath(namePlaylist), true);
+            try
+            {
+                Directory.Delete(PlayListPath(namePlaylist), true);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
 

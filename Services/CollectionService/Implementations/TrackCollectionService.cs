@@ -36,6 +36,7 @@ namespace test.Services
             try
             {
                 string[] imgFiles = Directory.GetFiles(path, "*.jpg");
+                
                 Collection.Clear();
 
                 foreach (var imgFile in imgFiles)
@@ -71,7 +72,7 @@ namespace test.Services
             catch(Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return null;
+                return new ObservableCollection<Track>();
             }
           
            
