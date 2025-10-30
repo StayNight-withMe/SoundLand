@@ -289,8 +289,7 @@ namespace test.ViewModel.TabViewModel
 
             _trackCollectionService.GetTracks(_getPath.TempImgPath, _audioFileNameParser);
         }
-        //
-
+               //
         public async void ToALLTrackHandler(Track track)
         {
 
