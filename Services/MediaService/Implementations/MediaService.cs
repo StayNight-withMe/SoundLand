@@ -10,7 +10,7 @@ using System.Windows.Threading;
 namespace test.Services
 {
     public class MediaService : IMediaService
-    {
+    {//
 
         private MediaElement _mediaElement;
 
@@ -37,7 +37,7 @@ namespace test.Services
            }
         }
 
-       
+       //
         public double CurrentPosition => _mediaElement?.Position.TotalSeconds ?? 0;
 
         public double TotalSeconds => _mediaElement.NaturalDuration.HasTimeSpan
