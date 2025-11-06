@@ -1,0 +1,21 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio
+*.user
+*.suo
+*.sln.docstates
+.vs/
+
+# Secrets
+appsettings.*.json
+!appsettings.json
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Other
+*.swp
+*.swo
