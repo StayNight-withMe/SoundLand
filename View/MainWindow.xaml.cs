@@ -24,6 +24,7 @@ namespace test
     public MainWindow()
     {
         InitializeComponent();
+            /////
             //
         var dispatcher = Application.Current.Dispatcher;
         var di = new DependencyInjection(dispatcher);
